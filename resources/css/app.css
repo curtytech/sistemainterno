@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+@source '../views/**/*.blade.php';
+@source '../js/**/*.js';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-primary: #f59e0b;
+    --color-gray-dark: #111827;
+    --color-gray-light: #e5e7eb;
+    --color-gray-line: #e5e7eb;
+    --color-gray-txt: #6b7280;
+}
+
+@layer base {
+    body {
+        @apply bg-white font-sans text-slate-900 antialiased;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+    .mobile-menu {
+        @apply bg-gray-dark px-4 py-6 text-white shadow-lg;
+    }
+
+    .mobile-dropdown-menu {
+        @apply mt-2 space-y-1 border-t border-white/10 px-2 pb-2 pt-3 text-left;
+    }
+
+    .mega-menu-panel {
+        @apply absolute left-1/2 z-50 mt-3 max-w-[85vw] -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-5 text-black shadow-2xl;
+        width: min(72rem, 85vw);
+    }
+
+    .mega-menu-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .mega-menu-column {
+        min-width: 0;
+    }
+
+    .main-slider .swiper-wrapper {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+    }
+
+    .main-slider .swiper-wrapper::-webkit-scrollbar,
+    .brands-swiper-slider .swiper-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .main-slider .swiper-slide {
+        @apply relative min-h-[70vh] min-w-full snap-start overflow-hidden;
+    }
+
+    .main-slider .swiper-slide > img {
+        @apply absolute inset-0 h-full w-full object-cover;
+    }
+
+    .main-slider .swiper-slide::after {
+        content: '';
+        @apply absolute inset-0 bg-black/45;
+    }
+
+    .swiper-slide-content {
+        @apply relative z-10 flex min-h-[70vh] max-w-3xl flex-col items-start justify-center px-6 py-16 md:px-16;
+    }
+
+    .brands-swiper-slider .swiper-wrapper {
+        @apply flex gap-4 overflow-x-auto py-2;
+        scroll-behavior: smooth;
+    }
+
+    .brands-swiper-slider .swiper-slide {
+        @apply min-w-[10rem] p-6;
+    }
+
+    .slider-nav-button {
+        @apply absolute top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white backdrop-blur transition hover:bg-primary focus:outline-none focus:ring-2 focus:ring-white/70;
+    }
+
+    .slider-nav-prev {
+        @apply left-4 md:left-8;
+    }
+
+    .slider-nav-next {
+        @apply right-4 md:right-8;
+    }
+
+    .slider-nav-button-light {
+        @apply border-slate-200 bg-white/95 text-slate-700 shadow-lg hover:text-white;
+    }
+
+    .main-slider .swiper-button-prev,
+    .main-slider .swiper-button-next,
+    .brands-swiper-slider .swiper-button-prev,
+    .brands-swiper-slider .swiper-button-next {
+        display: none;
+    }
+
+    .category-banner img {
+        @apply transition duration-300 group-hover:scale-105;
+    }
+}
