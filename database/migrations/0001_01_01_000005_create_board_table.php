@@ -14,7 +14,7 @@ return new class extends Migration
     {
 
         Schema::create('boards', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->string('title');
             $table->mediumText('content');
             $table->string('image');

@@ -13,25 +13,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('event_categories', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
         });
 
         Schema::create('events', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('category_id');
+            $table->id();
+            $table->foreignId('category_id')->constrained('event_categories')->cascadeOnDelete();
             $table->mediumText('content');
             $table->string('title');
             $table->string('image');
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('event_categories')->onDelete('cascade');
         });
 
         DB::table('event_categories')->updateOrInsert(
-            ['id' => 'corporativo'],
             [
                 'name' => 'Corporativo',
                 'description' => 'Eventos internos e comunicacoes corporativas.',
@@ -41,7 +38,6 @@ return new class extends Migration
         );
 
         DB::table('event_categories')->updateOrInsert(
-            ['id' => 'treinamentos'],
             [
                 'name' => 'Treinamentos',
                 'description' => 'Agenda de capacitacoes e encontros de aprendizado.',
@@ -51,7 +47,6 @@ return new class extends Migration
         );
 
         DB::table('event_categories')->updateOrInsert(
-            ['id' => 'integracao'],
             [
                 'name' => 'Integracao',
                 'description' => 'Acoes para integracao e cultura interna.',
@@ -61,10 +56,9 @@ return new class extends Migration
         );
 
         DB::table('events')->updateOrInsert(
-            ['id' => 'event-001'],
+            ['title' => 'Reuniao geral de alinhamento trimestral'],
             [
-                'category_id' => 'corporativo',
-                'title' => 'Reuniao geral de alinhamento trimestral',
+                'category_id' => 1,
                 'content' => 'Encontro com as liderancas para apresentar resultados, metas do trimestre e atualizacoes importantes para toda a empresa.',
                 'image' => 'https://picsum.photos/200/300',
                 'created_at' => now(),
@@ -73,10 +67,9 @@ return new class extends Migration
         );
 
         DB::table('events')->updateOrInsert(
-            ['id' => 'event-002'],
+            ['title' => 'Treinamento de processos internos e compliance'],
             [
-                'category_id' => 'treinamentos',
-                'title' => 'Treinamento de processos internos e compliance',
+                'category_id' => 2,
                 'content' => 'Capacitacao voltada para reforco de boas praticas, fluxos internos e conformidade nos processos operacionais.',
                 'image' => 'https://picsum.photos/200/300',
                 'created_at' => now(),
@@ -85,10 +78,9 @@ return new class extends Migration
         );
 
         DB::table('events')->updateOrInsert(
-            ['id' => 'event-003'],
+            ['title' => 'Cafe de integracao com novos colaboradores'],
             [
-                'category_id' => 'integracao',
-                'title' => 'Cafe de integracao com novos colaboradores',
+                'category_id' => 3,
                 'content' => 'Momento de recepcao dos novos integrantes com apresentacao das equipes, cultura da empresa e canais internos.',
                 'image' => 'https://picsum.photos/200/300',
                 'created_at' => now(),

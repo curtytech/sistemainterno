@@ -9,12 +9,7 @@ class EventCategory extends Model
 {
     protected $table = 'event_categories';
 
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'id',
         'name',
         'description',
     ];

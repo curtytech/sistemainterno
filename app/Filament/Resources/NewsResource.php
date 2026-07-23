@@ -29,10 +29,6 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
-                    ->label('ID')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\Select::make('category_id')
                     ->label('Categoria')
                     ->relationship('category', 'name')

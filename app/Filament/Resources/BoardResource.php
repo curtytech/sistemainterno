@@ -29,10 +29,6 @@ class BoardResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
-                    ->label('ID')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('title')
                     ->label('Titulo')
                     ->required(),
@@ -40,16 +36,25 @@ class BoardResource extends Resource
                     ->label('Conteudo')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('image')
-                    ->label('Imagem (URL)')
-                    ->url()
-                    ->required(),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Imagem do Banner')
+                    ->disk('public')
+                    ->directory('boards/images')
+                    ->image()
+                    ->required()
+                    ->downloadable()
+                    ->openable()
+                    ->nullable(false),
                 Forms\Components\TextInput::make('link')
                     ->label('Link')
                     ->url()
                     ->nullable(),
-                Forms\Components\TextInput::make('file')
+                Forms\Components\FileUpload::make('file')
                     ->label('Arquivo')
+                    ->disk('public')
+                    ->directory('boards/files')
+                    ->downloadable()
+                    ->openable()
                     ->nullable(),
             ]);
     }

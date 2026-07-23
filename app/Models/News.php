@@ -12,12 +12,7 @@ class News extends Model
 {
     protected $table = 'news';
 
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'id',
         'category_id',
         'content',
         'title',

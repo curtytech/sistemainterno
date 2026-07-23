@@ -9,12 +9,7 @@ class NewsCategory extends Model
 {
     protected $table = 'news_categories';
 
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'id',
         'name',
         'description',
     ];

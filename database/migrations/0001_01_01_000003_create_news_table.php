@@ -13,25 +13,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('news_categories', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
         });
 
         Schema::create('news', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('category_id');
+            $table->id();
+            $table->foreignId('category_id')->constrained('news_categories')->cascadeOnDelete();
             $table->mediumText('content');
             $table->string('title');
             $table->string('image');
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('news_categories')->onDelete('cascade');
         });
 
         DB::table('news_categories')->updateOrInsert(
-            ['id' => 'institucional'],
             [
                 'name' => 'Institucional',
                 'description' => 'Comunicados e novidades institucionais.',
@@ -41,7 +38,6 @@ return new class extends Migration
         );
 
         DB::table('news_categories')->updateOrInsert(
-            ['id' => 'rh'],
             [
                 'name' => 'RH',
                 'description' => 'Noticias internas para colaboradores.',
@@ -51,7 +47,6 @@ return new class extends Migration
         );
 
         DB::table('news_categories')->updateOrInsert(
-            ['id' => 'operacoes'],
             [
                 'name' => 'Operacoes',
                 'description' => 'Atualizacoes sobre operacoes e processos.',
@@ -61,10 +56,9 @@ return new class extends Migration
         );
 
         DB::table('news')->updateOrInsert(
-            ['id' => 'news-001'],
+            ['title' => 'Nova intranet da Sequoia entra em operacao'],
             [
-                'category_id' => 'institucional',
-                'title' => 'Nova intranet da Sequoia entra em operacao',
+                'category_id' => 1,
                 'content' => 'A nova intranet foi publicada para centralizar comunicados, documentos e links uteis para todos os colaboradores.',
                 'image' => 'https://picsum.photos/200/300',
                 'created_at' => now(),
@@ -73,10 +67,9 @@ return new class extends Migration
         );
 
         DB::table('news')->updateOrInsert(
-            ['id' => 'news-002'],
+            ['title' => 'Campanha interna de desenvolvimento profissional'],
             [
-                'category_id' => 'rh',
-                'title' => 'Campanha interna de desenvolvimento profissional',
+                'category_id' => 2,
                 'content' => 'O RH iniciou uma nova campanha com trilhas de aprendizado e incentivo a capacitacao continua dos colaboradores.',
                 'image' => 'https://picsum.photos/200/300',
                 'created_at' => now(),
@@ -85,10 +78,9 @@ return new class extends Migration
         );
 
         DB::table('news')->updateOrInsert(
-            ['id' => 'news-003'],
+            ['title' => 'Atualizacao dos processos de manutencao e suporte'],
             [
-                'category_id' => 'operacoes',
-                'title' => 'Atualizacao dos processos de manutencao e suporte',
+                'category_id' => 3,
                 'content' => 'As equipes operacionais passam a utilizar um fluxo unificado para solicitacoes internas, manutencao e acompanhamentos.',
                 'image' => 'https://picsum.photos/200/300',
                 'created_at' => now(),

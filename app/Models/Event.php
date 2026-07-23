@@ -10,12 +10,7 @@ use Illuminate\Support\Facades\Schema;
 
 class Event extends Model
 {
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'id',
         'category_id',
         'content',
         'title',

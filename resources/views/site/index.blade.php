@@ -294,39 +294,47 @@
   <section id="product-slider">
     <div class="main-slider swiper-container relative" data-carousel data-autoplay-ms="5000">
       <div class="swiper-wrapper">
-        <!-- Slide 1 -->
+        @forelse ($boards as $board)
         <div class="swiper-slide">
-          <img src="/assets/images/main-slider/5.jpg" alt="Product 1">
+          <img src="{{ $board->image_url }}" alt="{{ $board->title }}">
           <div class="swiper-slide-content">
-            <h2 class="text-3xl md:text-7xl font-bold text-white mb-2 md:mb-4">Women</h2>
-            <p class="mb-4 text-white md:text-2xl">Experience the best in sportswear with <br>our latest collection.</p>
-            <a href="#popular-products"
-              class="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-4 py-2 rounded-full inline-block">Shop
-              now</a>
+            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl">{{ $board->title }}</h2>
+            <p class="mb-4 text-white md:text-2xl">{{ \Illuminate\Support\Str::limit($board->content, 120) }}</p>
+            <div class="flex flex-wrap items-center gap-3">
+              @if ($board->link)
+              <a
+                href="{{ $board->link }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white hover:border-white hover:bg-transparent hover:text-white">
+                Acessar link
+              </a>
+              @endif
+              @if ($board->file_url)
+              <a
+                href="{{ $board->file_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block rounded-full border border-white bg-white/10 px-4 py-2 font-semibold text-white hover:bg-white hover:text-slate-900">
+                Baixar arquivo
+              </a>
+              @endif
+            </div>
           </div>
         </div>
-        <!-- Slide 2 -->
+        @empty
         <div class="swiper-slide">
-          <img src="/assets/images/main-slider/2.png" alt="Product 2">
+          <img src="/assets/images/main-slider/5.jpg" alt="Banner principal">
           <div class="swiper-slide-content">
-            <h2 class="text-3xl md:text-7xl font-bold text-white mb-2 md:mb-4">Men</h2>
-            <p class="mb-4 text-white md:text-2xl">Discover the latest trends in Men`s <br>sportswear and casual fashion.</p>
-            <a href="#popular-products"
-              class="bg-white hover:bg-transparent text-black hover:text-white font-semibold px-4 py-2 rounded-full inline-block border border-transparent hover:border-white">Shop
-              now</a>
+            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl">Sistema Interno</h2>
+            <p class="mb-4 text-white md:text-2xl">Acesse comunicados, documentos e links importantes em um so lugar.</p>
+            <a href="#news"
+              class="inline-block rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white hover:border-white hover:bg-transparent hover:text-white">
+              Ver noticias
+            </a>
           </div>
         </div>
-        <!-- Slide 3 -->
-        <div class="swiper-slide">
-          <img src="/assets/images/main-slider/4.jpg" alt="Product 3">
-          <div class="swiper-slide-content">
-            <h2 class="text-3xl md:text-7xl font-bold text-white mb-2 md:mb-4">Accessories</h2>
-            <p class="mb-4 text-white md:text-2xl">Elevate your style with our latest <br>sportswear collection.</p>
-            <a href="#popular-products"
-              class="bg-primary hover:bg-transparent text-white hover:text-white border border-transparent hover:border-white font-semibold px-4 py-2 rounded-full inline-block">Shop
-              now</a>
-          </div>
-        </div>
+        @endforelse
       </div>
       <button
         type="button"
