@@ -39,34 +39,30 @@
   ];
 
   $linksUteis = [
-  ['nome' => 'Conexão NFE', 'link' => 'https://www.conexaonfe.com.br/'],
-  ['nome' => 'Mercos', 'link' => 'https://app.mercos.com/login/'],
-  ['nome' => 'Hive Cloud - CTe', 'link' => 'https://cte.hivecloud.com.br/ctes'],
-  ['nome' => 'Hive Cloud - MDFe', 'link' => 'https://mdfe.hivecloud.com.br/'],
-  ['nome' => 'Universidade Sankhya', 'link' => 'https://ead.sankhya.com.br/login.php'],
-  ['nome' => 'Sankhya Om', 'link' => 'https://sequoia.sankhyacloud.com.br/mge/'],
-  ['nome' => 'Ordens de Serviço', 'link' => '#'],
-  ['nome' => 'Manutenção', 'link' => '#'],
-  ['nome' => 'Patrimonial', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJLv1d-JqxVOkIzJSns4QY1UOTlMSFQ5NlYxUUdJTUw2UlhTSlJUR0dRNyQlQCN0PWcu'],
-  ['nome' => 'TI', 'link' => '#'],
-  ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/'],
+  ['nome' => 'Qive', 'link' => 'https://qive.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=qive.com.br&sz=128'],
+  ['nome' => 'Mercos', 'link' => 'https://app.mercos.com/login/', 'logo' => 'https://www.google.com/s2/favicons?domain=mercos.com&sz=128'],
+  ['nome' => 'Hive Cloud - CTe', 'link' => 'https://cte.hivecloud.com.br/ctes', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
+  ['nome' => 'Hive Cloud - MDFe', 'link' => 'https://mdfe.hivecloud.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
+  ['nome' => 'Universidade Sankhya', 'link' => 'https://ead.sankhya.com.br/login.php', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
+  ['nome' => 'Sankhya Om', 'link' => 'https://sequoia.sankhyacloud.com.br/mge/', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
+  ['nome' => 'Manutenção', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DLMaVurEnZBCsdqn3fvEx5RURUtYQTBPVUdSQk05RkY5TTJVSU0wV0w4My4u', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
+  ['nome' => 'Patrimonial', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJLv1d-JqxVOkIzJSns4QY1UOTlMSFQ5NlYxUUdJTUw2UlhTSlJUR0dRNyQlQCN0PWcu', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
+  ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/', 'logo' => 'https://www.google.com/s2/favicons?domain=grupoimpulsionar.com&sz=128'],
   ['nome' => 'Admissão de Colaboradores', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UNjBVUkpSSjgwWlZUOEExWkhTSEM5SlVXTi4u&route=shorturl'],
   ['nome' => 'Solicitação Demissional', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UODhUVFgxN0YyME1TREZJT0pNV0tOVEU1Vy4u&route=shorturl'],
-  ['nome' => 'Pontotel', 'link' => 'https://gestao.pontotel.com.br/#/cognito/login'],
+  ['nome' => 'Pontotel', 'link' => 'https://gestao.pontotel.com.br/#/cognito/login', 'logo' => 'https://www.google.com/s2/favicons?domain=pontotel.com.br&sz=128'],
   ['nome' => 'Canal de Ética', 'link' => 'https://contatoseguro.com.br/sequoiabrasil'],
   ['nome' => 'Canal da mulher', 'link' => 'https://contatoseguro.com.br/pt/canaldamulhersequoiabrasil'],
-  ['nome' => 'Formulário Anônimo de Denuncia e Sugestões', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DEUrqtMkBb1GmQq4S0B2acRUMDBDNzBBR0gyMVM2TzRQMkFaTlhUWTRYMCQlQCN0PWcu&route=shorturl'],
+  ['nome' => 'Formulário Anônimo de Denuncia e Sugestões', 'link' => 'https://forms.office.com'],
   ];
 
   $linksUteis = collect($linksUteis)->map(function (array $item) {
   $host = null;
-  $logo = null;
+  $logo = $item['logo'] ?? null;
 
   if ($item['link'] !== '#') {
   $host = parse_url($item['link'], PHP_URL_HOST);
-  if (is_string($host) && $host !== '') {
-  $logo = 'https://www.google.com/s2/favicons?domain=' . $host . '&sz=128';
-  }
+  $logo ??= 'https://www.google.com/s2/favicons?sz=128&domain_url=' . urlencode($item['link']);
   }
 
   $palavras = preg_split('/\s+/', $item['nome']) ?: [];
@@ -89,22 +85,26 @@
   [
   'nome' => 'Sequoia',
   'endereco' => 'Rua Waldemar Colombo Garcia, 491, Santo Aleixo, Magé - RJ, 25926',
-  'link' => '#',
+  'link' => 'https://www.sequoiaalimentos.com.br/',
+  'logo' => '/assets/sequoialogo.png',
   ],
   [
   'nome' => 'Shasta',
   'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
-  'link' => '#',
+  'link' => 'https://www.shastadistribuidora.com.br/',
+  'logo' => '/assets/Shastalogo.png',
   ],
   [
   'nome' => 'Ocotillo',
   'endereco' => 'BR-040, Pedro do Rio, Areal - RJ, 25845-000',
   'link' => '#',
+  'logo' => '/assets/Ocotillologo.png',
   ],
   [
   'nome' => 'Valeric',
   'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
   'link' => '#',
+  'logo' => '/assets/Shastalogo.png',
   ],
   ];
 
@@ -506,7 +506,7 @@
     <div class="container mx-auto px-4">
       <div class="mb-10 text-center">
         <h2 class="text-4xl font-bold">Contatos</h2>
-        <p class="mt-3 text-slate-300">Unidades e endereços principais da empresa.</p>
+        <p class="mt-3 text-slate-300">Unidades e endereços principais das empresas.</p>
       </div>
       <div class="flex gap-6 justify-center mt-6">
         @foreach ($contatos as $contato)
@@ -514,8 +514,11 @@
           href="{{ $contato['link'] }}"
           class="group rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:border-primary hover:bg-white/10 w-full">
           <div class="flex flex-col items-center text-center">
-            <div class="flex h-20 w-20 items-center justify-center rounded-2xl border border-dashed border-white/15 bg-gray-dark/50 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-              Logo
+            <div class="flex h-20 w-28 items-center justify-center rounded-2xl border border-dashed border-white/15 bg-white px-3 py-2 shadow-sm">
+              <img
+                src="{{ $contato['logo'] }}"
+                alt="Logo {{ $contato['nome'] }}"
+                class="h-full w-full object-contain">
             </div>
             <h3 class="mt-5 text-2xl font-semibold text-white">{{ $contato['nome'] }}</h3>
             <p class="mt-4 text-base font-medium leading-7 text-slate-200">{{ $contato['endereco'] }}</p>
