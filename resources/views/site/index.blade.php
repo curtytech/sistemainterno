@@ -118,7 +118,8 @@
       <a href="{{ route('site.index') }}" class="flex items-center">
         <div class="ml-5">
           <!-- <img src="/assets/images/template-white-logo.png" alt="Logo" class="h-14 w-auto mr-4"> -->
-          <a href="{{ route('site.index') }}" class="text-white font-semibold pl-5">Sistema Interno</a>
+          <!-- <a href="{{ route('site.index') }}" class="text-white font-semibold pl-5">Sistema Interno</a> -->
+          <img src="/assets/Shastalogo.png" alt="Logo" class="h-14 w-auto mr-4">
         </div>
       </a>
 
@@ -298,9 +299,9 @@
         <div class="swiper-slide">
           <img src="{{ $board->image_url }}" alt="{{ $board->title }}">
           <div class="swiper-slide-content">
-            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl">{{ $board->title }}</h2>
-            <p class="mb-4 text-white md:text-2xl">{{ \Illuminate\Support\Str::limit($board->content, 120) }}</p>
-            <div class="flex flex-wrap items-center gap-3">
+            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl ml-5">{{ $board->title }}</h2>
+            <p class="mb-4 text-white md:text-2xl ml-5">{{ \Illuminate\Support\Str::limit($board->content, 120) }}</p>
+            <div class="flex flex-wrap items-center gap-3 ml-5">
               @if ($board->link)
               <a
                 href="{{ $board->link }}"

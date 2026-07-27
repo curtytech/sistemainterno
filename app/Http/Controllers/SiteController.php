@@ -17,4 +17,42 @@ class SiteController extends Controller
             'noticias' => News::getLatestForSite(4),
         ]);
     }
+
+    public function newsIndex(): View
+    {
+        return view('site.news.index', [
+            'noticias' => News::query()
+                ->with('category:id,name')
+                ->latest()
+                ->paginate(12),
+        ]);
+    }
+
+    public function newsShow(News $news): View
+    {
+        $news->load('category:id,name');
+
+        return view('site.news.show', [
+            'noticia' => $news,
+        ]);
+    }
+
+    public function eventsIndex(): View
+    {
+        return view('site.events.index', [
+            'eventos' => Event::query()
+                ->with('category:id,name')
+                ->latest()
+                ->paginate(12),
+        ]);
+    }
+
+    public function eventsShow(Event $event): View
+    {
+        $event->load('category:id,name');
+
+        return view('site.events.show', [
+            'evento' => $event,
+        ]);
+    }
 }

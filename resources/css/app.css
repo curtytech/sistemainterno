@@ -19,16 +19,18 @@
 @layer base {
     body {
         @apply bg-white font-sans text-slate-900 antialiased;
+        overflow-x: hidden;
     }
 
     html {
         scroll-behavior: smooth;
+        overflow-x: hidden;
     }
 }
 
 @layer components {
     .mobile-menu {
-        @apply bg-gray-dark px-4 py-6 text-white shadow-lg;
+        @apply w-full bg-gray-dark px-4 py-6 text-white shadow-lg;
     }
 
     .mobile-dropdown-menu {
@@ -51,8 +53,14 @@
         min-width: 0;
     }
 
+    .main-slider {
+        @apply relative w-full max-w-full overflow-hidden;
+    }
+
     .main-slider .swiper-wrapper {
         display: flex;
+        width: 100%;
+        max-width: 100%;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
@@ -79,6 +87,7 @@
 
     .swiper-slide-content {
         @apply relative z-10 flex min-h-[70vh] max-w-3xl flex-col items-start justify-center px-6 py-16 md:px-16;
+        width: min(100%, 42rem);
     }
 
     .brands-swiper-slider .swiper-wrapper {
@@ -115,5 +124,30 @@
 
     .category-banner img {
         @apply transition duration-300 group-hover:scale-105;
+    }
+
+    @media (max-width: 640px) {
+        .main-slider .swiper-slide {
+            min-height: 28rem;
+        }
+
+        .swiper-slide-content {
+            min-height: 28rem;
+            width: min(100%, 18rem);
+            padding: 4rem 1.25rem;
+        }
+
+        .slider-nav-button {
+            width: 2.75rem;
+            height: 2.75rem;
+        }
+
+        .slider-nav-prev {
+            left: 0.75rem;
+        }
+
+        .slider-nav-next {
+            right: 0.75rem;
+        }
     }
 }

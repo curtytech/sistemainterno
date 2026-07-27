@@ -19,7 +19,7 @@ class BoardResource extends Resource
 
     protected static ?string $navigationGroup = 'Conteudo';
 
-    protected static ?string $navigationLabel = 'Boards';
+    protected static ?string $navigationLabel = 'Mural';
 
     protected static ?string $modelLabel = 'Board';
 
