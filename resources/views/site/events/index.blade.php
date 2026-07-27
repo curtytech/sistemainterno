@@ -37,16 +37,24 @@
     <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
       @foreach ($eventos as $evento)
       <article class="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        <img src="{{ $evento->image }}" alt="{{ $evento->title }}" class="h-56 w-full object-cover">
+        <img src="{{ $evento->image_url }}" alt="{{ $evento->title }}" class="h-56 w-full object-cover">
         <div class="flex flex-1 flex-col p-6">
           <div class="mb-4 flex items-center justify-between gap-3">
             <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
               {{ $evento->category_name }}
             </span>
-            <span class="text-sm text-slate-500">{{ \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}</span>
+            <span class="text-sm text-slate-500">{{ $evento->start_date ? $evento->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}</span>
           </div>
           <h2 class="text-2xl font-semibold text-slate-900">{{ $evento->title }}</h2>
-          <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">{{ \Illuminate\Support\Str::limit($evento->content, 180) }}</p>
+          @if ($evento->start_time || $evento->end_time)
+          <p class="mt-3 text-sm font-medium text-slate-500">
+            {{ $evento->start_time ? \Illuminate\Support\Carbon::parse($evento->start_time)->format('H:i') : '--:--' }}
+            @if ($evento->end_time)
+            - {{ \Illuminate\Support\Carbon::parse($evento->end_time)->format('H:i') }}
+            @endif
+          </p>
+          @endif
+          <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">{{ \Illuminate\Support\Str::limit(strip_tags($evento->content), 180) }}</p>
           <div class="mt-6">
             <a href="{{ route('site.events.show', $evento) }}" class="inline-flex rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
               Ver evento

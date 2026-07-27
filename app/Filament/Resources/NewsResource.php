@@ -42,9 +42,11 @@ class NewsResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->label('Titulo')
                     ->required(),
-                Forms\Components\TextInput::make('image')
-                    ->label('Imagem (URL)')
-                    ->url()
+                Forms\Components\FileUpload::make('image')
+                    ->label('Imagem')
+                    ->disk('public')
+                    ->directory('news/images')
+                    ->image()
                     ->required(),
             ]);
     }
@@ -60,7 +62,8 @@ class NewsResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

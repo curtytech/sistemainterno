@@ -8,6 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/site', [SiteController::class, 'index'])->name('site.index');
+Route::get('/site/conteudos', [SiteController::class, 'contentIndex'])->name('site.content.index');
 Route::get('/site/noticias', [SiteController::class, 'newsIndex'])->name('site.news.index');
 Route::get('/site/noticias/{news}', [SiteController::class, 'newsShow'])->name('site.news.show');
 Route::get('/site/eventos', [SiteController::class, 'eventsIndex'])->name('site.events.index');

@@ -55,4 +55,18 @@ class SiteController extends Controller
             'evento' => $event,
         ]);
     }
+
+    public function contentIndex(): View
+    {
+        return view('site.content.index', [
+            'noticias' => News::query()
+                ->with('category:id,name')
+                ->latest()
+                ->paginate(8, ['*'], 'noticias_pagina'),
+            'eventos' => Event::query()
+                ->with('category:id,name')
+                ->latest()
+                ->paginate(8, ['*'], 'eventos_pagina'),
+        ]);
+    }
 }

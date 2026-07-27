@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -21,6 +23,7 @@ class News extends Model
 
     protected $appends = [
         'category_name',
+        'image_url',
     ];
 
     public function category(): BelongsTo
@@ -31,6 +34,19 @@ class News extends Model
     public function getCategoryNameAttribute(): ?string
     {
         return $this->category?->name;
+    }
+
+    public function getImageUrlAttribute(): ?string
+    {
+        if (! is_string($this->image) || $this->image === '') {
+            return null;
+        }
+
+        if (Str::startsWith($this->image, ['http://', 'https://', '/'])) {
+            return $this->image;
+        }
+
+        return Storage::disk('public')->url($this->image);
     }
 
     public function scopeLatestForSite(Builder $query, int $limit = 4): Builder

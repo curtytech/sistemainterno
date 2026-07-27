@@ -37,7 +37,7 @@
     <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
       @foreach ($noticias as $noticia)
       <article class="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        <img src="{{ $noticia->image }}" alt="{{ $noticia->title }}" class="h-56 w-full object-cover">
+        <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="h-56 w-full object-cover">
         <div class="flex flex-1 flex-col p-6">
           <div class="mb-4 flex items-center justify-between gap-3">
             <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">

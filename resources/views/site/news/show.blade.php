@@ -20,7 +20,7 @@
     </div>
 
     <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <img src="{{ $noticia->image }}" alt="{{ $noticia->title }}" class="h-72 w-full object-cover md:h-96">
+      <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="h-72 w-full object-cover md:h-96">
       <div class="p-6 md:p-10">
         <div class="mb-6 flex flex-wrap items-center gap-3">
           <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">

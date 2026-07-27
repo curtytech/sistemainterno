@@ -20,18 +20,31 @@
     </div>
 
     <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <img src="{{ $evento->image }}" alt="{{ $evento->title }}" class="h-72 w-full object-cover md:h-96">
+      <img src="{{ $evento->image_url }}" alt="{{ $evento->title }}" class="h-72 w-full object-cover md:h-96">
       <div class="p-6 md:p-10">
         <div class="mb-6 flex flex-wrap items-center gap-3">
           <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
             {{ $evento->category_name }}
           </span>
-          <span class="text-sm text-slate-500">{{ \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}</span>
+          <span class="text-sm text-slate-500">
+            {{ $evento->start_date ? $evento->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}
+            @if ($evento->end_date && $evento->end_date->ne($evento->start_date))
+            ate {{ $evento->end_date->format('d/m/Y') }}
+            @endif
+          </span>
+          @if ($evento->start_time || $evento->end_time)
+          <span class="text-sm text-slate-500">
+            {{ $evento->start_time ? \Illuminate\Support\Carbon::parse($evento->start_time)->format('H:i') : '--:--' }}
+            @if ($evento->end_time)
+            - {{ \Illuminate\Support\Carbon::parse($evento->end_time)->format('H:i') }}
+            @endif
+          </span>
+          @endif
         </div>
 
         <h1 class="text-3xl font-bold text-slate-900 md:text-5xl">{{ $evento->title }}</h1>
         <div class="mt-6 text-base leading-8 text-slate-700">
-          {!! nl2br(e($evento->content)) !!}
+          {!! $evento->content !!}
         </div>
       </div>
     </article>

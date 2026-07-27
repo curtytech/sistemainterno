@@ -29,24 +29,40 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('title')
+                    ->label('Titulo')
+                    ->required(),
                 Forms\Components\Select::make('category_id')
                     ->label('Categoria')
                     ->relationship('category', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
-                Forms\Components\Textarea::make('content')
+                Forms\Components\DatePicker::make('start_date')
+                    ->label('Data de inicio'),
+                Forms\Components\DatePicker::make('end_date')
+                    ->label('Data de fim'),
+                Forms\Components\TimePicker::make('start_time')
+                    ->label('Hora de inicio')
+                    ->seconds(false),
+                Forms\Components\TimePicker::make('end_time')
+                    ->label('Hora de fim')
+                    ->seconds(false),
+
+                Forms\Components\RichEditor::make('content')
                     ->label('Conteudo')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('title')
-                    ->label('Titulo')
-                    ->required(),
-                Forms\Components\TextInput::make('image')
-                    ->label('Imagem (URL)')
-                    ->url()
-                    ->required(),
-            ]);
+                Forms\Components\FileUpload::make('image')
+                    ->label('Imagem')
+                    ->disk('public')
+                    ->directory('events/images')
+                    ->image()
+                    ->required()
+                    ->columnSpanFull(),
+
+            ])
+            ->columns(2);
     }
 
     public static function table(Table $table): Table
@@ -60,7 +76,16 @@ class EventResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\TextColumn::make('start_date')
+                    ->label('Inicio')
+                    ->date('d/m/Y')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('start_time')
+                    ->label('Hora')
+                    ->time('H:i')
+                    ->sortable(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
