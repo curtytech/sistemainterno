@@ -29,25 +29,27 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('title')
+                    ->label('Titulo')
+                    ->required(),
                 Forms\Components\Select::make('category_id')
                     ->label('Categoria')
                     ->relationship('category', 'name')
                     ->searchable()
                     ->preload()
-                    ->required(),
+                    ->required(),                
                 Forms\Components\Textarea::make('content')
                     ->label('Conteudo')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('title')
-                    ->label('Titulo')
-                    ->required(),
+
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagem')
                     ->disk('public')
                     ->directory('news/images')
                     ->image()
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
             ]);
     }
 

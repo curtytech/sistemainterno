@@ -13,11 +13,9 @@
 </head>
 
 <body class="bg-slate-50 font-sans text-slate-900">
-  <main class="mx-auto max-w-5xl px-4 py-10">
-    <div class="mb-8 flex flex-wrap items-center gap-3">
-      <a href="{{ route('site.events.index') }}" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">Voltar para eventos</a>
-      <a href="{{ route('site.index') }}" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">Voltar ao site</a>
-    </div>
+  @include('site.partials.navbar')
+
+  <main class="mx-auto max-w-6xl px-4 py-10 md:py-14">
 
     <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
       <img src="{{ $evento->image_url }}" alt="{{ $evento->title }}" class="h-72 w-full object-cover md:h-96">
@@ -49,6 +47,9 @@
       </div>
     </article>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 </body>
 
 </html>

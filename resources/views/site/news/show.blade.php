@@ -13,29 +13,54 @@
 </head>
 
 <body class="bg-slate-50 font-sans text-slate-900">
-  <main class="mx-auto max-w-5xl px-4 py-10">
-    <div class="mb-8 flex flex-wrap items-center gap-3">
-      <a href="{{ route('site.news.index') }}" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">Voltar para notícias</a>
-      <a href="{{ route('site.index') }}" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">Voltar ao site</a>
-    </div>
+  @include('site.partials.navbar')
+
+  <main class="mx-auto max-w-6xl px-4 py-10 md:py-14">
 
     <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="h-72 w-full object-cover md:h-96">
-      <div class="p-6 md:p-10">
-        <div class="mb-6 flex flex-wrap items-center gap-3">
-          <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-            {{ $noticia->category_name }}
-          </span>
-          <span class="text-sm text-slate-500">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
+      <div class="grid gap-0 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <div class="border-b border-slate-200 bg-slate-100 lg:border-b-0 lg:border-r">
+          <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="h-64 w-full object-cover md:h-80 lg:h-full">
         </div>
 
-        <h1 class="text-3xl font-bold text-slate-900 md:text-5xl">{{ $noticia->title }}</h1>
-        <div class="mt-6 text-base leading-8 text-slate-700">
-          {!! nl2br(e($noticia->content)) !!}
+        <div class="p-6 md:p-8">
+          <div class="mb-4 flex flex-wrap items-center gap-3">
+            <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+              {{ $noticia->category_name }}
+            </span>
+            <span class="text-sm font-medium text-slate-500">Publicado em {{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
+          </div>
+
+          <h1 class="text-3xl font-bold text-slate-900 md:text-4xl">{{ $noticia->title }}</h1>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Categoria</p>
+              <p class="mt-2 text-sm font-semibold text-slate-900">{{ $noticia->category_name ?? 'Nao informada' }}</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Publicado em</p>
+              <p class="mt-2 text-sm font-semibold text-slate-900">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Atualizado em</p>
+              <p class="mt-2 text-sm font-semibold text-slate-900">{{ \Illuminate\Support\Carbon::parse($noticia->updated_at)->format('d/m/Y') }}</p>
+            </div>
+          </div>
+
+          <div class="mt-8 rounded-2xl border border-slate-200 p-5 md:p-6">
+            <h2 class="text-lg font-semibold text-slate-900">Conteudo da noticia</h2>
+            <div class="mt-4 whitespace-pre-line text-base leading-8 text-slate-700">
+              {{ $noticia->content }}
+            </div>
+          </div>
         </div>
       </div>
     </article>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 </body>
 
 </html>
