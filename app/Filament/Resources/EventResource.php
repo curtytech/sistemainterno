@@ -48,9 +48,8 @@ class EventResource extends Resource
                 Forms\Components\TimePicker::make('end_time')
                     ->label('Hora de fim')
                     ->seconds(false),
-
                 Forms\Components\RichEditor::make('content')
-                    ->label('Conteudo')
+                    ->label('Conteúdo')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
@@ -73,24 +72,29 @@ class EventResource extends Resource
                     ->label('ID')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
+                    ->label('Categoria')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Titulo')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->label('Inicio')
                     ->date('d/m/Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('start_time')
-                    ->label('Hora')
+                    ->label('Hora de inicio')
                     ->time('H:i')
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('image')
+                    ->label('Imagem')
                     ->disk('public'),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Criado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Atualizado em')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -50,6 +50,7 @@ class EventCategoryResource extends Resource
                     ->label('ID')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nome')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
