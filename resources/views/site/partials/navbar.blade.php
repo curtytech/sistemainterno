@@ -103,7 +103,7 @@
         <div class="ml-5">
           <!-- <img src="/assets/images/template-white-logo.png" alt="Logo" class="h-14 w-auto mr-4"> -->
           <!-- <a href="{{ route('site.index') }}" class="text-white font-semibold pl-5">Sistema Interno</a> -->
-          <img src="/assets/Shastalogo.png" alt="Logo" class="h-14 w-auto mr-4">
+          <img src="/assets/logo-grupo-sequoia.png" alt="Logo" class="h-14 w-auto mr-4">
         </div>
       </a>
 

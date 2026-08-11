@@ -356,11 +356,11 @@
         <h2 class="text-4xl font-bold">Contatos</h2>
         <p class="mt-3 text-slate-300">Unidades e endereços principais das empresas.</p>
       </div>
-      <div class="flex gap-6 justify-center mt-6">
+      <div class="flex flex-col gap-6 justify-center mt-6 md:flex-row">
         @foreach ($contatos as $contato)
         <a
           href="{{ $contato['link'] }}"
-          class="group rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:border-primary hover:bg-white/10 w-full">
+          class="group rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:border-primary hover:bg-white/10 w-full md:max-w-xs">
           <div class="flex flex-col items-center text-center">
             <div class="flex h-20 w-28 items-center justify-center rounded-2xl border border-dashed border-white/15 bg-white px-3 py-2 shadow-sm">
               <img
