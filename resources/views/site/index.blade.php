@@ -104,7 +104,7 @@
   'nome' => 'Valeric',
   'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
   'link' => '#',
-  'logo' => '/assets/Shastalogo.png',
+  'logo' => '/assets/Valericlogo.png',
   ],
   ];
 
