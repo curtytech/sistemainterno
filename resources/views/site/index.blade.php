@@ -16,26 +16,27 @@
 <body class="font-sans bg-white text-slate-900">
   @php
   $departamentos = [
-  ['nome' => 'Comercial', 'link' => '#'],
-  ['nome' => 'Compras', 'link' => '#'],
-  ['nome' => 'Controladoria', 'link' => '#'],
-  ['nome' => 'Financeiro', 'link' => '#'],
-  ['nome' => 'Fiscal/Contábil', 'link' => '#'],
-  ['nome' => 'Gerência', 'link' => '#'],
-  ['nome' => 'Jurídico', 'link' => '#'],
-  ['nome' => 'Logística', 'link' => '#'],
-  ['nome' => 'Manutenção', 'link' => '#'],
-  ['nome' => 'Marketing', 'link' => '#'],
-  ['nome' => 'NFe', 'link' => '#'],
-  ['nome' => 'Orçamento', 'link' => '#'],
-  ['nome' => 'Patrimonial', 'link' => '#'],
-  ['nome' => 'PCP', 'link' => '#'],
-  ['nome' => 'Pública', 'link' => '#'],
-  ['nome' => 'Qualidade / PeD', 'link' => '#'],
-  ['nome' => 'RH', 'link' => '#'],
-  ['nome' => 'SST', 'link' => '#'],
-  ['nome' => 'Sustentabilidade', 'link' => '#'],
-  ['nome' => 'TI', 'link' => '#'],
+  ['nome' => 'Administrativo', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Administrativo'],
+  ['nome' => 'Comercial', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Comercial'],
+  ['nome' => 'Compras', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Compras'],
+  ['nome' => 'Controladoria', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Controladoria'],
+  ['nome' => 'Financeiro', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Financeiro'],
+  ['nome' => 'Fiscal/Contábil', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Fiscal_contabil'],
+  ['nome' => 'Gerência', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Gerencia'],
+  ['nome' => 'Jurídico', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-juridico/SitePages/CollabHome.aspx'],
+  ['nome' => 'Logística', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Logistica'],
+  ['nome' => 'Manutenção', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Manutencao'],
+  ['nome' => 'Marketing', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Marketing'],
+  ['nome' => 'NFe', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-NF'],
+  ['nome' => 'Orçamento', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Orcamento'],
+  ['nome' => 'Patrimonial', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Patrimonial'],
+  ['nome' => 'PCP', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-PCP'],
+  ['nome' => 'Pública', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Publica'],
+  ['nome' => 'Qualidade / PeD', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Qualidade/SitePages/CollabHome.aspx'],
+  ['nome' => 'RH', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-RH'],
+  ['nome' => 'SST', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-SST'],
+  ['nome' => 'Sustentabilidade', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Sustentabilidade'],
+  ['nome' => 'TI', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/intrasequoia/SitePages/Inova%C3%A7%C3%B5es-Tecnol%C3%B3gicas.aspx'],
   ];
 
   $linksUteis = [
@@ -111,7 +112,7 @@
   $departamentosColunas = collect($departamentos)->chunk((int) ceil(count($departamentos) / 3));
   $linksUteisColunas = collect($linksUteis)->chunk((int) ceil(count($linksUteis) / 3));
   @endphp
- 
+
   @include('site.partials.navbar')
 
   <!-- Slider -->
