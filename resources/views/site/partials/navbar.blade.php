@@ -208,9 +208,9 @@
       </nav>
 
       <!-- Right section: Buttons (for desktop) -->
-      <div class="hidden lg:flex items-center space-x-4 relative">
+      <div class="hidden lg:flex items-center space-x-4 relative" style="margin-right: 20px;">
         <a href="{{ route('filament.admin.pages.dashboard') }}"
-          class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Área Interna</a>
+          class=" bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Área Interna</a>
       </div>
     </div>
   </header>
