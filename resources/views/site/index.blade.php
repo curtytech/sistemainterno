@@ -140,7 +140,7 @@
                 href="{{ $board->file_url }}"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-block rounded-full border border-white bg-white/10 px-4 py-2 font-semibold text-white hover:bg-white hover:text-slate-900">
+                class="inline-block rounded-full border border-white bg-white/10 px-4 py-2 font-semibold text-white hover:bg-primary">
                 Baixar arquivo
               </a>
               @endif
