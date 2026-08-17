@@ -48,7 +48,7 @@
   ['nome' => 'Sankhya Om', 'link' => 'https://sequoia.sankhyacloud.com.br/mge/', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
   ['nome' => 'Manutenção', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DLMaVurEnZBCsdqn3fvEx5RURUtYQTBPVUdSQk05RkY5TTJVSU0wV0w4My4u', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
   ['nome' => 'Patrimonial', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJLv1d-JqxVOkIzJSns4QY1UOTlMSFQ5NlYxUUdJTUw2UlhTSlJUR0dRNyQlQCN0PWcu', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
-  ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/', 'logo' => 'https://www.google.com/s2/favicons?domain=grupoimpulsionar.com&sz=128'],
+  ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/', 'logo' => '/assets/logo-grupo-sequoia.png'],
   ['nome' => 'Admissão de Colaboradores', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UNjBVUkpSSjgwWlZUOEExWkhTSEM5SlVXTi4u&route=shorturl'],
   ['nome' => 'Solicitação Demissional', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UODhUVFgxN0YyME1TREZJT0pNV0tOVEU1Vy4u&route=shorturl'],
   ['nome' => 'Pontotel', 'link' => 'https://gestao.pontotel.com.br/#/cognito/login', 'logo' => 'https://www.google.com/s2/favicons?domain=pontotel.com.br&sz=128'],
