@@ -16,45 +16,45 @@
 <body class="font-sans bg-white text-slate-900">
   @php
   $departamentos = [
-  ['nome' => 'Administrativo', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Administrativo'],
-  ['nome' => 'Comercial', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Comercial'],
-  ['nome' => 'Compras', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Compras'],
-  ['nome' => 'Controladoria', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Controladoria'],
-  ['nome' => 'Financeiro', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Financeiro'],
-  ['nome' => 'Fiscal/Contábil', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Fiscal_contabil'],
-  ['nome' => 'Gerência', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Gerencia'],
-  ['nome' => 'Jurídico', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-juridico/SitePages/CollabHome.aspx'],
-  ['nome' => 'Logística', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Logistica'],
-  ['nome' => 'Manutenção', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Manutencao'],
-  ['nome' => 'Marketing', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Marketing'],
-  ['nome' => 'NFe', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-NF'],
-  ['nome' => 'Orçamento', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Orcamento'],
-  ['nome' => 'Patrimonial', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Patrimonial'],
-  ['nome' => 'PCP', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-PCP'],
-  ['nome' => 'Pública', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Publica'],
-  ['nome' => 'Qualidade / PeD', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Qualidade/SitePages/CollabHome.aspx'],
-  ['nome' => 'RH', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-RH'],
-  ['nome' => 'SST', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-SST'],
-  ['nome' => 'Sustentabilidade', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Sustentabilidade'],
-  ['nome' => 'TI', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/intrasequoia/SitePages/Inova%C3%A7%C3%B5es-Tecnol%C3%B3gicas.aspx'],
+  ['nome' => 'Administrativo', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Administrativo', 'image' => '/assets/icon/adm.jpeg'],
+  ['nome' => 'Comercial', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Comercial', 'image' => '/assets/icon/com.jpeg'],
+  ['nome' => 'Compras', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Compras', 'image' => '/assets/icon/comesup.jpeg'],
+  ['nome' => 'Controladoria', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Controladoria', 'image' => '/assets/icon/cont.jpeg'],
+  ['nome' => 'Financeiro', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Financeiro', 'image' => '/assets/icon/fin.jpeg'],
+  ['nome' => 'Fiscal/Contábil', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Fiscal_contabil', 'image' => '/assets/icon/fis.jpeg'],
+  ['nome' => 'Gerência', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Gerencia', 'image' => '/assets/icon/ger.jpeg'],
+  ['nome' => 'Jurídico', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-juridico/SitePages/CollabHome.aspx', 'image' => '/assets/icon/jur.jpeg'],
+  ['nome' => 'Logística', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Logistica', 'image' => '/assets/icon/logetrans.jpeg'],
+  ['nome' => 'Manutenção', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Manutencao', 'image' => '/assets/icon/man.jpeg'],
+  ['nome' => 'Marketing', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Marketing', 'image' => '/assets/icon/mark.jpeg'],
+  ['nome' => 'NFe', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-NF', 'image' => '/assets/icon/nfe.jpeg'],
+  ['nome' => 'Orçamento', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Orcamento', 'image' => '/assets/icon/orc.jpeg'],
+  ['nome' => 'Patrimonial', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Patrimonial', 'image' => '/assets/icon/pat.jpeg'],
+  ['nome' => 'PCP', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-PCP', 'image' => '/assets/icon/pcp.jpeg'],
+  ['nome' => 'Pública', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Publica', 'image' => '/assets/icon/publ.jpeg'],
+  ['nome' => 'Qualidade / PeD', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Qualidade/SitePages/CollabHome.aspx', 'image' => '/assets/icon/quali.jpeg'],
+  ['nome' => 'RH', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-RH', 'image' => '/assets/icon/rh.jpeg'],
+  ['nome' => 'SST', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-SST', 'image' => '/assets/icon/sst.jpeg'],
+  ['nome' => 'Sustentabilidade', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/Departamento-Sustentabilidade', 'image' => '/assets/icon/sust.jpeg'],
+  ['nome' => 'TI', 'link' => 'https://sequoiatortillas.sharepoint.com/sites/intrasequoia/SitePages/Inova%C3%A7%C3%B5es-Tecnol%C3%B3gicas.aspx', 'image' => '/assets/icon/inov.jpeg'],
   ];
 
   $linksUteis = [
-  ['nome' => 'Qive', 'link' => 'https://qive.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=qive.com.br&sz=128'],
-  ['nome' => 'Mercos', 'link' => 'https://app.mercos.com/login/', 'logo' => 'https://www.google.com/s2/favicons?domain=mercos.com&sz=128'],
-  ['nome' => 'Hive Cloud - CTe', 'link' => 'https://cte.hivecloud.com.br/ctes', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
-  ['nome' => 'Hive Cloud - MDFe', 'link' => 'https://mdfe.hivecloud.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
-  ['nome' => 'Universidade Sankhya', 'link' => 'https://ead.sankhya.com.br/login.php', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
-  ['nome' => 'Sankhya Om', 'link' => 'https://sequoia.sankhyacloud.com.br/mge/', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
-  ['nome' => 'Manutenção', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DLMaVurEnZBCsdqn3fvEx5RURUtYQTBPVUdSQk05RkY5TTJVSU0wV0w4My4u', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
-  ['nome' => 'Patrimonial', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJLv1d-JqxVOkIzJSns4QY1UOTlMSFQ5NlYxUUdJTUw2UlhTSlJUR0dRNyQlQCN0PWcu', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
-  ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/', 'logo' => '/assets/logo-grupo-sequoia.png'],
-  ['nome' => 'Admissão de Colaboradores', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UNjBVUkpSSjgwWlZUOEExWkhTSEM5SlVXTi4u&route=shorturl'],
-  ['nome' => 'Solicitação Demissional', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UODhUVFgxN0YyME1TREZJT0pNV0tOVEU1Vy4u&route=shorturl'],
-  ['nome' => 'Pontotel', 'link' => 'https://gestao.pontotel.com.br/#/cognito/login', 'logo' => 'https://www.google.com/s2/favicons?domain=pontotel.com.br&sz=128'],
-  ['nome' => 'Canal de Ética', 'link' => 'https://contatoseguro.com.br/sequoiabrasil'],
-  ['nome' => 'Canal da mulher', 'link' => 'https://contatoseguro.com.br/pt/canaldamulhersequoiabrasil'],
-  ['nome' => 'Formulário Anônimo de Denuncia e Sugestões', 'link' => 'https://forms.office.com'],
+    ['nome' => 'Qive', 'link' => 'https://qive.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=qive.com.br&sz=128'],
+    ['nome' => 'Mercos', 'link' => 'https://app.mercos.com/login/', 'logo' => 'https://www.google.com/s2/favicons?domain=mercos.com&sz=128'],
+    ['nome' => 'Hive Cloud - CTe', 'link' => 'https://cte.hivecloud.com.br/ctes', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
+    ['nome' => 'Hive Cloud - MDFe', 'link' => 'https://mdfe.hivecloud.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
+    ['nome' => 'Universidade Sankhya', 'link' => 'https://ead.sankhya.com.br/login.php', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
+    ['nome' => 'Sankhya Om', 'link' => 'https://sequoia.sankhyacloud.com.br/mge/', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
+    ['nome' => 'Manutenção', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DLMaVurEnZBCsdqn3fvEx5RURUtYQTBPVUdSQk05RkY5TTJVSU0wV0w4My4u', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
+    ['nome' => 'Patrimonial', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJLv1d-JqxVOkIzJSns4QY1UOTlMSFQ5NlYxUUdJTUw2UlhTSlJUR0dRNyQlQCN0PWcu', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
+    ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/', 'logo' => '/assets/logo-grupo-sequoia.png'],
+    ['nome' => 'Admissão de Colaboradores', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UNjBVUkpSSjgwWlZUOEExWkhTSEM5SlVXTi4u&route=shorturl'],
+    ['nome' => 'Solicitação Demissional', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UODhUVFgxN0YyME1TREZJT0pNV0tOVEU1Vy4u&route=shorturl'],
+    ['nome' => 'Pontotel', 'link' => 'https://gestao.pontotel.com.br/#/cognito/login', 'logo' => 'https://www.google.com/s2/favicons?domain=pontotel.com.br&sz=128'],
+    ['nome' => 'Canal de Ética', 'link' => 'https://contatoseguro.com.br/sequoiabrasil'],
+    ['nome' => 'Canal da mulher', 'link' => 'https://contatoseguro.com.br/pt/canaldamulhersequoiabrasil'],
+    ['nome' => 'Formulário Anônimo de Denuncia e Sugestões', 'link' => 'https://forms.office.com'],
   ];
 
   $linksUteis = collect($linksUteis)->map(function (array $item) {
@@ -82,31 +82,51 @@
   ];
   })->values();
 
+  $departamentos = collect($departamentos)->map(function (array $item) {
+  $host = null;
+  if ($item['link'] !== '#') {
+  $host = parse_url($item['link'], PHP_URL_HOST);
+  }
+  $palavras = preg_split('/\s+|\/|\//', $item['nome']) ?: [];
+  $iniciais = collect($palavras)
+  ->filter()
+  ->take(2)
+  ->map(fn (string $palavra) => mb_strtoupper(mb_substr($palavra, 0, 1)))
+  ->implode('');
+  return [
+  'nome' => $item['nome'],
+  'link' => $item['link'],
+  'host' => $host,
+  'image' => $item['image'] ?? null,
+  'iniciais' => $iniciais !== '' ? $iniciais : 'DP',
+  ];
+  })->values();
+
   $contatos = [
-  [
-  'nome' => 'Sequoia',
-  'endereco' => 'Rua Waldemar Colombo Garcia, 491, Santo Aleixo, Magé - RJ, 25926',
-  'link' => 'https://www.sequoiaalimentos.com.br/',
-  'logo' => '/assets/sequoialogo.png',
-  ],
-  [
-  'nome' => 'Shasta',
-  'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
-  'link' => 'https://www.shastadistribuidora.com.br/',
-  'logo' => '/assets/Shastalogo.png',
-  ],
-  [
-  'nome' => 'Ocotillo',
-  'endereco' => 'BR-040, Pedro do Rio, Areal - RJ, 25845-000',
-  'link' => '#',
-  'logo' => '/assets/Ocotillologo.png',
-  ],
-  [
-  'nome' => 'Valeric',
-  'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
-  'link' => '#',
-  'logo' => '/assets/Valericlogo.png',
-  ],
+    [
+    'nome' => 'Sequoia',
+    'endereco' => 'Rua Waldemar Colombo Garcia, 491, Santo Aleixo, Magé - RJ, 25926',
+    'link' => 'https://www.sequoiaalimentos.com.br/',
+    'logo' => '/assets/sequoialogo.png',
+    ],
+    [
+    'nome' => 'Shasta',
+    'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
+    'link' => 'https://www.shastadistribuidora.com.br/',
+    'logo' => '/assets/Shastalogo.png',
+    ],
+    [
+    'nome' => 'Ocotillo',
+    'endereco' => 'BR-040, Pedro do Rio, Areal - RJ, 25845-000',
+    'link' => '#',
+    'logo' => '/assets/Ocotillologo.png',
+    ],
+    [
+    'nome' => 'Valeric',
+    'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
+    'link' => '#',
+    'logo' => '/assets/Valericlogo.png',
+    ],
   ];
 
   $departamentosColunas = collect($departamentos)->chunk((int) ceil(count($departamentos) / 3));
@@ -178,48 +198,74 @@
     </div>
   </section>
 
-  <!-- Links uteis section -->
-  <section id="links-uteis" class="bg-white py-16 px-4">
+ 
+
+  <section id="links-uteis" class="bg-white py-8 px-4">
     <div class="container mx-auto max-w-screen-xl px-4 testimonials">
-      <div class="text-center mb-12 lg:mb-20">
-        <h2 class="text-5xl font-bold mb-4">Links <span class="text-primary">Úteis</span></h2>
-        <p class="my-7">Acesse rapidamente as principais plataformas usadas no dia a dia.</p>
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-2">Links <span class="text-primary">Úteis</span></h2>
+        <p class="text-slate-600">Acesse rapidamente as principais plataformas usadas no dia a dia.</p>
       </div>
-      <div class="swiper brands-swiper-slider relative" data-carousel data-autoplay-ms="3200">
-        <div class="swiper-wrapper">
-          @foreach ($linksUteis as $item)
+      <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        @foreach ($linksUteis as $item)
+        <a
+          href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
+          @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+          class="flex min-h-[11rem] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-white hover:shadow-lg">
+          <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 p-2">
+            @if ($item['logo'])
+            <img src="{{ $item['logo'] }}" alt="Logo {{ $item['nome'] }}" class="h-9 w-9 rounded-xl object-contain">
+            @else
+            <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
+            @endif
+          </div>
+          <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
+          <p class="mt-1 text-xs text-slate-500">
+            {{ $item['host'] ?? 'Link interno em breve' }}
+          </p>
+        </a>
+        @endforeach
+      </div>
+  </section>
+
+
+  <!-- Departamentos section -->
+  <section id="departamentos" class="bg-slate-50 py-8 px-4">
+    <div class="container mx-auto max-w-screen-xl px-4">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold mb-2">Departamentos</h2>
+        <p class="text-slate-600">Acesse rapidamente os canais de cada departamento.</p>
+      </div>
+      @php
+        $linhas = [
+          $departamentos->slice(0, 7)->values(),
+          $departamentos->slice(7, 7)->values(),
+          $departamentos->slice(14, 7)->values(),
+        ];
+      @endphp
+      <div class="flex flex-col gap-3">
+        @foreach ($linhas as $linha)
+        <div class="flex items-stretch justify-center gap-3">
+          @foreach ($linha as $item)
           <a
             href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
-            @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-            class="swiper-slide flex min-h-[11rem] min-w-[13rem] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-white hover:shadow-lg">
-            <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
-              @if ($item['logo'])
-              <img src="{{ $item['logo'] }}" alt="Logo {{ $item['nome'] }}" class="h-10 w-10 rounded-xl object-contain">
-              @else
-              <span class="text-lg font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
-              @endif
+            @if ($item['link'] !== '#' ) target="_blank" rel="noopener noreferrer" @endif
+            class="flex flex-1 min-w-0 flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg overflow-hidden">
+            @if ($item['image'])
+            <div class="mb-3 flex h-20 w-full items-center justify-center rounded-xl overflow-hidden bg-slate-50">
+              <img src="{{ $item['image'] }}" alt="{{ $item['nome'] }}" class="h-16 object-contain p-2">
             </div>
+            @else
+            <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200">
+              <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
+            </div>
+            @endif
             <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
-            <p class="mt-2 text-xs text-slate-500">
-              {{ $item['host'] ?? 'Link interno em breve' }}
-            </p>
+           
           </a>
           @endforeach
         </div>
-        <button
-          type="button"
-          class="slider-nav-button slider-nav-prev slider-nav-button-light"
-          data-carousel-prev
-          aria-label="Voltar links úteis">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <button
-          type="button"
-          class="slider-nav-button slider-nav-next slider-nav-button-light"
-          data-carousel-next
-          aria-label="Avançar links úteis">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+        @endforeach
       </div>
   </section>
 
