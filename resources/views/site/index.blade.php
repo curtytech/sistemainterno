@@ -40,21 +40,21 @@
   ];
 
   $linksUteis = [
-    ['nome' => 'Qive', 'link' => 'https://qive.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=qive.com.br&sz=128'],
-    ['nome' => 'Mercos', 'link' => 'https://app.mercos.com/login/', 'logo' => 'https://www.google.com/s2/favicons?domain=mercos.com&sz=128'],
-    ['nome' => 'Hive Cloud - CTe', 'link' => 'https://cte.hivecloud.com.br/ctes', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
-    ['nome' => 'Hive Cloud - MDFe', 'link' => 'https://mdfe.hivecloud.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
-    ['nome' => 'Universidade Sankhya', 'link' => 'https://ead.sankhya.com.br/login.php', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
-    ['nome' => 'Sankhya Om', 'link' => 'https://sequoia.sankhyacloud.com.br/mge/', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
-    ['nome' => 'Manutenção', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DLMaVurEnZBCsdqn3fvEx5RURUtYQTBPVUdSQk05RkY5TTJVSU0wV0w4My4u', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
-    ['nome' => 'Patrimonial', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJLv1d-JqxVOkIzJSns4QY1UOTlMSFQ5NlYxUUdJTUw2UlhTSlJUR0dRNyQlQCN0PWcu', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
-    ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/', 'logo' => '/assets/logo-grupo-sequoia.png'],
-    ['nome' => 'Admissão de Colaboradores', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UNjBVUkpSSjgwWlZUOEExWkhTSEM5SlVXTi4u&route=shorturl'],
-    ['nome' => 'Solicitação Demissional', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UODhUVFgxN0YyME1TREZJT0pNV0tOVEU1Vy4u&route=shorturl'],
-    ['nome' => 'Pontotel', 'link' => 'https://gestao.pontotel.com.br/#/cognito/login', 'logo' => 'https://www.google.com/s2/favicons?domain=pontotel.com.br&sz=128'],
-    ['nome' => 'Canal de Ética', 'link' => 'https://contatoseguro.com.br/sequoiabrasil'],
-    ['nome' => 'Canal da mulher', 'link' => 'https://contatoseguro.com.br/pt/canaldamulhersequoiabrasil'],
-    ['nome' => 'Formulário Anônimo de Denuncia e Sugestões', 'link' => 'https://forms.office.com'],
+  ['nome' => 'Qive', 'link' => 'https://qive.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=qive.com.br&sz=128'],
+  ['nome' => 'Mercos', 'link' => 'https://app.mercos.com/login/', 'logo' => 'https://www.google.com/s2/favicons?domain=mercos.com&sz=128'],
+  ['nome' => 'Hive Cloud - CTe', 'link' => 'https://cte.hivecloud.com.br/ctes', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
+  ['nome' => 'Hive Cloud - MDFe', 'link' => 'https://mdfe.hivecloud.com.br/', 'logo' => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128'],
+  ['nome' => 'Universidade Sankhya', 'link' => 'https://ead.sankhya.com.br/login.php', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
+  ['nome' => 'Sankhya Om', 'link' => 'https://sequoia.sankhyacloud.com.br/mge/', 'logo' => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128'],
+  ['nome' => 'Manutenção', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DLMaVurEnZBCsdqn3fvEx5RURUtYQTBPVUdSQk05RkY5TTJVSU0wV0w4My4u', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
+  ['nome' => 'Patrimonial', 'link' => 'https://forms.office.com/Pages/ResponsePage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJLv1d-JqxVOkIzJSns4QY1UOTlMSFQ5NlYxUUdJTUw2UlhTSlJUR0dRNyQlQCN0PWcu', 'logo' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128'],
+  ['nome' => 'Plataforma de Treinamentos', 'link' => 'https://gruposequoia.grupoimpulsionar.com/', 'logo' => '/assets/logo-grupo-sequoia.png'],
+  ['nome' => 'Admissão de Colaboradores', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UNjBVUkpSSjgwWlZUOEExWkhTSEM5SlVXTi4u&route=shorturl'],
+  ['nome' => 'Solicitação Demissional', 'link' => 'https://forms.office.com/pages/responsepage.aspx?id=iQL2wSFX90aaQLCc6Yi0DJOpBteh8IVCkQqORfhz3J1UODhUVFgxN0YyME1TREZJT0pNV0tOVEU1Vy4u&route=shorturl'],
+  ['nome' => 'Pontotel', 'link' => 'https://gestao.pontotel.com.br/#/cognito/login', 'logo' => 'https://www.google.com/s2/favicons?domain=pontotel.com.br&sz=128'],
+  ['nome' => 'Canal de Ética', 'link' => 'https://contatoseguro.com.br/sequoiabrasil'],
+  ['nome' => 'Canal da mulher', 'link' => 'https://contatoseguro.com.br/pt/canaldamulhersequoiabrasil'],
+  ['nome' => 'Formulário Anônimo de Denuncia e Sugestões', 'link' => 'https://forms.office.com'],
   ];
 
   $linksUteis = collect($linksUteis)->map(function (array $item) {
@@ -103,30 +103,30 @@
   })->values();
 
   $contatos = [
-    [
-    'nome' => 'Sequoia',
-    'endereco' => 'Rua Waldemar Colombo Garcia, 491, Santo Aleixo, Magé - RJ, 25926',
-    'link' => 'https://www.sequoiaalimentos.com.br/',
-    'logo' => '/assets/sequoialogo.png',
-    ],
-    [
-    'nome' => 'Shasta',
-    'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
-    'link' => 'https://www.shastadistribuidora.com.br/',
-    'logo' => '/assets/Shastalogo.png',
-    ],
-    [
-    'nome' => 'Ocotillo',
-    'endereco' => 'BR-040, Pedro do Rio, Areal - RJ, 25845-000',
-    'link' => '#',
-    'logo' => '/assets/Ocotillologo.png',
-    ],
-    [
-    'nome' => 'Valeric',
-    'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
-    'link' => '#',
-    'logo' => '/assets/Valericlogo.png',
-    ],
+  [
+  'nome' => 'Sequoia',
+  'endereco' => 'Rua Waldemar Colombo Garcia, 491, Santo Aleixo, Magé - RJ, 25926',
+  'link' => 'https://www.sequoiaalimentos.com.br/',
+  'logo' => '/assets/sequoialogo.png',
+  ],
+  [
+  'nome' => 'Shasta',
+  'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
+  'link' => 'https://www.shastadistribuidora.com.br/',
+  'logo' => '/assets/Shastalogo.png',
+  ],
+  [
+  'nome' => 'Ocotillo',
+  'endereco' => 'BR-040, Pedro do Rio, Areal - RJ, 25845-000',
+  'link' => '#',
+  'logo' => '/assets/Ocotillologo.png',
+  ],
+  [
+  'nome' => 'Valeric',
+  'endereco' => 'Estrada Adam Blumer, 6225, Magé - RJ, 25931-128',
+  'link' => '#',
+  'logo' => '/assets/Valericlogo.png',
+  ],
   ];
 
   $departamentosColunas = collect($departamentos)->chunk((int) ceil(count($departamentos) / 3));
@@ -134,71 +134,6 @@
   @endphp
 
   @include('site.partials.navbar')
-
-  <!-- Slider -->
-  <section id="product-slider">
-    <div class="main-slider swiper-container relative" data-carousel data-autoplay-ms="5000">
-      <div class="swiper-wrapper">
-        @forelse ($boards as $board)
-        <div class="swiper-slide">
-          <img src="{{ $board->image_url }}" alt="{{ $board->title }}">
-          <div class="swiper-slide-content">
-            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl ml-5">{{ $board->title }}</h2>
-            <p class="mb-4 text-white md:text-2xl ml-5">{{ \Illuminate\Support\Str::limit($board->content, 120) }}</p>
-            <div class="flex flex-wrap items-center gap-3 ml-5">
-              @if ($board->link)
-              <a
-                href="{{ $board->link }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-block rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white hover:border-white hover:bg-transparent hover:text-white">
-                Acessar link
-              </a>
-              @endif
-              @if ($board->file_url)
-              <a
-                href="{{ $board->file_url }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-block rounded-full border border-white bg-white/10 px-4 py-2 font-semibold text-white hover:bg-primary">
-                Baixar arquivo
-              </a>
-              @endif
-            </div>
-          </div>
-        </div>
-        @empty
-        <div class="swiper-slide">
-          <img src="/assets/images/main-slider/5.jpg" alt="Banner principal">
-          <div class="swiper-slide-content">
-            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl">Sistema Interno</h2>
-            <p class="mb-4 text-white md:text-2xl">Acesse comunicados, documentos e links importantes em um so lugar.</p>
-            <a href="#news"
-              class="inline-block rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white hover:border-white hover:bg-transparent hover:text-white">
-              Ver noticias
-            </a>
-          </div>
-        </div>
-        @endforelse
-      </div>
-      <button
-        type="button"
-        class="slider-nav-button slider-nav-prev"
-        data-carousel-prev
-        aria-label="Voltar slide">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
-      <button
-        type="button"
-        class="slider-nav-button slider-nav-next"
-        data-carousel-next
-        aria-label="Avançar slide">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-    </div>
-  </section>
-
- 
 
   <section id="links-uteis" class="bg-white py-8 px-4">
     <div class="container mx-auto max-w-screen-xl px-4 testimonials">
@@ -237,11 +172,11 @@
         <p class="text-slate-600">Acesse rapidamente os canais de cada departamento.</p>
       </div>
       @php
-        $linhas = [
-          $departamentos->slice(0, 7)->values(),
-          $departamentos->slice(7, 7)->values(),
-          $departamentos->slice(14, 7)->values(),
-        ];
+      $linhas = [
+      $departamentos->slice(0, 7)->values(),
+      $departamentos->slice(7, 7)->values(),
+      $departamentos->slice(14, 7)->values(),
+      ];
       @endphp
       <div class="flex flex-col gap-3">
         @foreach ($linhas as $linha)
@@ -249,7 +184,7 @@
           @foreach ($linha as $item)
           <a
             href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
-            @if ($item['link'] !== '#' ) target="_blank" rel="noopener noreferrer" @endif
+            @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
             class="flex flex-1 min-w-0 flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg overflow-hidden">
             @if ($item['image'])
             <div class="mb-3 flex h-20 w-full items-center justify-center rounded-xl overflow-hidden bg-slate-50">
@@ -261,7 +196,7 @@
             </div>
             @endif
             <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
-           
+
           </a>
           @endforeach
         </div>
