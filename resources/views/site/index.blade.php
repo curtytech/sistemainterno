@@ -135,124 +135,188 @@
 
   @include('site.partials.navbar')
 
-  <section id="links-uteis" class="bg-white py-8 px-4">
-    <div class="container mx-auto max-w-screen-xl px-4 testimonials">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold mb-2">Links <span class="text-primary">Úteis</span></h2>
-        <p class="text-slate-600">Acesse rapidamente as principais plataformas usadas no dia a dia.</p>
-      </div>
-      <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        @foreach ($linksUteis as $item)
-        <a
-          href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
-          @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-          class="flex min-h-[11rem] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-white hover:shadow-lg">
-          <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 p-2">
-            @if ($item['logo'])
-            <img src="{{ $item['logo'] }}" alt="Logo {{ $item['nome'] }}" class="h-9 w-9 rounded-xl object-contain">
-            @else
-            <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
-            @endif
-          </div>
-          <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
-          <p class="mt-1 text-xs text-slate-500">
-            {{ $item['host'] ?? 'Link interno em breve' }}
-          </p>
-        </a>
-        @endforeach
-      </div>
-  </section>
-
-
-  <!-- Departamentos section -->
-  <section id="departamentos" class="bg-slate-50 py-8 px-4">
-    <div class="container mx-auto max-w-screen-xl px-4">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold mb-2">Departamentos</h2>
-        <p class="text-slate-600">Acesse rapidamente os canais de cada departamento.</p>
-      </div>
-      @php
-      $linhas = [
-      $departamentos->slice(0, 7)->values(),
-      $departamentos->slice(7, 7)->values(),
-      $departamentos->slice(14, 7)->values(),
-      ];
-      @endphp
-      <div class="flex flex-col gap-3">
-        @foreach ($linhas as $linha)
-        <div class="flex items-stretch justify-center gap-3">
-          @foreach ($linha as $item)
-          <a
-            href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
-            @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-            class="flex flex-1 min-w-0 flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg overflow-hidden">
-            @if ($item['image'])
-            <div class="mb-3 flex h-20 w-full items-center justify-center rounded-xl overflow-hidden bg-slate-50">
-              <img src="{{ $item['image'] }}" alt="{{ $item['nome'] }}" class="h-16 object-contain p-2">
-            </div>
-            @else
-            <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200">
-              <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
-            </div>
-            @endif
-            <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
-
-          </a>
-          @endforeach
-        </div>
-        @endforeach
-      </div>
-  </section>
-
-
-  <!-- News section -->
-  <section id="news">
-    <div class="container mx-auto px-4 text-center">
-      <div class="container mx-auto max-w-screen-xl px-4 testimonials">
-        <div class="text-center mb-12 lg:mb-20">
-          <h2 class="text-5xl font-bold mb-4 text-primary">Notícias</h2>
-          <p class="my-7">Acesse rapidamente as principais notícias do sistema interno.</p>
-          <div class="flex flex-wrap items-center justify-center gap-3">
-            <a href="{{ route('site.news.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
-              Veja mais
-            </a>
-            <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
-              Ver tudo em uma página
-            </a>
-          </div>
-        </div>
-      </div>
-      @if ($noticias->isNotEmpty())
-      <div class="flex flex-wrap -mx-4">
-        @foreach ($noticias as $noticia)
-        <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
-          <article class="bg-white p-3 rounded-lg shadow-lg h-full flex flex-col">
-            <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="w-full h-52 object-cover mb-4 rounded-lg">
-            <h3 class="text-lg font-semibold mb-2">{{ $noticia->title }}</h3>
-            <p class="my-2 text-sm font-medium text-primary uppercase tracking-wide">{{ $noticia->category_name }}</p>
-            <p class="mb-4 text-sm text-gray-txt">{{ \Illuminate\Support\Str::limit($noticia->content, 110) }}</p>
-            <div class="mt-auto flex items-center justify-between gap-3">
-              <span class="text-sm font-semibold text-gray-900">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
-              <a href="{{ route('site.news.show', $noticia) }}" class="bg-primary border border-transparent hover:bg-transparent hover:border-primary text-white hover:text-primary font-semibold py-2 px-4 rounded-full inline-flex items-center justify-center">
-                Ler mais
+   <!-- Slider -->
+  <section id="product-slider">
+    <div class="main-slider swiper-container relative" data-carousel data-autoplay-ms="5000">
+      <div class="swiper-wrapper">
+        @forelse ($boards as $board)
+        <div class="swiper-slide">
+          <img src="{{ $board->image_url }}" alt="{{ $board->title }}">
+          <div class="swiper-slide-content">
+            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl ml-5">{{ $board->title }}</h2>
+            <p class="mb-4 text-white md:text-2xl ml-5">{{ \Illuminate\Support\Str::limit($board->content, 120) }}</p>
+            <div class="flex flex-wrap items-center gap-3 ml-5">
+              @if ($board->link)
+              <a
+                href="{{ $board->link }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white hover:border-white hover:bg-transparent hover:text-white">
+                Acessar link
               </a>
+              @endif
+              @if ($board->file_url)
+              <a
+                href="{{ $board->file_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block rounded-full border border-white bg-white/10 px-4 py-2 font-semibold text-white ">
+                Baixar arquivo
+              </a>
+              @endif
             </div>
-          </article>
+          </div>
         </div>
-        @endforeach
+        @empty
+        <div class="swiper-slide">
+          <img src="/assets/images/main-slider/5.jpg" alt="Banner principal">
+          <div class="swiper-slide-content">
+            <h2 class="mb-2 text-3xl font-bold text-white md:mb-4 md:text-7xl">Sistema Interno</h2>
+            <p class="mb-4 text-white md:text-2xl">Acesse comunicados, documentos e links importantes em um so lugar.</p>
+            <a href="#news"
+              class="inline-block rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white hover:border-white hover:bg-transparent hover:text-white">
+              Ver noticias
+            </a>
+          </div>
+        </div>
+        @endforelse
       </div>
-      @else
-      <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-14 text-center">
-        <h3 class="text-2xl font-semibold text-slate-800">Nenhuma notícia cadastrada</h3>
-        <p class="mt-3 text-slate-500">Assim que houver notícias no banco, elas aparecerão automaticamente nesta seção.</p>
-      </div>
-      @endif
+      <button
+        type="button"
+        class="slider-nav-button slider-nav-prev"
+        data-carousel-prev
+        aria-label="Voltar slide">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button
+        type="button"
+        class="slider-nav-button slider-nav-next"
+        data-carousel-next
+        aria-label="Avançar slide">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
     </div>
   </section>
 
+  <div class="text-slate-900 font-sans bg-white ">
+    <section id="links-uteis" class="bg-white py-8 px-4 ">
+      <div class="container mx-auto max-w-screen-xl px-4 testimonials">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold mb-2 ">Links <span class="text-primary">Úteis</span></h2>
+          <p class="text-slate-600">Acesse rapidamente as principais plataformas usadas no dia a dia.</p>
+        </div>
+        <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          @foreach ($linksUteis as $item)
+          <a
+            href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
+            @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+            class="flex min-h-[11rem] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-white hover:shadow-lg">
+            <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 p-2">
+              @if ($item['logo'])
+              <img src="{{ $item['logo'] }}" alt="Logo {{ $item['nome'] }}" class="h-9 w-9 rounded-xl object-contain">
+              @else
+              <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
+              @endif
+            </div>
+            <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
+            <p class="mt-1 text-xs text-slate-500">
+              {{ $item['host'] ?? 'Link interno em breve' }}
+            </p>
+          </a>
+          @endforeach
+        </div>
+    </section>
 
-  <!-- Banner section -->
-  <!-- <section id="banner" class="relative my-16">
+
+    <!-- Departamentos section -->
+    <section id="departamentos" class="bg-slate-50 py-8 px-4">
+      <div class="container mx-auto max-w-screen-xl px-4">
+        <div class="text-center mb-8">
+          <h2 class="text-5xl font-bold mb-4 text-primary">Departamentos</h2>
+          <p class="text-slate-600">Acesse rapidamente os canais de cada departamento.</p>
+        </div>
+        @php
+        $linhas = [
+        $departamentos->slice(0, 7)->values(),
+        $departamentos->slice(7, 7)->values(),
+        $departamentos->slice(14, 7)->values(),
+        ];
+        @endphp
+        <div class="flex flex-col gap-3">
+          @foreach ($linhas as $linha)
+          <div class="flex items-stretch justify-center gap-3">
+            @foreach ($linha as $item)
+            <a
+              href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
+              @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+              class="flex flex-1 min-w-0 flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg overflow-hidden">
+              @if ($item['image'])
+              <div class="mb-3 flex h-20 w-full items-center justify-center rounded-xl overflow-hidden bg-slate-50">
+                <img src="{{ $item['image'] }}" alt="{{ $item['nome'] }}" class="h-16 object-contain p-2">
+              </div>
+              @else
+              <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200">
+                <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
+              </div>
+              @endif
+              <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
+
+            </a>
+            @endforeach
+          </div>
+          @endforeach
+        </div>
+    </section>
+
+
+    <!-- News section -->
+    <section id="news">
+      <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto max-w-screen-xl px-4 testimonials">
+          <div class="text-center mb-12 lg:mb-20">
+            <h2 class="text-5xl font-bold mb-4 text-primary">Notícias</h2>
+            <p class="my-7">Acesse rapidamente as principais notícias do sistema interno.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <a href="{{ route('site.news.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
+                Veja mais
+              </a>
+              <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+                Ver tudo em uma página
+              </a>
+            </div>
+          </div>
+        </div>
+        @if ($noticias->isNotEmpty())
+        <div class="flex flex-wrap -mx-4">
+          @foreach ($noticias as $noticia)
+          <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+            <article class="bg-white p-3 rounded-lg shadow-lg h-full flex flex-col">
+              <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="w-full h-52 object-cover mb-4 rounded-lg">
+              <h3 class="text-lg font-semibold mb-2">{{ $noticia->title }}</h3>
+              <p class="my-2 text-sm font-medium text-primary uppercase tracking-wide">{{ $noticia->category_name }}</p>
+              <p class="mb-4 text-sm text-gray-txt">{{ \Illuminate\Support\Str::limit($noticia->content, 110) }}</p>
+              <div class="mt-auto flex items-center justify-between gap-3">
+                <span class="text-sm font-semibold text-gray-900">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
+                <a href="{{ route('site.news.show', $noticia) }}" class="bg-primary border border-transparent hover:bg-transparent hover:border-primary text-white hover:text-primary font-semibold py-2 px-4 rounded-full inline-flex items-center justify-center">
+                  Ler mais
+                </a>
+              </div>
+            </article>
+          </div>
+          @endforeach
+        </div>
+        @else
+        <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-14 text-center">
+          <h3 class="text-2xl font-semibold text-slate-800">Nenhuma notícia cadastrada</h3>
+          <p class="mt-3 text-slate-500">Assim que houver notícias no banco, elas aparecerão automaticamente nesta seção.</p>
+        </div>
+        @endif
+      </div>
+    </section>
+
+
+    <!-- Banner section -->
+    <!-- <section id="banner" class="relative my-16">
     <div class="container mx-auto px-4 py-20 rounded-lg relative bg-cover bg-center" style="background-image: url('/assets/images/banner1.jpg');">
       <div class="absolute inset-0 bg-black opacity-40 rounded-lg"></div>
       <div class="relative flex flex-col items-center justify-center h-full text-center text-white py-20">
@@ -266,151 +330,152 @@
     </div>
   </section> -->
 
-  <!-- Eventos section -->
-  <section id="eventos" class="py-16">
-    <div class="text-center mb-12 lg:mb-20">
-      <h2 class="text-5xl font-bold mb-4">Próximos <span class="text-primary">Eventos</span></h2>
-      <p class="my-7">Acompanhe comunicados, treinamentos e ações internas da Sequoia.</p>
-      <div class="flex flex-wrap items-center justify-center gap-3">
-        <a href="{{ route('site.events.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
-          Veja mais
-        </a>
-        <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
-          Ver tudo em uma página
-        </a>
+    <!-- Eventos section -->
+    <section id="eventos" class="py-16">
+      <div class="text-center mb-12 lg:mb-20">
+        <h2 class="text-5xl font-bold mb-4">Próximos <span class="text-primary">Eventos</span></h2>
+        <p class="my-7">Acompanhe comunicados, treinamentos e ações internas da Sequoia.</p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a href="{{ route('site.events.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
+            Veja mais
+          </a>
+          <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+            Ver tudo em uma página
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-24 max-w-7xl">
-      @if ($eventos->isNotEmpty())
-      <div class="grid w-full grid-cols-1 gap-6 mx-auto lg:grid-cols-3">
-        @foreach ($eventos as $evento)
-        <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
-          <img
-            class="h-56 w-full object-cover object-center"
-            src="{{ $evento->image_url }}"
-            alt="{{ $evento->title }}">
-          <div class="flex flex-1 flex-col p-6">
-            <div class="mb-4 flex items-center justify-between gap-3">
-              <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-                {{ $evento->category_name }}
-              </span>
-              <span class="text-sm text-slate-500">
-                {{ $evento->start_date ? $evento->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}
-              </span>
-            </div>
-            <h3 class="mb-4 text-2xl font-semibold leading-tight text-gray-dark">
-              {{ $evento->title }}
-            </h3>
-            @if ($evento->start_time || $evento->end_time)
-            <p class="mb-4 text-sm font-medium text-slate-500">
-              {{ $evento->start_time ? \Illuminate\Support\Carbon::parse($evento->start_time)->format('H:i') : '--:--' }}
-              @if ($evento->end_time)
-              - {{ \Illuminate\Support\Carbon::parse($evento->end_time)->format('H:i') }}
+      <div class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-24 max-w-7xl">
+        @if ($eventos->isNotEmpty())
+        <div class="grid w-full grid-cols-1 gap-6 mx-auto lg:grid-cols-3">
+          @foreach ($eventos as $evento)
+          <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+            <img
+              class="h-56 w-full object-cover object-center"
+              src="{{ $evento->image_url }}"
+              alt="{{ $evento->title }}">
+            <div class="flex flex-1 flex-col p-6">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                  {{ $evento->category_name }}
+                </span>
+                <span class="text-sm text-slate-500">
+                  {{ $evento->start_date ? $evento->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}
+                </span>
+              </div>
+              <h3 class="mb-4 text-2xl font-semibold leading-tight text-gray-dark">
+                {{ $evento->title }}
+              </h3>
+              @if ($evento->start_time || $evento->end_time)
+              <p class="mb-4 text-sm font-medium text-slate-500">
+                {{ $evento->start_time ? \Illuminate\Support\Carbon::parse($evento->start_time)->format('H:i') : '--:--' }}
+                @if ($evento->end_time)
+                - {{ \Illuminate\Support\Carbon::parse($evento->end_time)->format('H:i') }}
+                @endif
+              </p>
               @endif
-            </p>
-            @endif
-            <p class="flex-grow text-base font-medium leading-relaxed text-gray-txt">
-              {{ \Illuminate\Support\Str::limit(strip_tags($evento->content), 160) }}
-            </p>
-            <div class="mt-8">
-              <a href="{{ route('site.events.show', $evento) }}" class="inline-flex w-full items-center justify-center rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
-                Ver detalhes
-              </a>
+              <p class="flex-grow text-base font-medium leading-relaxed text-gray-txt">
+                {{ \Illuminate\Support\Str::limit(strip_tags($evento->content), 160) }}
+              </p>
+              <div class="mt-8">
+                <a href="{{ route('site.events.show', $evento) }}" class="inline-flex w-full items-center justify-center rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
+                  Ver detalhes
+                </a>
+              </div>
             </div>
-          </div>
-        </article>
-        @endforeach
+          </article>
+          @endforeach
+        </div>
+        @else
+        <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-14 text-center">
+          <h3 class="text-2xl font-semibold text-slate-800">Nenhum evento cadastrado</h3>
+          <p class="mt-3 text-slate-500">Assim que houver eventos no banco, eles aparecerão automaticamente nesta seção.</p>
+        </div>
+        @endif
       </div>
-      @else
-      <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-14 text-center">
-        <h3 class="text-2xl font-semibold text-slate-800">Nenhum evento cadastrado</h3>
-        <p class="mt-3 text-slate-500">Assim que houver eventos no banco, eles aparecerão automaticamente nesta seção.</p>
-      </div>
-      @endif
-    </div>
-  </section>
+    </section>
 
 
-  <!-- Contatos section -->
-  <section id="contatos" class="bg-gray-dark py-16 text-white">
-    <div class="container mx-auto px-4">
-      <div class="mb-10 text-center">
-        <h2 class="text-4xl font-bold">Contatos</h2>
-        <p class="mt-3 text-slate-300">Unidades e endereços principais das empresas.</p>
-      </div>
-      <div class="flex flex-col gap-6 justify-center mt-6 md:flex-row">
-        @foreach ($contatos as $contato)
-        <a
-          href="{{ $contato['link'] }}"
-          class="group rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:border-primary hover:bg-white/10 w-full md:max-w-xs">
-          <div class="flex flex-col items-center text-center">
-            <div class="flex h-20 w-28 items-center justify-center rounded-2xl border border-dashed border-white/15 bg-white px-3 py-2 shadow-sm">
-              <img
-                src="{{ $contato['logo'] }}"
-                alt="Logo {{ $contato['nome'] }}"
-                class="h-full w-full object-contain">
+    <!-- Contatos section -->
+    <section id="contatos" class="bg-gray-dark py-16 text-white">
+      <div class="container mx-auto px-4">
+        <div class="mb-10 text-center">
+          <h2 class="text-4xl font-bold">Contatos</h2>
+          <p class="mt-3 text-slate-300">Unidades e endereços principais das empresas.</p>
+        </div>
+        <div class="flex flex-col gap-6 justify-center mt-6 md:flex-row">
+          @foreach ($contatos as $contato)
+          <a
+            href="{{ $contato['link'] }}"
+            class="group rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:border-primary hover:bg-white/10 w-full md:max-w-xs">
+            <div class="flex flex-col items-center text-center">
+              <div class="flex h-20 w-28 items-center justify-center rounded-2xl border border-dashed border-white/15 bg-white px-3 py-2 shadow-sm">
+                <img
+                  src="{{ $contato['logo'] }}"
+                  alt="Logo {{ $contato['nome'] }}"
+                  class="h-full w-full object-contain">
+              </div>
+              <h3 class="mt-5 text-2xl font-semibold text-white">{{ $contato['nome'] }}</h3>
+              <p class="mt-4 text-base font-medium leading-7 text-slate-200">{{ $contato['endereco'] }}</p>
             </div>
-            <h3 class="mt-5 text-2xl font-semibold text-white">{{ $contato['nome'] }}</h3>
-            <p class="mt-4 text-base font-medium leading-7 text-slate-200">{{ $contato['endereco'] }}</p>
-          </div>
-        </a>
-        @endforeach
-      </div>
-    </div>
-  </section>
-
-  <footer class="border-t border-gray-line bg-gray-dark text-white">
-    <div class="container mx-auto px-4 py-8">
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <h3 class="text-lg font-semibold">Portal</h3>
-          <ul class="mt-4 space-y-2 text-sm text-slate-300">
-            <li><a href="{{ route('site.index') }}" class="transition hover:text-primary">Home</a></li>
-            <li><a href="{{ route('filament.admin.pages.dashboard') }}" class="transition hover:text-primary">Área Interna</a></li>
-            <li><a href="#news" class="transition hover:text-primary">Notícias</a></li>
-            <li><a href="#eventos" class="transition hover:text-primary">Eventos</a></li>
-            <li><a href="#contatos" class="transition hover:text-primary">Contatos</a></li>
-          </ul>
+          </a>
+          @endforeach
         </div>
-        <div>
-          <h3 class="text-lg font-semibold">Links Úteis</h3>
-          <ul class="mt-4 space-y-2 text-sm text-slate-300">
-            @foreach (collect($linksUteis)->take(5) as $item)
-            <li>
-              <a href="{{ $item['link'] }}" @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif class="transition hover:text-primary">
-                {{ $item['nome'] }}
+      </div>
+    </section>
+
+    <footer class="border-t border-gray-line bg-gray-dark text-white">
+      <div class="container mx-auto px-4 py-8">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <h3 class="text-lg font-semibold">Portal</h3>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li><a href="{{ route('site.index') }}" class="transition hover:text-primary">Home</a></li>
+              <li><a href="{{ route('filament.admin.pages.dashboard') }}" class="transition hover:text-primary">Área Interna</a></li>
+              <li><a href="#news" class="transition hover:text-primary">Notícias</a></li>
+              <li><a href="#eventos" class="transition hover:text-primary">Eventos</a></li>
+              <li><a href="#contatos" class="transition hover:text-primary">Contatos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">Links Úteis</h3>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              @foreach (collect($linksUteis)->take(5) as $item)
+              <li>
+                <a href="{{ $item['link'] }}" @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif class="transition hover:text-primary">
+                  {{ $item['nome'] }}
+                </a>
+              </li>
+              @endforeach
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">Departamentos</h3>
+
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              @foreach (collect($departamentos)->take(5) as $item)
+              <li><a href="{{ $item['link'] }}" class="transition hover:text-primary">{{ $item['nome'] }}</a></li>
+              @endforeach
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">Redes Sociais</h3>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
+                <i class="fa-brands fa-instagram"></i>
               </a>
-            </li>
-            @endforeach
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold">Departamentos</h3>
-          <ul class="mt-4 space-y-2 text-sm text-slate-300">
-            @foreach (collect($departamentos)->take(5) as $item)
-            <li><a href="{{ $item['link'] }}" class="transition hover:text-primary">{{ $item['nome'] }}</a></li>
-            @endforeach
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-semibold">Redes Sociais</h3>
-          <div class="mt-4 flex flex-wrap gap-3">
-            <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.instagram.com/garytos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
+              <a href="https://www.instagram.com/garytos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
 
+            </div>
+            <p class="mt-4 text-sm text-slate-400">© {{ now()->year }} Sistema Interno</p>
           </div>
-          <p class="mt-4 text-sm text-slate-400">© {{ now()->year }} Sistema Interno</p>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  </div>
 </body>
 
 </html>

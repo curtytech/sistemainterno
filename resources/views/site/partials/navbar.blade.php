@@ -97,7 +97,10 @@ $departamentosColunas = collect($departamentos)->chunk((int) ceil(count($departa
 $linksUteisColunas = collect($linksUteis)->chunk((int) ceil(count($linksUteis) / 3));
 @endphp
 
-
+@if (isset($noticias) && $noticias->isNotEmpty())
+@php
+$todasNoticias = $noticias->merge($noticias);
+@endphp
 
 <style>
   @keyframes scroll {
@@ -106,233 +109,235 @@ $linksUteisColunas = collect($linksUteis)->chunk((int) ceil(count($linksUteis) /
     }
 
     100% {
-      transform: translateX(calc(-250px * 7));
+      transform: translateX(-50%);
     }
   }
 
-  .slider {
-    background: white;
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
-    height: 35px;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-  }
-
-  .slider::before,
-  .slider::after {
-    content: "";
-    height: 35px;
-    position: absolute;
-    width: 35px;
-    z-index: 2;
-  }
-
-  .slider::after {
-    right: 0;
-    top: 0;
-    transform: rotateZ(180deg);
-  }
-
-  .slider::before {
-    left: 0;
-    top: 0;
-  }
-
-  .slider .slide-track {
+  .slider-track {
     animation: scroll 40s linear infinite;
-    display: flex;
-    width: calc(250px * 14);
   }
 
-  .slider .slide {
-    height: 100px;
-    width: 250px;
+  .slider-track:hover {
+    animation-play-state: paused;
   }
 </style>
-<div class="slider text-black w-full">
-  <div class="slide-track">
-    <div class="slide text-black">
-      @foreach ($noticias as $item)
-      <p class="text-center">{{ $item['title'] }}</p>
-      @endforeach
-    </div>
+
+<div class="relative w-full overflow-hidden bg-white h-9 shadow-[0_10px_20px_-5px_rgba(0,0,0,0.125)] before:content-[''] before:absolute before:left-0 before:top-0
+           before:h-9 before:w-9 before:bg-gradient-to-r before:from-white before:to-transparent
+           before:z-10 after:content-[''] after:absolute after:right-0 after:top-0
+           after:h-9 after:w-9 after:bg-gradient-to-l after:from-white after:to-transparent after:z-10">
+  <div class="flex w-max slider-track">
+
+    @foreach ($todasNoticias as $item)
+    <a
+      href="{{ route('site.news.show', $item) }}"
+      target="_blank"
+      class="flex h-9 shrink-0 items-center gap-3 px-6
+                      hover:bg-slate-50 transition duration-300">
+      <span class="whitespace-nowrap text-sm font-semibold text-slate-900">
+        {{ $item->title }}
+      </span>
+    </a>
+    @endforeach
+
+    {{-- Duplica as notícias para criar o loop contínuo --}}
+    @foreach ($todasNoticias as $item)
+    <a
+      href="{{ route('site.news.show', $item) }}"
+      target="_blank"
+      class="flex h-9 shrink-0 items-center gap-3 px-6
+                      hover:bg-slate-50 transition duration-300">
+      <span class="whitespace-nowrap text-sm font-semibold text-slate-900">
+        {{ $item->title }}
+      </span>
+    </a>
+    @endforeach
+
   </div>
 </div>
+@endif
 
-<!-- Top bar -->
-<div class="bg-gradient-to-r from-sky-100 via-sky-400 to-sky-600 text-white hidden lg:block">
+<!-- Header menu escuro -->
+<header class="bg-gray-dark sticky top-0 z-50" x-data="{ openMenu: null, closeTimer: null }">
 
+  <div class="flex justify-between items-center pt-5">
+    <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 pt-5" style="width: 100px; ">
 
-  <!-- Header menu -->
-  <header class="bg-gray-dark sticky top-0 z-50" x-data="{ openMenu: null, closeTimer: null }">
-    <div class="container mx-auto flex items-center justify-between py-4">
-      <a href="{{ route('site.index') }}" class="flex items-center gap-3 lg:hidden" @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }">
-        <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5" style="width: 100px; ">
-      </a>
-
-      <div class="flex lg:hidden">
-        <button id="hamburger" class="text-white focus:outline-none">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
+    <div class="flex flex-col">
+      <div class="flex"> 
+        <p class="text-white">Fale Conosco: </p>
       </div>
 
-      <nav class="hidden lg:flex md:flex-grow justify-center">
-        <ul class="flex justify-center items-center space-x-5 text-white gap-3">
-          <li><a href="{{ route('site.index') }}" class="font-semibold transition hover:text-secondary">Home</a></li>
-          <li><a href="https://sequoiatortillas.sharepoint.com/sites/Bussoladoconhecimento" target="_blank" rel="noopener noreferrer" class="transition hover:text-secondary font-semibold">Bússola do Conhecimento</a></li>
-
-          <li
-            class="relative group"
-            @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } openMenu = 'departamentos'"
-            @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)">
-            <a href="#" class="transition hover:text-secondary font-semibold flex items-center">
-              Departamentos
-              <i :class="openMenu === 'departamentos' ? 'fa-solid fa-chevron-up ml-1 text-xs' : 'fa-solid fa-chevron-down ml-1 text-xs'"></i>
-            </a>
-            <div
-              x-show="openMenu === 'departamentos'"
-              x-cloak
-              @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }"
-              @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)"
-              class="mega-menu-panel"
-              x-transition:enter="transition ease-out duration-100"
-              x-transition:enter-start="opacity-0 scale-90"
-              x-transition:enter-end="opacity-100 scale-100"
-              x-transition:leave="transition ease-in duration-100"
-              x-transition:leave-start="opacity-100 scale-100"
-              x-transition:leave-end="opacity-0 scale-90">
-              <div class="mb-4 border-b border-slate-200 px-3 pb-3">
-                <p class="text-sm font-semibold text-slate-900">Departamentos</p>
-                <p class="mt-1 text-xs text-slate-500">Acesso rapido aos principais setores da intranet.</p>
-              </div>
-              <div class="mega-menu-grid">
-                @foreach ($departamentosColunas as $coluna)
-                <div class="mega-menu-column space-y-1">
-                  @foreach ($coluna as $item)
-                  <div>
-                    <a
-                      href="{{ $item['link'] }}"
-                      @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-                      class="block rounded-lg px-3 py-2 text-sm leading-snug transition hover:bg-primary hover:text-white">
-                      {{ $item['nome'] }}
-                    </a>
-                  </div>
-                  @endforeach
-                </div>
-                @endforeach
-              </div>
-            </div>
-          </li>
-
-          <li
-            class="relative group"
-            @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } openMenu = 'links'"
-            @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)">
-            <a href="#" class="transition hover:text-secondary font-semibold flex items-center">
-              Links Úteis
-              <i :class="openMenu === 'links' ? 'fa-solid fa-chevron-up ml-1 text-xs' : 'fa-solid fa-chevron-down ml-1 text-xs'"></i>
-            </a>
-            <div
-              x-show="openMenu === 'links'"
-              x-cloak
-              @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }"
-              @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)"
-              class="mega-menu-panel"
-              x-transition:enter="transition ease-out duration-100"
-              x-transition:enter-start="opacity-0 scale-90"
-              x-transition:enter-end="opacity-100 scale-100"
-              x-transition:leave="transition ease-in duration-100"
-              x-transition:leave-start="opacity-100 scale-100"
-              x-transition:leave-end="opacity-0 scale-90">
-              <div class="mb-4 border-b border-slate-200 px-3 pb-3">
-                <p class="text-sm font-semibold text-slate-900">Links Úteis</p>
-                <p class="mt-1 text-xs text-slate-500">Ferramentas, formulários e plataformas de uso frequente.</p>
-              </div>
-              <div class="mega-menu-grid">
-                @foreach ($linksUteisColunas as $coluna)
-                <div class="mega-menu-column space-y-1">
-                  @foreach ($coluna as $item)
-                  <div>
-                    <a
-                      href="{{ $item['link'] }}"
-                      @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-                      class="block rounded-lg px-3 py-2 text-sm leading-snug transition hover:bg-primary hover:text-white">
-                      {{ $item['nome'] }}
-                    </a>
-                  </div>
-                  @endforeach
-                </div>
-                @endforeach
-              </div>
-            </div>
-          </li>
-
-          <li><a href="{{ route('site.index') }}#eventos" class="transition hover:text-secondary font-semibold">Eventos</a></li>
-          <li><a href="{{ route('site.index') }}#news" class="transition hover:text-secondary font-semibold">Notícias</a></li>
-        </ul>
-      </nav>
-
-      <div class="hidden lg:flex items-center space-x-4 relative">
-        <a href="{{ route('filament.admin.pages.dashboard') }}"
-          class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Área Interna</a>
-      </div>
     </div>
-  </header>
 
-  <!-- Mobile menu -->
-  <nav id="mobile-menu-placeholder" class="mobile-menu hidden flex-col items-center space-y-8 lg:hidden">
-    <ul class="w-full space-y-2">
-      <li>
-        <a href="{{ route('site.index') }}" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Home</a>
-      </li>
-      <li>
-        <a href="https://sequoiatortillas.sharepoint.com/sites/Bussoladoconhecimento" target="_blank" rel="noopener noreferrer" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Bússola do Conhecimento</a>
-      </li>
-      <li class="rounded-2xl border border-white/10 bg-white/5 px-2 py-1" x-data="{ open: false }">
-        <button type="button" @click="open = !open" class="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left font-semibold">
-          <span>Departamentos</span>
-          <i :class="open ? 'fa-solid fa-chevron-up text-xs' : 'fa-solid fa-chevron-down text-xs'"></i>
-        </button>
-        <ul class="mobile-dropdown-menu" x-show="open" x-transition>
-          @foreach ($departamentos as $item)
-          <li>
-            <a
-              href="{{ $item['link'] }}"
-              class="block rounded-xl px-4 py-2 text-sm font-medium transition hover:bg-primary hover:text-white">
-              {{ $item['nome'] }}
-            </a>
-          </li>
-          @endforeach
-        </ul>
-      </li>
-      <li class="rounded-2xl border border-white/10 bg-white/5 px-2 py-1" x-data="{ open: false }">
-        <button type="button" @click="open = !open" class="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left font-semibold">
-          <span>Links Úteis</span>
-          <i :class="open ? 'fa-solid fa-chevron-up text-xs' : 'fa-solid fa-chevron-down text-xs'"></i>
-        </button>
-        <ul class="mobile-dropdown-menu" x-show="open" x-transition>
-          @foreach ($linksUteis as $item)
-          <li>
-            <a
-              href="{{ $item['link'] }}"
-              @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-              class="block rounded-xl px-4 py-2 text-sm font-medium transition hover:bg-primary hover:text-white">
-              {{ $item['nome'] }}
-            </a>
-          </li>
-          @endforeach
-        </ul>
-      </li>
-      <li>
-        <a href="{{ route('site.index') }}#eventos" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Eventos</a>
-      </li>
-      <li>
-        <a href="{{ route('site.index') }}#news" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Notícias</a>
-      </li>
-    </ul>
+  </div>
 
-  </nav>
+  <div class="container mx-auto flex items-center justify-between py-4">
+    <a href="{{ route('site.index') }}" class="flex items-center gap-3 lg:hidden" @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }">
+      <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 pt-5" style="width: 100px; ">
+    </a>
+
+    <div class="flex lg:hidden">
+      <button id="hamburger" class="text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="hidden lg:flex md:flex-grow justify-center">
+      <ul class="flex justify-center items-center space-x-5 text-white gap-3">
+        <li><a href="{{ route('site.index') }}" class="font-semibold transition hover:text-secondary">Home</a></li>
+        <li><a href="https://sequoiatortillas.sharepoint.com/sites/Bussoladoconhecimento" target="_blank" rel="noopener noreferrer" class="transition hover:text-secondary font-semibold">Bússola do Conhecimento</a></li>
+
+        <li
+          class="relative group"
+          @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } openMenu = 'departamentos'"
+          @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)">
+          <a href="#" class="transition hover:text-secondary font-semibold flex items-center">
+            Departamentos
+            <i :class="openMenu === 'departamentos' ? 'fa-solid fa-chevron-up ml-1 text-xs' : 'fa-solid fa-chevron-down ml-1 text-xs'"></i>
+          </a>
+          <div
+            x-show="openMenu === 'departamentos'"
+            x-cloak
+            @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }"
+            @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)"
+            class="mega-menu-panel"
+            x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90">
+            <div class="mb-4 border-b border-slate-200 px-3 pb-3">
+              <p class="text-sm font-semibold text-slate-900">Departamentos</p>
+              <p class="mt-1 text-xs text-slate-500">Acesso rapido aos principais setores da intranet.</p>
+            </div>
+            <div class="mega-menu-grid">
+              @foreach ($departamentosColunas as $coluna)
+              <div class="mega-menu-column space-y-1">
+                @foreach ($coluna as $item)
+                <div>
+                  <a
+                    href="{{ $item['link'] }}"
+                    @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+                    class="block rounded-lg px-3 py-2 text-sm leading-snug transition hover:bg-primary hover:text-white">
+                    {{ $item['nome'] }}
+                  </a>
+                </div>
+                @endforeach
+              </div>
+              @endforeach
+            </div>
+          </div>
+        </li>
+
+        <li
+          class="relative group"
+          @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } openMenu = 'links'"
+          @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)">
+          <a href="#" class="transition hover:text-secondary font-semibold flex items-center">
+            Links Úteis
+            <i :class="openMenu === 'links' ? 'fa-solid fa-chevron-up ml-1 text-xs' : 'fa-solid fa-chevron-down ml-1 text-xs'"></i>
+          </a>
+          <div
+            x-show="openMenu === 'links'"
+            x-cloak
+            @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }"
+            @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)"
+            class="mega-menu-panel"
+            x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-90">
+            <div class="mb-4 border-b border-slate-200 px-3 pb-3">
+              <p class="text-sm font-semibold text-slate-900">Links Úteis</p>
+              <p class="mt-1 text-xs text-slate-500">Ferramentas, formulários e plataformas de uso frequente.</p>
+            </div>
+            <div class="mega-menu-grid">
+              @foreach ($linksUteisColunas as $coluna)
+              <div class="mega-menu-column space-y-1">
+                @foreach ($coluna as $item)
+                <div>
+                  <a
+                    href="{{ $item['link'] }}"
+                    @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+                    class="block rounded-lg px-3 py-2 text-sm leading-snug transition hover:bg-primary hover:text-white">
+                    {{ $item['nome'] }}
+                  </a>
+                </div>
+                @endforeach
+              </div>
+              @endforeach
+            </div>
+          </div>
+        </li>
+
+        <li><a href="{{ route('site.index') }}#eventos" class="transition hover:text-secondary font-semibold">Eventos</a></li>
+        <li><a href="{{ route('site.index') }}#news" class="transition hover:text-secondary font-semibold">Notícias</a></li>
+      </ul>
+    </nav>
+
+    <div class="hidden lg:flex items-center space-x-4 relative">
+      <a href="{{ route('filament.admin.pages.dashboard') }}"
+        class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Área Interna</a>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<nav id="mobile-menu-placeholder" class="mobile-menu hidden flex-col items-center space-y-8 lg:hidden">
+  <ul class="w-full space-y-2">
+    <li>
+      <a href="{{ route('site.index') }}" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Home</a>
+    </li>
+    <li>
+      <a href="https://sequoiatortillas.sharepoint.com/sites/Bussoladoconhecimento" target="_blank" rel="noopener noreferrer" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Bússola do Conhecimento</a>
+    </li>
+    <li class="rounded-2xl border border-white/10 bg-white/5 px-2 py-1" x-data="{ open: false }">
+      <button type="button" @click="open = !open" class="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left font-semibold">
+        <span>Departamentos</span>
+        <i :class="open ? 'fa-solid fa-chevron-up text-xs' : 'fa-solid fa-chevron-down text-xs'"></i>
+      </button>
+      <ul class="mobile-dropdown-menu" x-show="open" x-transition>
+        @foreach ($departamentos as $item)
+        <li>
+          <a
+            href="{{ $item['link'] }}"
+            class="block rounded-xl px-4 py-2 text-sm font-medium transition hover:bg-primary hover:text-white">
+            {{ $item['nome'] }}
+          </a>
+        </li>
+        @endforeach
+      </ul>
+    </li>
+    <li class="rounded-2xl border border-white/10 bg-white/5 px-2 py-1" x-data="{ open: false }">
+      <button type="button" @click="open = !open" class="flex w-full items-center justify-between rounded-xl px-2 py-3 text-left font-semibold">
+        <span>Links Úteis</span>
+        <i :class="open ? 'fa-solid fa-chevron-up text-xs' : 'fa-solid fa-chevron-down text-xs'"></i>
+      </button>
+      <ul class="mobile-dropdown-menu" x-show="open" x-transition>
+        @foreach ($linksUteis as $item)
+        <li>
+          <a
+            href="{{ $item['link'] }}"
+            @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+            class="block rounded-xl px-4 py-2 text-sm font-medium transition hover:bg-primary hover:text-white">
+            {{ $item['nome'] }}
+          </a>
+        </li>
+        @endforeach
+      </ul>
+    </li>
+    <li>
+      <a href="{{ route('site.index') }}#eventos" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Eventos</a>
+    </li>
+    <li>
+      <a href="{{ route('site.index') }}#news" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Notícias</a>
+    </li>
+  </ul>
+
+</nav>

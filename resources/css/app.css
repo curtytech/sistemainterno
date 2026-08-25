@@ -14,6 +14,17 @@
     --color-gray-light: #e5e7eb;
     --color-gray-line: #e5e7eb;
     --color-gray-txt: #6b7280;
+    --animate-marquee: marquee 28s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 @layer base {
@@ -57,12 +68,10 @@
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
         scroll-behavior: smooth;
-        position: relative;
     }
 
     .main-slider .swiper-wrapper::-webkit-scrollbar,
-    .brands-swiper-slider .swiper-wrapper::-webkit-scrollbar,
-    .news-ticker-swiper .swiper-wrapper::-webkit-scrollbar {
+    .brands-swiper-slider .swiper-wrapper::-webkit-scrollbar {
         display: none;
     }
 
@@ -92,17 +101,6 @@
         @apply min-w-[10rem] p-6;
     }
 
-    .news-ticker-swiper .swiper-wrapper {
-        @apply flex overflow-x-auto py-1;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-        scroll-behavior: smooth;
-    }
-
-    .news-ticker-swiper .swiper-slide {
-        @apply shrink-0 snap-start min-w-full;
-    }
-
     .slider-nav-button {
         @apply absolute top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white backdrop-blur transition hover:bg-primary focus:outline-none focus:ring-2 focus:ring-white/70;
     }
@@ -122,9 +120,7 @@
     .main-slider .swiper-button-prev,
     .main-slider .swiper-button-next,
     .brands-swiper-slider .swiper-button-prev,
-    .brands-swiper-slider .swiper-button-next,
-    .news-ticker-swiper .swiper-button-prev,
-    .news-ticker-swiper .swiper-button-next {
+    .brands-swiper-slider .swiper-button-next {
         display: none;
     }
 
