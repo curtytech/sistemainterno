@@ -158,16 +158,24 @@ $todasNoticias = $noticias->merge($noticias);
 @endif
 
 <!-- Header menu escuro -->
-<header class="bg-gray-dark sticky top-0 z-50" x-data="{ openMenu: null, closeTimer: null }">
+<header class="bg-gray-dark sticky  z-50" x-data="{ openMenu: null, closeTimer: null }">
 
-  <div class="flex justify-between items-center pt-5">
-    <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 pt-5" style="width: 100px; ">
+  <div class="flex justify-between items-center pt-5 container mx-auto">
 
-    <div class="flex flex-col">
-      <div class="flex"> 
-        <p class="text-white">Fale Conosco: </p>
+    <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 " style="width: 100px; ">
+
+    <div class="flex flex-col mt-5 ">
+      <div class="flex">
+        <p class="text-sm text-white">Fale Conosco: (21) 99848-7779</p>
       </div>
-
+      <div class="flex justify-start items-center gap-3 mt-2">
+        <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.instagram.com/garytos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
     </div>
 
   </div>
