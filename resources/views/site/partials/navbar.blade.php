@@ -158,15 +158,15 @@ $todasNoticias = $noticias->merge($noticias);
 @endif
 
 <!-- Header menu escuro -->
-<header class="bg-gray-dark sticky  z-50" x-data="{ openMenu: null, closeTimer: null }">
+<header class="bg-gray-dark sticky z-50" x-data="{ openMenu: null, closeTimer: null }">
 
-  <div class="flex justify-between items-center pt-5 container mx-auto">
+  <div class="hidden justify-between items-center pt-5 lg:flex" style="margin: 0 100px 0 100px;">
 
-    <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 " style="width: 100px; ">
+    <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 mt-3" style="width: 100px; ">
 
-    <div class="flex flex-col mt-5 ">
-      <div class="flex">
-        <p class="text-sm text-white">Fale Conosco: (21) 99848-7779</p>
+    <div class="flex flex-col mt-5">
+      <div class="flex justify-start items-center">
+        <p class="text-sm font-bold text-white">Fale Conosco: (21) 99848-7779</p>
       </div>
       <div class="flex justify-start items-center gap-3 mt-2">
         <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
@@ -175,6 +175,11 @@ $todasNoticias = $noticias->merge($noticias);
         <a href="https://www.instagram.com/garytos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
           <i class="fa-brands fa-instagram"></i>
         </a>
+
+        <div class="hidden lg:flex items-center space-x-4 relative">
+          <a href="{{ route('filament.admin.pages.dashboard') }}"
+            class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-3 py-1 rounded-full inline-block">Área Interna</a>
+        </div>
       </div>
     </div>
 
@@ -289,10 +294,7 @@ $todasNoticias = $noticias->merge($noticias);
       </ul>
     </nav>
 
-    <div class="hidden lg:flex items-center space-x-4 relative">
-      <a href="{{ route('filament.admin.pages.dashboard') }}"
-        class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-4 py-2 rounded-full inline-block">Área Interna</a>
-    </div>
+
   </div>
 </header>
 

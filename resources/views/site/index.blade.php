@@ -468,7 +468,7 @@
               </a>
 
             </div>
-            <p class="mt-4 text-sm text-slate-400">© {{ now()->year }} Sistema Interno</p>
+            <p class="mt-4 text-sm text-slate-400">© {{ now()->year }} Shasta</p>
           </div>
         </div>
       </div>

@@ -10,6 +10,10 @@ class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request): RedirectResponse | Redirector
     {
+        if ($request->user()?->isAdmin()) {
+            return redirect()->route('filament.admin.pages.dashboard');
+        }
+
         return redirect()->route('site.index');
     }
 }
