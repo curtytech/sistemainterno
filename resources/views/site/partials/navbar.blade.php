@@ -122,19 +122,16 @@ $todasNoticias = $noticias->merge($noticias);
   }
 </style>
 
-<div class="relative w-full overflow-hidden bg-white h-9 shadow-[0_10px_20px_-5px_rgba(0,0,0,0.125)] before:content-[''] before:absolute before:left-0 before:top-0
-           before:h-9 before:w-9 before:bg-gradient-to-r before:from-white before:to-transparent
-           before:z-10 after:content-[''] after:absolute after:right-0 after:top-0
-           after:h-9 after:w-9 after:bg-gradient-to-l after:from-white after:to-transparent after:z-10">
+<div class="relative w-full overflow-hidden bg-sky-500" >
   <div class="flex w-max slider-track">
 
     @foreach ($todasNoticias as $item)
     <a
       href="{{ route('site.news.show', $item) }}"
       target="_blank"
-      class="flex h-9 shrink-0 items-center gap-3 px-6
-                      hover:bg-slate-50 transition duration-300">
-      <span class="whitespace-nowrap text-sm font-semibold text-slate-900">
+      class="flex h-9 shrink-0 items-center gap-3 px-6 
+                      hover:bg-slate-100 transition duration-300">
+      <span class="whitespace-nowrap text-sm font-bold text-white">
         {{ $item->title }}
       </span>
     </a>
@@ -147,7 +144,7 @@ $todasNoticias = $noticias->merge($noticias);
       target="_blank"
       class="flex h-9 shrink-0 items-center gap-3 px-6
                       hover:bg-slate-50 transition duration-300">
-      <span class="whitespace-nowrap text-sm font-semibold text-slate-900">
+      <span class="whitespace-nowrap text-sm font-bold text-white">
         {{ $item->title }}
       </span>
     </a>
@@ -158,7 +155,7 @@ $todasNoticias = $noticias->merge($noticias);
 @endif
 
 <!-- Header menu escuro -->
-<header class="bg-gray-dark sticky z-50" x-data="{ openMenu: null, closeTimer: null }">
+<header class=" sticky z-50" x-data="{ openMenu: null, closeTimer: null }" style="background-color: #9adaf3ff;">
 
   <div class="hidden justify-between items-center pt-5 lg:flex" style="margin: 0 100px 0 100px;">
 
@@ -166,14 +163,20 @@ $todasNoticias = $noticias->merge($noticias);
 
     <div class="flex flex-col mt-5">
       <div class="flex justify-start items-center">
-        <p class="text-sm font-bold text-white">Fale Conosco: (21) 99848-7779</p>
+        <p class="text-sm font-bold text-black">Fale Conosco: (21) 99848-7779</p>
       </div>
       <div class="flex justify-start items-center gap-3 mt-2">
-        <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
+        <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://www.instagram.com/garytos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-primary hover:bg-primary">
+        <a href="https://www.instagram.com/shasta.grupo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
           <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.facebook.com/garytos.sequoia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://www.youtube.com/@SequoiaAlimentos" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
+          <i class="fa-brands fa-youtube"></i>
         </a>
 
         <div class="hidden lg:flex items-center space-x-4 relative">
@@ -185,7 +188,7 @@ $todasNoticias = $noticias->merge($noticias);
 
   </div>
 
-  <div class="container mx-auto flex items-center justify-between py-4">
+  <div class="container mx-auto flex items-center justify-between py-4 mt-4" style="background-color: #033550ff;">
     <a href="{{ route('site.index') }}" class="flex items-center gap-3 lg:hidden" @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }">
       <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 pt-5" style="width: 100px; ">
     </a>

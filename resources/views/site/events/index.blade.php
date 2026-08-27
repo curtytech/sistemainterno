@@ -23,6 +23,8 @@
     </div>
   </header>
 
+  @include('site.partials.alerts')
+
   <main class="mx-auto max-w-7xl px-4 py-12">
     <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div>

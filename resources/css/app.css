@@ -9,7 +9,8 @@
 @theme {
     --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-    --color-primary: #f59e0b;
+    --color-primary: #033550ff;
+    /* --color-primary: #f59e0b; */
     --color-gray-dark: #111827;
     --color-gray-light: #e5e7eb;
     --color-gray-line: #e5e7eb;
