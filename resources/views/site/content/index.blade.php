@@ -48,8 +48,7 @@
           <h3 class="mb-2 text-lg font-semibold">{{ $noticia->title }}</h3>
           <p class="my-2 text-sm font-medium uppercase tracking-wide text-primary">{{ $noticia->category_name }}</p>
           <p class="mb-4 text-sm text-gray-txt">{{ \Illuminate\Support\Str::limit($noticia->content, 110) }}</p>
-          <div class="mt-auto flex items-center justify-between gap-3">
-            <span class="text-sm font-semibold text-gray-900">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
+          <div class="mt-auto flex items-center justify-center gap-3">
             <a href="{{ route('site.news.show', $noticia) }}" class="inline-flex items-center justify-center rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
               Ler mais
             </a>
