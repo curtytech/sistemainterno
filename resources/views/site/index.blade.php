@@ -135,7 +135,7 @@
 
   @include('site.partials.navbar')
 
-   <!-- Slider -->
+  <!-- Slider -->
   <section id="product-slider">
     <div class="main-slider swiper-container relative" data-carousel data-autoplay-ms="5000">
       <div class="swiper-wrapper">
@@ -268,7 +268,6 @@
         </div>
     </section>
 
-
     <!-- News section -->
     <section id="news">
       <div class="container mx-auto px-4 text-center">
@@ -288,22 +287,25 @@
         </div>
         @if ($noticias->isNotEmpty())
         <div class="flex flex-wrap -mx-4">
-          @foreach ($noticias as $noticia)
-          <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
-            <article class="bg-white p-3 rounded-lg shadow-lg h-full flex flex-col">
-              <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="w-full h-52 object-cover mb-4 rounded-lg">
-              <h3 class="text-lg font-semibold mb-2">{{ $noticia->title }}</h3>
-              <p class="my-2 text-sm font-medium text-primary uppercase tracking-wide">{{ $noticia->category_name }}</p>
-              <p class="mb-4 text-sm text-gray-txt">{{ \Illuminate\Support\Str::limit($noticia->content, 110) }}</p>
-              <div class="mt-auto flex items-center justify-between gap-3">
-                <span class="text-sm font-semibold text-gray-900">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
-                <a href="{{ route('site.news.show', $noticia) }}" class="bg-primary border border-transparent hover:bg-transparent hover:border-primary text-white hover:text-primary font-semibold py-2 px-4 rounded-full inline-flex items-center justify-center">
-                  Ler mais
-                </a>
+          <div class="main-slider swiper-container relative" data-carousel data-autoplay-ms="5000">
+            <div class="swiper-wrapper">
+              @foreach ($noticias as $noticia)
+              <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+                <article class="bg-white p-3 rounded-lg shadow-lg h-full flex flex-col">
+                  <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="w-full h-52 object-cover mb-4 rounded-lg">
+                  <h3 class="text-lg font-semibold mb-2">{{ $noticia->title }}</h3>
+                  <p class="my-2 text-sm font-medium text-primary uppercase tracking-wide">{{ $noticia->category_name }}</p>
+                  <p class="mb-2 text-sm text-gray-txt">{{ \Illuminate\Support\Str::limit($noticia->content, 110) }}</p>
+                  <div class="mt-auto flex items-center justify-center gap-3">
+                    <a href="{{ route('site.news.show', $noticia) }}" class="bg-primary border border-transparent hover:bg-transparent hover:border-primary text-white hover:text-primary font-semibold py-2 px-4 rounded-full inline-flex items-center justify-center">
+                      Ler mais
+                    </a>
+                  </div>
+                </article>
               </div>
-            </article>
+              @endforeach
+            </div>
           </div>
-          @endforeach
         </div>
         @else
         <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-14 text-center">
@@ -393,7 +395,6 @@
         @endif
       </div>
     </section>
-
 
     <!-- Contatos section -->
     <section id="contatos" class="bg-gray-dark py-16 text-white">
