@@ -13,16 +13,8 @@
 </head>
 
 <body class="bg-slate-50 font-sans text-slate-900">
-  <header class="border-b border-slate-200 bg-white">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-5">
-      <a href="{{ route('site.index') }}" class="text-lg font-semibold text-slate-900">Sistema Interno</a>
-      <nav class="flex flex-wrap items-center gap-3">
-        <a href="{{ route('site.index') }}" class="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">Voltar ao site</a>
-        <a href="{{ route('site.news.index') }}" class="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">Só notícias</a>
-        <a href="{{ route('site.events.index') }}" class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">Só eventos</a>
-      </nav>
-    </div>
-  </header>
+  @include('site.partials.navbar')
+
 
   <main class="mx-auto max-w-7xl px-4 py-12">
     <div class="mb-12 text-center">
@@ -120,6 +112,7 @@
       @endif
     </section>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 
 </html>
