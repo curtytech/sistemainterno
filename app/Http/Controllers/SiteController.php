@@ -12,7 +12,7 @@ class SiteController extends Controller
     public function index(): View
     {
         return view('site.index', [
-            'boards' => Board::getLatestForSite(5),
+            'boards' => Board::getLatestForSite(15),
             'eventos' => Event::getLatestForSite(3),
             'noticias' => News::getLatestForSite(4),
         ]);

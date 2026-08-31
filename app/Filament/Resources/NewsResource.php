@@ -19,11 +19,11 @@ class NewsResource extends Resource
 
     protected static ?string $navigationGroup = 'Conteudo';
 
-    protected static ?string $navigationLabel = 'Noticias';
+    protected static ?string $navigationLabel = 'Notícias';
 
-    protected static ?string $modelLabel = 'Noticia';
+    protected static ?string $modelLabel = 'Notícia';
 
-    protected static ?string $pluralModelLabel = 'Noticias';
+    protected static ?string $pluralModelLabel = 'Notícias';
 
     public static function form(Form $form): Form
     {
@@ -38,11 +38,10 @@ class NewsResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required(),                
-                Forms\Components\Textarea::make('content')
+                Forms\Components\RichEditor::make('content')
                     ->label('Conteudo')
                     ->required()
                     ->columnSpanFull(),
-
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagem')
                     ->disk('public')

@@ -15,7 +15,6 @@
 <body class="bg-slate-50 font-sans text-slate-900">
   @include('site.partials.navbar')
 
-
   <main class="mx-auto max-w-7xl px-4 py-12">
     <div class="mb-12 text-center">
       <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Conteúdo completo</p>
