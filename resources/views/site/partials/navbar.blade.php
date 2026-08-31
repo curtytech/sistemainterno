@@ -130,7 +130,7 @@ $todasNoticias = $noticias->merge($noticias);
       href="{{ route('site.news.show', $item) }}"
       target="_blank"
       class="flex h-9 shrink-0 items-center gap-3 px-6 
-                      hover:bg-slate-100 transition duration-300">
+                       transition duration-300">
       <span class="whitespace-nowrap text-sm font-bold text-white">
         {{ $item->title }}
       </span>
@@ -143,7 +143,7 @@ $todasNoticias = $noticias->merge($noticias);
       href="{{ route('site.news.show', $item) }}"
       target="_blank"
       class="flex h-9 shrink-0 items-center gap-3 px-6
-                      hover:bg-slate-50 transition duration-300">
+                       transition duration-300">
       <span class="whitespace-nowrap text-sm font-bold text-white">
         {{ $item->title }}
       </span>
@@ -166,16 +166,16 @@ $todasNoticias = $noticias->merge($noticias);
         <p class="text-sm font-bold text-black">Fale Conosco: (21) 99848-7779</p>
       </div>
       <div class="flex justify-start items-center gap-3 mt-2">
-        <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
+        <a href="https://www.instagram.com/sequoia.alimentos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary hover:text-white">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://www.instagram.com/shasta.grupo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
-          <i class="fa-brands fa-instagram"></i>
+        <a href="https://www.instagram.com/shasta.grupo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary hover:text-white">
+          <i class="fa-brands fa-instagram "></i>
         </a>
-        <a href="https://www.facebook.com/garytos.sequoia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
+        <a href="https://www.facebook.com/garytos.sequoia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary hover:text-white">
           <i class="fa-brands fa-facebook"></i>
         </a>
-        <a href="https://www.youtube.com/@SequoiaAlimentos" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary">
+        <a href="https://www.youtube.com/@SequoiaAlimentos" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-primary hover:bg-primary hover:text-white">
           <i class="fa-brands fa-youtube"></i>
         </a>
 
