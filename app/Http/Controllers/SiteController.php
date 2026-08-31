@@ -12,9 +12,18 @@ class SiteController extends Controller
     public function index(): View
     {
         return view('site.index', [
-            'boards' => Board::getLatestForSite(15),
-            'eventos' => Event::getLatestForSite(3),
-            'noticias' => News::getLatestForSite(4),
+            'boards' => Board::query()
+                ->latest()
+                ->limit(15)
+                ->get(),
+            'eventos' => Event::query()
+                ->future()
+                ->limit(21)
+                ->get(),
+            'noticias' => News::query()
+                ->published()
+                ->limit(21)
+                ->get(),
         ]);
     }
 
@@ -22,15 +31,14 @@ class SiteController extends Controller
     {
         return view('site.news.index', [
             'noticias' => News::query()
-                ->with('category:id,name')
-                ->latest()
+                ->published()
                 ->paginate(12),
         ]);
     }
 
     public function newsShow(News $news): View
     {
-        $news->load('category:id,name');
+        $news->loadMissing('category:id,name');
 
         return view('site.news.show', [
             'noticia' => $news,
@@ -41,15 +49,14 @@ class SiteController extends Controller
     {
         return view('site.events.index', [
             'eventos' => Event::query()
-                ->with('category:id,name')
-                ->latest()
+                ->sortedForListing()
                 ->paginate(12),
         ]);
     }
 
     public function eventsShow(Event $event): View
     {
-        $event->load('category:id,name');
+        $event->loadMissing('category:id,name');
 
         return view('site.events.show', [
             'evento' => $event,
@@ -60,12 +67,10 @@ class SiteController extends Controller
     {
         return view('site.content.index', [
             'noticias' => News::query()
-                ->with('category:id,name')
-                ->latest()
+                ->published()
                 ->paginate(8, ['*'], 'noticias_pagina'),
             'eventos' => Event::query()
-                ->with('category:id,name')
-                ->latest()
+                ->sortedForListing()
                 ->paginate(8, ['*'], 'eventos_pagina'),
         ]);
     }

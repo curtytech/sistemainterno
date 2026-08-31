@@ -57,6 +57,13 @@ class News extends Model
             ->limit($limit);
     }
 
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query
+            ->with('category:id,name')
+            ->orderBy('created_at', 'DESC');
+    }
+
     public static function getLatestForSite(int $limit = 4): Collection
     {
         if (! Schema::hasTable('news') || ! Schema::hasTable('news_categories')) {

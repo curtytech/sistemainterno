@@ -33,6 +33,8 @@ class Event extends Model
         return [
             'start_date' => 'date',
             'end_date' => 'date',
+            'start_time' => 'string',
+            'end_time' => 'string',
         ];
     }
 
@@ -52,7 +54,8 @@ class Event extends Model
             return null;
         }
 
-        if (Str::startsWith($this->image, ['http://', 'https://', '/'])) {
+        $haystack = array('http://', 'https://', '/');
+        if (Str::startsWith($this->image, $haystack)) {
             return $this->image;
         }
 
@@ -64,6 +67,63 @@ class Event extends Model
         return $query
             ->with('category:id,name')
             ->latest()
+            ->limit($limit);
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query
+            ->with('category:id,name')
+            ->orderBy('created_at', 'DESC');
+    }
+
+    public function scopeUpcoming(Builder $query): Builder
+    {
+        $today = now()->toDateString();
+
+        return $query
+            ->with('category:id,name')
+            ->where(function (Builder $sub) use ($today) {
+                $sub
+                    ->whereDate('end_date', '>=', $today)
+                    ->orWhereNull('end_date');
+            })
+            ->orderByRaw('COALESCE(start_date, created_at) ASC');
+    }
+
+    public function scopeFuture(Builder $query): Builder
+    {
+        $today = now()->toDateString();
+
+        return $query
+            ->with('category:id,name')
+            ->whereDate('start_date', '>=', $today)
+            ->orderBy('start_date', 'ASC');
+    }
+
+    public function scopeSortedForListing(Builder $query): Builder
+    {
+        $today = now()->toDateString();
+        $orderSql = "
+            CASE
+                WHEN COALESCE(start_date, end_date, created_at) >= ? THEN 0
+                ELSE 1
+            END ASC,
+            CASE
+                WHEN COALESCE(start_date, end_date, created_at) >= ? THEN COALESCE(start_date, end_date, created_at) ASC
+                ELSE COALESCE(start_date, end_date, created_at) DESC
+            END
+        ";
+
+        return $query
+            ->with('category:id,name')
+            ->orderByRaw($orderSql, array($today, $today));
+    }
+
+    public function scopeRecentAndUpcoming(Builder $query, int $limit = 6): Builder
+    {
+        return $query
+            ->sortedForListing()
             ->limit($limit);
     }
 

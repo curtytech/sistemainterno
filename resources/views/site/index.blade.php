@@ -287,8 +287,6 @@
         </div>
         @if ($noticias->isNotEmpty())
         <div class="flex flex-wrap -mx-4">
-          <div class="main-slider swiper-container relative" data-carousel data-autoplay-ms="5000">
-            <div class="swiper-wrapper">
               @foreach ($noticias as $noticia)
               <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
                 <article class="bg-white p-3 rounded-lg shadow-lg h-full flex flex-col">
@@ -304,8 +302,6 @@
                 </article>
               </div>
               @endforeach
-            </div>
-          </div>
         </div>
         @else
         <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-14 text-center">
