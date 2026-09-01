@@ -20,9 +20,15 @@ class SiteController extends Controller
                 ->future()
                 ->limit(21)
                 ->get(),
+            'noticiasEmDestaque' => News::query()
+                ->published()
+                ->where('featured', 1)
+                ->limit(21)
+                ->get(),
             'noticias' => News::query()
                 ->published()
                 ->limit(21)
+                ->where('featured', 0)
                 ->get(),
         ]);
     }
@@ -32,7 +38,7 @@ class SiteController extends Controller
         return view('site.news.index', [
             'noticias' => News::query()
                 ->published()
-                ->paginate(12),
+                ->get(),
         ]);
     }
 
@@ -49,8 +55,7 @@ class SiteController extends Controller
     {
         return view('site.events.index', [
             'eventos' => Event::query()
-                ->sortedForListing()
-                ->paginate(12),
+                ->get(),
         ]);
     }
 
@@ -68,10 +73,11 @@ class SiteController extends Controller
         return view('site.content.index', [
             'noticias' => News::query()
                 ->published()
-                ->paginate(8, ['*'], 'noticias_pagina'),
+                ->get(),
+
             'eventos' => Event::query()
                 ->sortedForListing()
-                ->paginate(8, ['*'], 'eventos_pagina'),
+                ->get(),
         ]);
     }
 }

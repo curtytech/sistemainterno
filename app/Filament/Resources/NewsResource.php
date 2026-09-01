@@ -30,16 +30,19 @@ class NewsResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
-                    ->label('Titulo')
+                    ->label('Título')
                     ->required(),
                 Forms\Components\Select::make('category_id')
                     ->label('Categoria')
                     ->relationship('category', 'name')
                     ->searchable()
                     ->preload()
-                    ->required(),                
+                    ->required(),
+                Forms\Components\Toggle::make('featured')
+                    ->label('Destaque')
+                    ->default(false),
                 Forms\Components\RichEditor::make('content')
-                    ->label('Conteudo')
+                    ->label('Conteúdo')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')

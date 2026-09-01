@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eventos | Sistema Interno</title>
+  <title>Eventos | Ápice</title>
   <link rel="icon" type="icon" href="/assets/images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,6 @@
 
 <body class="bg-slate-50 font-sans text-slate-900">
   @include('site.partials.navbar')
-
 
   <main class="mx-auto max-w-7xl px-4 py-12">
     <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -58,9 +57,7 @@
       @endforeach
     </div>
 
-    <div class="mt-10">
-      {{ $eventos->links() }}
-    </div>
+   
     @else
     <div class="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
       <h2 class="text-2xl font-semibold text-slate-800">Nenhum evento cadastrado</h2>

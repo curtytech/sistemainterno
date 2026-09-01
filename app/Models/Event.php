@@ -104,20 +104,17 @@ class Event extends Model
     public function scopeSortedForListing(Builder $query): Builder
     {
         $today = now()->toDateString();
-        $orderSql = "
-            CASE
-                WHEN COALESCE(start_date, end_date, created_at) >= ? THEN 0
-                ELSE 1
-            END ASC,
-            CASE
-                WHEN COALESCE(start_date, end_date, created_at) >= ? THEN COALESCE(start_date, end_date, created_at) ASC
-                ELSE COALESCE(start_date, end_date, created_at) DESC
-            END
-        ";
+        $coalesce = 'COALESCE(start_date, end_date, created_at)';
+        $juliandayToday = 'julianday(?)';
+        $upcomingFlag = "CASE WHEN {$coalesce} >= {$juliandayToday} THEN 0 ELSE 1 END";
+        $upcomingDate = "CASE WHEN {$coalesce} >= {$juliandayToday} THEN julianday({$coalesce}) ELSE NULL END ASC";
+        $pastDate = "CASE WHEN {$coalesce} <  {$juliandayToday} THEN julianday({$coalesce}) ELSE NULL END DESC";
 
         return $query
             ->with('category:id,name')
-            ->orderByRaw($orderSql, array($today, $today));
+            ->orderByRaw($upcomingFlag, array($today))
+            ->orderByRaw($upcomingDate, array($today))
+            ->orderByRaw($pastDate, array($today));
     }
 
     public function scopeRecentAndUpcoming(Builder $query, int $limit = 6): Builder

@@ -273,6 +273,49 @@
       <div class="container mx-auto px-4 text-center">
         <div class="container mx-auto max-w-screen-xl px-4 testimonials">
           <div class="text-center mb-12 lg:mb-20">
+            <h2 class="text-5xl font-bold mb-4 text-primary">Notícias em Destaque</h2>
+            <p class="my-7">Acesse rapidamente as principais notícias do sistema interno.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <a href="{{ route('site.news.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
+                Veja mais
+              </a>
+              <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+                Ver tudo em uma página
+              </a>
+            </div>
+          </div>
+        </div>
+        @if ($noticiasEmDestaque->isNotEmpty())
+        <div class="flex flex-wrap -mx-4">
+              @foreach ($noticiasEmDestaque as $noticia)
+              <div class="w-full sm:w-1/2 lg:w-1/4 px-4 mb-8">
+                <article class="bg-white p-3 rounded-lg shadow-lg h-full flex flex-col">
+                  <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="w-full h-52 object-cover mb-4 rounded-lg">
+                  <h3 class="text-lg font-semibold mb-2">{{ $noticia->title }}</h3>
+                  <p class="my-2 text-sm font-medium text-primary uppercase tracking-wide">{{ $noticia->category_name }}</p>
+                  <p class="mb-2 text-sm text-gray-txt">{{ \Illuminate\Support\Str::limit($noticia->content, 110) }}</p>
+                  <div class="mt-auto flex items-center justify-center gap-3">
+                    <a href="{{ route('site.news.show', $noticia) }}" class="bg-primary border border-transparent hover:bg-transparent hover:border-primary text-white hover:text-primary font-semibold py-2 px-4 rounded-full inline-flex items-center justify-center">
+                      Ler mais
+                    </a>
+                  </div>
+                </article>
+              </div>
+              @endforeach
+        </div>
+        @else
+        <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 py-14 text-center">
+          <h3 class="text-2xl font-semibold text-slate-800">Nenhuma notícia cadastrada</h3>
+          <p class="mt-3 text-slate-500">Assim que houver notícias no banco, elas aparecerão automaticamente nesta seção.</p>
+        </div>
+        @endif
+      </div>
+    </section>
+    <!-- News section -->
+    <section id="news">
+      <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto max-w-screen-xl px-4 testimonials">
+          <div class="text-center mb-12 lg:mb-20">
             <h2 class="text-5xl font-bold mb-4 text-primary">Notícias</h2>
             <p class="my-7">Acesse rapidamente as principais notícias do sistema interno.</p>
             <div class="flex flex-wrap items-center justify-center gap-3">

@@ -19,12 +19,20 @@ class News extends Model
         'content',
         'title',
         'image',
+        'featured',
     ];
 
     protected $appends = [
         'category_name',
         'image_url',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'featured' => 'boolean',
+        ];
+    }
 
     public function category(): BelongsTo
     {

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notícias | Sistema Interno</title>
+  <title>Notícias | Ápice</title>
   <link rel="icon" type="icon" href="/assets/images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,15 @@
 </head>
 
 <body class="bg-slate-50 font-sans text-slate-900">
-  @include('site.partials.navbar')
-
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-5">
+      <a href="{{ route('site.index') }}" class="text-lg font-semibold text-slate-900">Sistema Interno</a>
+      <nav class="flex items-center gap-3">
+        <a href="{{ route('site.index') }}" class="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">Voltar ao site</a>
+        <a href="{{ route('site.events.index') }}" class="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90">Ver eventos</a>
+      </nav>
+    </div>
+  </header>
 
   <main class="mx-auto max-w-7xl px-4 py-12">
     <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -50,9 +57,7 @@
       @endforeach
     </div>
 
-    <div class="mt-10">
-      {{ $noticias->links() }}
-    </div>
+   
     @else
     <div class="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
       <h2 class="text-2xl font-semibold text-slate-800">Nenhuma notícia cadastrada</h2>
