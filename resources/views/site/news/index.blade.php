@@ -36,28 +36,29 @@
     @if ($noticias->isNotEmpty())
     <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
       @foreach ($noticias as $noticia)
-      <article class="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="h-56 w-full object-cover">
-        <div class="flex flex-1 flex-col p-6">
-          <div class="mb-4 flex items-center justify-between gap-3">
-            <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-              {{ $noticia->category_name }}
-            </span>
-            <span class="text-sm text-slate-500">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
+      <a href="{{ route('site.news.show', $noticia) }}">
+        <article class="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="h-56 w-full object-cover">
+          <div class="flex flex-1 flex-col p-6">
+            <div class="mb-4 flex items-center justify-between gap-3">
+              <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                {{ $noticia->category_name }}
+              </span>
+              <span class="text-sm text-slate-500">{{ \Illuminate\Support\Carbon::parse($noticia->created_at)->format('d/m/Y') }}</span>
+            </div>
+            <h2 class="text-2xl font-semibold text-slate-900">{{ $noticia->title }}</h2>
+            <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">{{ \Illuminate\Support\Str::limit($noticia->content, 180) }}</p>
+            <div class="mt-6">
+              <a href="{{ route('site.news.show', $noticia) }}" class="inline-flex rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
+                Ler notícia
+              </a>
+            </div>
           </div>
-          <h2 class="text-2xl font-semibold text-slate-900">{{ $noticia->title }}</h2>
-          <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">{{ \Illuminate\Support\Str::limit($noticia->content, 180) }}</p>
-          <div class="mt-6">
-            <a href="{{ route('site.news.show', $noticia) }}" class="inline-flex rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
-              Ler notícia
-            </a>
-          </div>
-        </div>
-      </article>
+        </article>
+      </a>
       @endforeach
     </div>
 
-   
     @else
     <div class="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
       <h2 class="text-2xl font-semibold text-slate-800">Nenhuma notícia cadastrada</h2>
