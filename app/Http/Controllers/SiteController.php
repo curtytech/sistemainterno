@@ -55,6 +55,7 @@ class SiteController extends Controller
     {
         return view('site.events.index', [
             'eventos' => Event::query()
+                ->future()
                 ->get(),
         ]);
     }

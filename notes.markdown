@@ -32,3 +32,11 @@ composer dump-autoload -o
 
 
 php artisan key:generate
+
+
+
+
+Foto de noticias cortada
+A href nos cards inteiros
+Ordem dos eventos 
+Noticias com animações de carousel

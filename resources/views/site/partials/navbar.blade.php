@@ -159,7 +159,7 @@ $todasNoticias = $noticias->merge($noticias);
 
   <div class="hidden justify-between items-center pt-5 lg:flex" style="margin: 0 100px 0 100px;">
 
-    <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 mt-3" style="width: 100px; ">
+    <img src="/assets/ApiceLogo.png" alt="Logo" class="ml-5 mt-1" style="width: 150px; ">
 
     <div class="flex flex-col mt-5">
       <div class="flex justify-start items-center">
