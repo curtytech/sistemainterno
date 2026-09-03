@@ -51,7 +51,7 @@
           <div class="mt-8 rounded-2xl border border-slate-200 p-5 md:p-6">
             <h2 class="text-lg font-semibold text-slate-900">Conteudo da noticia</h2>
             <div class="mt-4 whitespace-pre-line text-base leading-8 text-slate-700">
-              {{ $noticia->content }}
+              {!! $noticia->content !!}
             </div>
           </div>
         </div>

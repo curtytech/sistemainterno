@@ -204,7 +204,7 @@ $todasNoticias = $noticias->merge($noticias);
     <nav class="hidden lg:flex md:flex-grow justify-center">
       <ul class="flex justify-center items-center space-x-5 text-white gap-3">
         <li><a href="{{ route('site.index') }}" class="font-semibold transition hover:text-secondary">Home</a></li>
-        <li><a href="https://sequoiatortillas.sharepoint.com/sites/Bussoladoconhecimento" target="_blank" rel="noopener noreferrer" class="transition hover:text-secondary font-semibold">Bússola do Conhecimento</a></li>
+        <li><a href="https://gruposequoia.grupoimpulsionar.com/" target="_blank" rel="noopener noreferrer" class="transition hover:text-secondary font-semibold">Plataforma de Treinamentos</a></li>
 
         <li
           class="relative group"

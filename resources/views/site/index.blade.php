@@ -232,8 +232,8 @@
     <section id="departamentos" class="bg-slate-50 py-8 px-4">
       <div class="container mx-auto max-w-screen-xl px-4">
         <div class="text-center mb-8">
-          <h2 class="text-5xl font-bold mb-4 text-primary">Departamentos</h2>
-          <p class="text-slate-600">Acesse rapidamente os canais de cada departamento.</p>
+          <h2 class="text-5xl font-bold mb-4 text-primary">Biblioteca de Documentos</h2>
+          <p class="text-slate-600">Acesse rapidamente os canais de cada documento.</p>
         </div>
         @php
         $linhas = [
@@ -489,7 +489,7 @@
             </ul>
           </div>
           <div>
-            <h3 class="text-lg font-semibold">Departamentos</h3>
+            <h3 class="text-lg font-semibold">Biblioteca de Documentos</h3>
 
             <ul class="mt-4 space-y-2 text-sm text-slate-300">
               @foreach (collect($departamentos)->take(5) as $item)
