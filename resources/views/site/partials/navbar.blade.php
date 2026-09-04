@@ -182,6 +182,82 @@ $todasNoticias = $noticias->merge($noticias);
         <div class="hidden lg:flex items-center space-x-4 relative">
           <a href="{{ route('filament.admin.pages.dashboard') }}"
             class="bg-primary border border-primary hover:bg-transparent text-white hover:text-primary font-semibold px-3 py-1 rounded-full inline-block">Área Interna</a>
+
+          @auth
+          <div
+            class="relative"
+            x-data="{ openUser: false }"
+            @mouseenter="openUser = true; if (typeof closeTimer !== 'undefined' && closeTimer) { clearTimeout(closeTimer); closeTimer = null; } if (typeof openMenu !== 'undefined') { openMenu = null; }"
+            @mouseleave="closeTimer = setTimeout(() => { openUser = false }, 120)">
+            <button
+              type="button"
+              class="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-2 py-1 pr-3 text-sm transition hover:bg-white/10"
+              @click="openUser = !openUser">
+              <span class="flex h-7 w-7 items-center justify-center rounded-full bg-primary font-bold text-white text-xs">
+                {{ strtoupper(collect(preg_split('/\s+/', auth()->user()->name) ?: [])->filter()->take(2)->map(fn ($p) => mb_substr($p, 0, 1))->implode('') ?: 'U') }}
+              </span>
+              <span class="hidden xl:inline text-left leading-tight">
+                <span class="block truncate max-w-[180px] font-semibold text-slate-900">{{ auth()->user()->name }}</span>
+                <span class="block truncate max-w-[180px] text-xs text-slate-700">{{ auth()->user()->email }}</span>
+              </span>
+              <i :class="openUser ? 'fa-solid fa-chevron-up text-slate-900' : 'fa-solid fa-chevron-down text-slate-900'" class="text-xs"></i>
+            </button>
+
+            <div
+              x-show="openUser"
+              x-cloak
+              x-transition:enter="transition ease-out duration-100"
+              x-transition:enter-start="opacity-0 scale-90 -translate-y-1"
+              x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+              x-transition:leave="transition ease-in duration-100"
+              x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+              x-transition:leave-end="opacity-0 scale-90 -translate-y-1"
+              @mouseenter="if (typeof closeTimer !== 'undefined' && closeTimer) { clearTimeout(closeTimer); closeTimer = null; }"
+              @mouseleave="closeTimer = setTimeout(() => { openUser = false }, 120)"
+              class="absolute right-0 top-full z-50 mt-3 w-[320px] origin-top-right rounded-2xl border border-slate-200 bg-white p-2 shadow-xl ring-1 ring-black/5">
+              <div class="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
+                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary font-bold text-white">
+                  {{ strtoupper(collect(preg_split('/\s+/', auth()->user()->name) ?: [])->filter()->take(2)->map(fn ($p) => mb_substr($p, 0, 1))->implode('') ?: 'U') }}
+                </div>
+                <div class="min-w-0">
+                  <p class="truncate text-sm font-semibold text-slate-900">{{ auth()->user()->name }}</p>
+                  <p class="truncate text-xs text-slate-500">{{ auth()->user()->email }}</p>
+                  <span class="mt-1 inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium {{ auth()->user()->isAdmin() ? 'border-amber-200 bg-amber-50 text-amber-700' : 'border-sky-200 bg-sky-50 text-sky-700' }}">
+                    <i class="fa-solid {{ auth()->user()->isAdmin() ? 'fa-shield-halved' : 'fa-user' }} text-[9px]"></i>
+                    {{ auth()->user()->isAdmin() ? 'Administrador' : 'Usuário' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="mt-2 space-y-1 border-t border-slate-100 pt-2">
+                <a
+                  href="{{ route('site.profile.password') }}"
+                  class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-700 transition hover:bg-primary hover:text-white">
+                  <i class="fa-solid fa-key w-4 text-center text-slate-400 group-hover:text-white"></i>
+                  <div class="flex-1">
+                    <p class="font-semibold">Alterar senha</p>
+                    <p class="text-xs text-slate-500 group-hover:text-white/80">Atualize sua senha de acesso</p>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-xs text-slate-300 group-hover:text-white/80"></i>
+                </a>
+
+                <form method="POST" action="{{ route('logout') }}" class="group">
+                  @csrf
+                  <button
+                    type="submit"
+                    class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-slate-700 transition hover:bg-red-50 hover:text-red-600">
+                    <i class="fa-solid fa-right-from-bracket w-4 text-center text-slate-400 group-hover:text-red-500"></i>
+                    <div class="flex-1">
+                      <p class="font-semibold">Sair</p>
+                      <p class="text-xs text-slate-500 group-hover:text-red-500/80">Encerrar sessão atual</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-xs text-slate-300 group-hover:text-red-400"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          @endauth
         </div>
       </div>
     </div>
