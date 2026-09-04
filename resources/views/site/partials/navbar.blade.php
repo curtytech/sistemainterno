@@ -211,7 +211,7 @@ $todasNoticias = $noticias->merge($noticias);
           @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } openMenu = 'departamentos'"
           @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)">
           <a href="#" class="transition hover:text-secondary font-semibold flex items-center">
-            Departamentos
+            Biblioteca de Documentos
             <i :class="openMenu === 'departamentos' ? 'fa-solid fa-chevron-up ml-1 text-xs' : 'fa-solid fa-chevron-down ml-1 text-xs'"></i>
           </a>
           <div
@@ -227,7 +227,7 @@ $todasNoticias = $noticias->merge($noticias);
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-90">
             <div class="mb-4 border-b border-slate-200 px-3 pb-3">
-              <p class="text-sm font-semibold text-slate-900">Departamentos</p>
+              <p class="text-sm font-semibold text-slate-900">Biblioteca de Documentos</p>
               <p class="mt-1 text-xs text-slate-500">Acesso rapido aos principais setores da intranet.</p>
             </div>
             <div class="mega-menu-grid">
