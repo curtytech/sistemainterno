@@ -18,7 +18,9 @@
   <main class="mx-auto max-w-6xl px-4 py-10 md:py-14">
 
     <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <img src="{{ $evento->image_url }}" alt="{{ $evento->title }}" class="h-72 w-full object-cover md:h-96">
+      <div class="flex w-full items-center justify-center bg-slate-100 p-4 md:p-8">
+        <img src="{{ $evento->image_url }}" alt="{{ $evento->title }}" class="max-h-[32rem] w-full object-contain">
+      </div>
       <div class="p-6 md:p-10">
         <div class="mb-6 flex flex-wrap items-center gap-3">
           <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">

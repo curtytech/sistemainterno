@@ -18,12 +18,11 @@
   <main class="mx-auto max-w-6xl px-4 py-10 md:py-14">
 
     <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-      <div class="grid gap-0 lg:grid-cols-[360px_minmax(0,1fr)]">
-        <div class="border-b border-slate-200 bg-slate-100 lg:border-b-0 lg:border-r">
-          <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="h-64 w-full object-cover md:h-80 lg:h-full">
-        </div>
+      <div class="flex items-center justify-center w-full border-b border-slate-200 bg-slate-100 p-4 md:p-8">
+        <img src="{{ $noticia->image_url }}" alt="{{ $noticia->title }}" class="max-h-[32rem] w-full object-contain">
+      </div>
 
-        <div class="p-6 md:p-8">
+      <div class="p-6 md:p-8">
           <div class="mb-4 flex flex-wrap items-center gap-3">
             <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
               {{ $noticia->category_name }}
@@ -55,7 +54,6 @@
             </div>
           </div>
         </div>
-      </div>
     </article>
   </main>
 
