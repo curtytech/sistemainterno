@@ -36,7 +36,7 @@ php artisan key:generate
 
 
 
-Foto de noticias cortada
+Foto de noticias cortada ok
 A href nos cards inteiros ok
 Ordem dos eventos 
 Noticias com animações de carousel
