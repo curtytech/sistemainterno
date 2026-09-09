@@ -1,31 +1,32 @@
 @php
-if (! isset($eventos)) {
-$eventos = \App\Models\Event::future()->limit(21)->get();
+if (! isset($noticias)) {
+$noticias = \App\Models\Event::future()->limit(21)->get();
 }
 @endphp
 
-<div class="events-container container mx-auto px-5">
-    <div class="mb-10 text-center">
-        <h2 class="text-5xl font-bold mb-4">Próximos <span class="text-primary">Eventos</span></h2>
-        <p class="mt-3 text-slate-700">Acompanhe comunicados, treinamentos e ações internas da Sequoia.</p>
-
-        <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
-            <a href="{{ route('site.events.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
-                Veja mais
-            </a>
-            <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
-                Ver tudo em uma página
-            </a>
+<div class="events-container container mx-auto px-5 mb-5">
+    <div class="container mx-auto max-w-screen-xl px-4 testimonials">
+        <div class="text-center mb-12 lg:mb-20">
+            <h2 class="text-5xl font-bold mb-4 text-primary">Notícias</h2>
+            <p class="my-7">Acesse rapidamente as principais notícias.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <a href="{{ route('site.news.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
+                    Veja mais
+                </a>
+                <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+                    Ver tudo em uma página
+                </a>
+            </div>
         </div>
     </div>
-    @if ($eventos->isNotEmpty())
+    @if ($noticias->isNotEmpty())
     <div class="events-carousel relative">
         <div class="relative overflow-hidden rounded-lg ">
             <div class="events-slide-track flex slide-transition">
-                @foreach($eventos as $evento)
+                @foreach($noticias as $evento)
                 <div class="events-slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
                     <a
-                        href="{{ route('site.events.show', $evento) }}"
+                        href="{{ route('site.news.show', $evento) }}"
                         class="block rounded-lg overflow-hidden shadow-md h-full transition hover:shadow-xl hover:-translate-y-0.5 duration-200">
                         <div class=" flex items-center justify-center">
                             <img

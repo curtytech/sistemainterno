@@ -1,69 +1,70 @@
 @php
-if (! isset($eventos)) {
-$eventos = \App\Models\Event::future()->limit(21)->get();
+if (! isset($noticias)) {
+$noticias = \App\Models\Event::future()->limit(21)->get();
 }
 @endphp
 
-<div class="events-container container mx-auto px-5">
-    <div class="mb-10 text-center">
-        <h2 class="text-5xl font-bold mb-4">Próximos <span class="text-primary">Eventos</span></h2>
-        <p class="mt-3 text-slate-700">Acompanhe comunicados, treinamentos e ações internas da Sequoia.</p>
-
-        <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
-            <a href="{{ route('site.events.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
-                Veja mais
-            </a>
-            <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
-                Ver tudo em uma página
-            </a>
+<div class="events-container container mx-auto px-5 mb-5">
+    <div class="container mx-auto max-w-screen-xl px-4 testimonials">
+        <div class="text-center mb-12 lg:mb-20">
+            <h2 class="text-5xl font-bold mb-4">Notícias em <span class="text-primary">Destaque</span></h2>
+            <p class="my-7">Acesse rapidamente as principais notícias em destaque.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <a href="{{ route('site.news.index') }}" class="inline-flex rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white">
+                    Veja mais
+                </a>
+                <a href="{{ route('site.content.index') }}" class="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+                    Ver tudo em uma página
+                </a>
+            </div>
         </div>
     </div>
-    @if ($eventos->isNotEmpty())
+    @if ($noticiasEmDestaque->isNotEmpty())
     <div class="events-carousel relative">
         <div class="relative overflow-hidden rounded-lg ">
             <div class="events-slide-track flex slide-transition">
-                @foreach($eventos as $evento)
+                @foreach($noticiasEmDestaque as $item)
                 <div class="events-slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
                     <a
-                        href="{{ route('site.events.show', $evento) }}"
+                        href="{{ route('site.news.show', $item) }}"
                         class="block rounded-lg overflow-hidden shadow-md h-full transition hover:shadow-xl hover:-translate-y-0.5 duration-200">
                         <div class=" flex items-center justify-center">
                             <img
-                                src="{{ $evento->image_url ?? '/assets/images/banner1.jpg' }}"
-                                alt="{{ $evento->title }}"
+                                src="{{ $item->image_url ?? '/assets/images/banner1.jpg' }}"
+                                alt="{{ $item->title }}"
                                 class="w-full h-full object-contain"
                                 onerror="this.onerror=null;this.src='/assets/images/banner1.jpg';">
                         </div>
 
                         <div class="p-4">
                             <div class="mb-3 flex items-center justify-between gap-2">
-                                @if ($evento->category_name)
+                                @if ($item->category_name)
                                 <span class="inline-flex rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary">
-                                    {{ $evento->category_name }}
+                                    {{ $item->category_name }}
                                 </span>
                                 @endif
                                 <span class="text-xs text-slate-500 shrink-0">
-                                    {{ $evento->start_date ? $evento->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}
+                                    {{ $item->start_date ? $item->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($item->created_at)->format('d/m/Y') }}
                                 </span>
                             </div>
 
                             <h3 class="text-xl font-semibold text-gray-dark leading-snug line-clamp-2">
-                                {{ $evento->title }}
+                                {{ $item->title }}
                             </h3>
 
-                            @if ($evento->start_time || $evento->end_time)
+                            @if ($item->start_time || $item->end_time)
                             <p class="mt-2 text-sm font-medium text-slate-500">
                                 <i class="fa-regular fa-clock mr-1"></i>
-                                {{ $evento->start_time ? \Illuminate\Support\Carbon::parse($evento->start_time)->format('H:i') : '--:--' }}
-                                @if ($evento->end_time)
-                                - {{ \Illuminate\Support\Carbon::parse($evento->end_time)->format('H:i') }}
+                                {{ $item->start_time ? \Illuminate\Support\Carbon::parse($item->start_time)->format('H:i') : '--:--' }}
+                                @if ($item->end_time)
+                                - {{ \Illuminate\Support\Carbon::parse($item->end_time)->format('H:i') }}
                                 @endif
                             </p>
                             @endif
 
-                            @if ($evento->content)
+                            @if ($item->content)
                             <p class="mt-2 text-sm text-slate-600 line-clamp-3">
-                                {{ \Illuminate\Support\Str::limit(strip_tags($evento->content), 110) }}
+                                {{ \Illuminate\Support\Str::limit(strip_tags($item->content), 110) }}
                             </p>
                             @endif
                         </div>
