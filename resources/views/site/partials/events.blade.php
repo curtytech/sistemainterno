@@ -1,394 +1,214 @@
-    <div class="container mx-auto px-4 py-12">
+@php
+if (! isset($eventos)) {
+$eventos = \App\Models\Event::future()->limit(21)->get();
+}
+@endphp
 
-        <div id="carousel" class="relative">
-
-            <div class="relative overflow-hidden rounded-lg shadow-xl bg-white">
-
-                <div id="slideTrack" class="flex slide-transition">
-
-                    <!-- Slide 1 -->
-                    <div class="slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
-                        <div class="rounded-lg overflow-hidden shadow-md h-full">
-
-                            <div class="bg-gray-200 h-48 md:h-64 flex items-center justify-center">
-                                <img src="https://picsum.photos/id/10/800/600" alt="Nature 1"
-                                    class="w-full h-full object-cover">
-                            </div>
-
-                            <div class="p-4">
-                                <h3 class="text-xl font-semibold">
-                                    Nature 1
-                                </h3>
-
-                                <p class="text-gray-600 mt-2">
-                                    Nature first
-                                </p>
-                            </div>
-
+<div class="events-container container mx-auto px-5">
+    <div class="mb-10 text-center">
+        <h2 class="text-5xl font-bold mb-4">Próximos <span class="text-primary">Eventos</span></h2>
+        <p class="mt-3 text-slate-300">Acompanhe comunicados, treinamentos e ações internas da Sequoia.</p>
+    </div>
+    @if ($eventos->isNotEmpty())
+    <div class="events-carousel relative">
+        <div class="relative overflow-hidden rounded-lg ">
+            <div class="events-slide-track flex slide-transition">
+                @foreach($eventos as $evento)
+                <div class="events-slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
+                    <a
+                        href="{{ route('site.events.show', $evento) }}"
+                        class="block rounded-lg overflow-hidden shadow-md h-full transition hover:shadow-xl hover:-translate-y-0.5 duration-200">
+                        <div class=" flex items-center justify-center">
+                            <img
+                                src="{{ $evento->image_url ?? '/assets/images/banner1.jpg' }}"
+                                alt="{{ $evento->title }}"
+                                class="w-full h-full object-contain"
+                                onerror="this.onerror=null;this.src='/assets/images/banner1.jpg';">
                         </div>
-                    </div>
 
-                    <!-- Slide 2 -->
-                    <div class="slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
-                        <div class="rounded-lg overflow-hidden shadow-md h-full">
-
-                            <div class="bg-gray-200 h-48 md:h-64 flex items-center justify-center">
-                                <img src="https://picsum.photos/id/11/800/600" alt="Nature 2"
-                                    class="w-full h-full object-cover">
+                        <div class="p-4">
+                            <div class="mb-3 flex items-center justify-between gap-2">
+                                @if ($evento->category_name)
+                                <span class="inline-flex rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary">
+                                    {{ $evento->category_name }}
+                                </span>
+                                @endif
+                                <span class="text-xs text-slate-500 shrink-0">
+                                    {{ $evento->start_date ? $evento->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($evento->created_at)->format('d/m/Y') }}
+                                </span>
                             </div>
 
-                            <div class="p-4">
-                                <h3 class="text-xl font-semibold">
-                                    Nature 2
-                                </h3>
+                            <h3 class="text-xl font-semibold text-gray-dark leading-snug line-clamp-2">
+                                {{ $evento->title }}
+                            </h3>
 
-                                <p class="text-gray-600 mt-2">
-                                    Nature second
-                                </p>
-                            </div>
+                            @if ($evento->start_time || $evento->end_time)
+                            <p class="mt-2 text-sm font-medium text-slate-500">
+                                <i class="fa-regular fa-clock mr-1"></i>
+                                {{ $evento->start_time ? \Illuminate\Support\Carbon::parse($evento->start_time)->format('H:i') : '--:--' }}
+                                @if ($evento->end_time)
+                                - {{ \Illuminate\Support\Carbon::parse($evento->end_time)->format('H:i') }}
+                                @endif
+                            </p>
+                            @endif
 
+                            @if ($evento->content)
+                            <p class="mt-2 text-sm text-slate-600 line-clamp-3">
+                                {{ \Illuminate\Support\Str::limit(strip_tags($evento->content), 110) }}
+                            </p>
+                            @endif
                         </div>
-                    </div>
-
-                    <!-- Slide 3 -->
-                    <div class="slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
-                        <div class="rounded-lg overflow-hidden shadow-md h-full">
-
-                            <div class="bg-gray-200 h-48 md:h-64 flex items-center justify-center">
-                                <img src="https://picsum.photos/id/12/800/600" alt="Nature 3"
-                                    class="w-full h-full object-cover">
-                            </div>
-
-                            <div class="p-4">
-                                <h3 class="text-xl font-semibold">
-                                    Nature 3
-                                </h3>
-
-                                <p class="text-gray-600 mt-2">
-                                    Nature third
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Slide 4 -->
-                    <div class="slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
-                        <div class="rounded-lg overflow-hidden shadow-md h-full">
-
-                            <div class="bg-gray-200 h-48 md:h-64 flex items-center justify-center">
-                                <img src="https://picsum.photos/id/13/800/600" alt="Nature 4"
-                                    class="w-full h-full object-cover">
-                            </div>
-
-                            <div class="p-4">
-                                <h3 class="text-xl font-semibold">
-                                    Nature 4
-                                </h3>
-
-                                <p class="text-gray-600 mt-2">
-                                    Nature last
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
+                    </a>
                 </div>
+                @endforeach
             </div>
-
-
-            <!-- Botão anterior -->
-            <button id="prevButton" type="button" class="absolute left-0 top-1/2 -translate-y-1/2
-                       bg-white/80 hover:bg-white
-                       rounded-full w-10 h-10
-                       flex items-center justify-center
-                       shadow-md z-10 -ml-4
-                       disabled:opacity-50
-                       disabled:cursor-not-allowed">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-
-
-            <!-- Botão próximo -->
-            <button id="nextButton" type="button" class="absolute right-0 top-1/2 -translate-y-1/2
-                       bg-white/80 hover:bg-white
-                       rounded-full w-10 h-10
-                       flex items-center justify-center
-                       shadow-md z-10 -mr-4
-                       disabled:opacity-50
-                       disabled:cursor-not-allowed">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
-
-
-            <!-- Indicadores -->
-            <div id="indicators" class="flex justify-center mt-4 space-x-2"></div>
-
         </div>
 
+        <button type="button" class="events-prev absolute left-0 top-1/2 -translate-y-1/2
+                bg-white/80 hover:bg-white rounded-full w-10 h-10
+                flex items-center justify-center shadow-md z-10 -ml-4
+                disabled:opacity-50 disabled:cursor-not-allowed transition">
+            <i class="fa-solid fa-chevron-left text-slate-700"></i>
+        </button>
+
+        <button type="button" class="events-next absolute right-0 top-1/2 -translate-y-1/2
+                bg-white/80 hover:bg-white rounded-full w-10 h-10
+                flex items-center justify-center shadow-md z-10 -mr-4
+                disabled:opacity-50 disabled:cursor-not-allowed transition">
+            <i class="fa-solid fa-chevron-right text-slate-700"></i>
+        </button>
     </div>
 
-    <script>
+    <div class="events-indicators flex justify-center mt-4 space-x-2"></div>
+    @else
+    <div class="border-2 border-dashed border-slate-300 rounded-2xl bg-slate-50 py-16 text-center">
+        <i class="fa-regular fa-calendar-xmark text-5xl text-slate-300 mb-4"></i>
+        <p class="text-slate-500 font-medium">Nenhum evento cadastrado no momento.</p>
+    </div>
+    @endif
+</div>
 
-        document.addEventListener('DOMContentLoaded', function () {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fallbackImage = '/assets/images/banner1.jpg';
 
-            const track = document.getElementById('slideTrack');
-            const slides = document.querySelectorAll('.slide');
-            const prevButton = document.getElementById('prevButton');
-            const nextButton = document.getElementById('nextButton');
-            const indicators = document.getElementById('indicators');
+        document.querySelectorAll('.events-container').forEach(function(container) {
+            const carousel = container.querySelector('.events-carousel');
+            if (!carousel) return;
+
+            const track = carousel.querySelector('.events-slide-track');
+            const slides = carousel.querySelectorAll('.events-slide');
+            const prevButton = carousel.querySelector('.events-prev');
+            const nextButton = carousel.querySelector('.events-next');
+            const indicators = container.querySelector('.events-indicators');
+
+            if (!track || slides.length === 0) return;
 
             let currentSlide = 0;
             let visibleSlides = 1;
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Atualiza quantidade de slides visíveis
-            |--------------------------------------------------------------------------
-            */
-
             function updateVisibleSlides() {
-
                 if (window.innerWidth < 768) {
                     visibleSlides = 1;
                 } else {
                     visibleSlides = 3;
                 }
 
-                /*
-                * Corrige o slide atual caso a tela seja redimensionada
-                */
-                const maxSlide = slides.length - visibleSlides;
-
+                const maxSlide = Math.max(0, slides.length - visibleSlides);
                 if (currentSlide > maxSlide) {
-                    currentSlide = Math.max(0, maxSlide);
+                    currentSlide = maxSlide;
                 }
 
                 updateCarousel();
                 createIndicators();
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Atualiza posição do carrossel
-            |--------------------------------------------------------------------------
-            */
-
             function updateCarousel() {
-
                 const slidePercentage = 100 / visibleSlides;
-
                 const translateX = currentSlide * slidePercentage;
-
-                track.style.transform = `translateX(-${translateX}%)`;
-
+                track.style.transform = 'translateX(-' + translateX + '%)';
                 updateButtons();
                 updateIndicators();
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Botões
-            |--------------------------------------------------------------------------
-            */
-
             function updateButtons() {
-
-                const maxSlide = slides.length - visibleSlides;
-
-                prevButton.disabled = currentSlide === 0;
-
-                nextButton.disabled = currentSlide >= maxSlide;
+                const maxSlide = Math.max(0, slides.length - visibleSlides);
+                if (prevButton) prevButton.disabled = currentSlide === 0;
+                if (nextButton) nextButton.disabled = currentSlide >= maxSlide;
             }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Próximo
-            |--------------------------------------------------------------------------
-            */
 
             function next() {
-
-                const maxSlide = slides.length - visibleSlides;
-
+                const maxSlide = Math.max(0, slides.length - visibleSlides);
                 if (currentSlide < maxSlide) {
-
                     currentSlide++;
-
                     updateCarousel();
                 }
             }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Anterior
-            |--------------------------------------------------------------------------
-            */
 
             function prev() {
-
                 if (currentSlide > 0) {
-
                     currentSlide--;
-
                     updateCarousel();
                 }
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Ir para slide
-            |--------------------------------------------------------------------------
-            */
-
             function goTo(index) {
-
-                const maxSlide = slides.length - visibleSlides;
-
-                currentSlide = Math.min(index, maxSlide);
-
+                const maxSlide = Math.max(0, slides.length - visibleSlides);
+                currentSlide = Math.min(Math.max(0, index), maxSlide);
                 updateCarousel();
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Indicadores
-            |--------------------------------------------------------------------------
-            */
-
             function createIndicators() {
-
+                if (!indicators) return;
                 indicators.innerHTML = '';
 
-                const totalIndicators =
-                    slides.length - visibleSlides + 1;
-
+                const totalIndicators = Math.max(1, slides.length - visibleSlides + 1);
 
                 for (let i = 0; i < totalIndicators; i++) {
-
                     const button = document.createElement('button');
-
                     button.type = 'button';
-
-                    button.className =
-                        'w-3 h-3 rounded-full transition-colors';
-
-
-                    button.setAttribute(
-                        'aria-label',
-                        `Ir para slide ${i + 1}`
-                    );
-
-
-                    button.addEventListener(
-                        'click',
-                        function () {
-
-                            goTo(i);
-
-                        }
-                    );
-
-
+                    button.className = 'w-3 h-3 rounded-full transition-colors bg-gray-300 hover:bg-gray-400';
+                    button.setAttribute('aria-label', 'Ir para slide ' + (i + 1));
+                    button.addEventListener('click', function() {
+                        goTo(i);
+                    });
                     indicators.appendChild(button);
                 }
 
                 updateIndicators();
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Atualiza indicadores
-            |--------------------------------------------------------------------------
-            */
-
             function updateIndicators() {
-
-                const buttons =
-                    indicators.querySelectorAll('button');
-
-
-                buttons.forEach(function (button, index) {
-
+                if (!indicators) return;
+                const buttons = indicators.querySelectorAll('button');
+                buttons.forEach(function(button, index) {
                     if (index === currentSlide) {
-
-                        button.classList.remove('bg-gray-300');
-
+                        button.classList.remove('bg-gray-300', 'hover:bg-gray-400');
                         button.classList.add('bg-blue-600');
-
                     } else {
-
                         button.classList.remove('bg-blue-600');
-
-                        button.classList.add('bg-gray-300');
-
+                        button.classList.add('bg-gray-300', 'hover:bg-gray-400');
                     }
-
                 });
             }
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Erro nas imagens
-            |--------------------------------------------------------------------------
-            */
-
-            slides.forEach(function (slide) {
-
+            slides.forEach(function(slide) {
                 const image = slide.querySelector('img');
-
-                image.addEventListener('error', function () {
-
-                    image.src =
-                        'https://picsum.photos/id/20/800/600';
-
+                if (!image) return;
+                image.addEventListener('error', function() {
+                    image.onerror = null;
+                    image.src = fallbackImage;
                 });
-
             });
 
+            if (nextButton) nextButton.addEventListener('click', next);
+            if (prevButton) prevButton.addEventListener('click', prev);
 
-            /*
-            |--------------------------------------------------------------------------
-            | Eventos
-            |--------------------------------------------------------------------------
-            */
-
-            nextButton.addEventListener('click', next);
-
-            prevButton.addEventListener('click', prev);
-
-
-            window.addEventListener('resize', function () {
-
+            window.addEventListener('resize', function() {
                 updateVisibleSlides();
-
             });
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Inicialização
-            |--------------------------------------------------------------------------
-            */
 
             updateVisibleSlides();
-
         });
-
-    </script>
+    });
+</script>
