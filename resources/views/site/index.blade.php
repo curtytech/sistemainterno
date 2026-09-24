@@ -274,6 +274,8 @@
 
     @include('site.partials.events')
 
+    @include('site.partials.pdfs')
+
     <!-- Contatos section -->
     <section id="contatos" class="bg-gray-dark py-16 text-white mt-5 ">
       <div class="container mx-auto px-4">

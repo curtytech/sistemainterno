@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/site/noticias/{news}', [SiteController::class, 'newsShow'])->name('site.news.show');
     Route::get('/site/eventos', [SiteController::class, 'eventsIndex'])->name('site.events.index');
     Route::get('/site/eventos/{event}', [SiteController::class, 'eventsShow'])->name('site.events.show');
+    Route::get('/site/pdf', [SiteController::class, 'pdfIndex'])->name('site.pdf.index');
+    Route::get('/site/pdf/{pdf}', [SiteController::class, 'pdfShow'])->name('site.pdf.show');
 
     Route::get('/site/perfil/senha', [ProfilePasswordController::class, 'index'])->name('site.profile.password');
     Route::put('/site/perfil/senha', [ProfilePasswordController::class, 'update'])->name('site.profile.password.update');

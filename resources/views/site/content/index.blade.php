@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -97,7 +98,7 @@
         @endforeach
       </div>
 
-      
+
       @else
       <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
         <h3 class="text-2xl font-semibold text-slate-800">Nenhum evento cadastrado</h3>
@@ -105,6 +106,49 @@
       </div>
       @endif
     </section>
+
+    <section id="conteudos-arquivos" class="mt-20">
+      <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900">Arquivos</h2>
+          <p class="mt-2 text-slate-600">Treinamentos, comunicados e ações internas publicados no sistema.</p>
+        </div>
+        <a href="{{ route('site.pdf.index') }}" class="text-sm font-semibold text-primary transition hover:opacity-80">Abrir página só de arquivos</a>
+      </div>
+
+      @if ($pdfs->isNotEmpty())
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        @foreach ($pdfs as $pdf)
+        <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+          <div class="flex flex-1 flex-col p-6">
+            <div class="mb-4 flex items-center justify-between gap-3">
+              <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                {{ $pdf->category_name }}
+              </span>
+              <span class="text-sm text-slate-500">{{ $pdf->start_date ? $pdf->start_date->format('d/m/Y') : \Illuminate\Support\Carbon::parse($pdf->created_at)->format('d/m/Y') }}</span>
+            </div>
+            <h3 class="mb-4 text-2xl font-semibold leading-tight text-gray-dark">{{ $pdf->title }}</h3>
+            <p class="flex-grow text-base font-medium leading-relaxed text-gray-txt">{{ \Illuminate\Support\Str::limit(strip_tags($pdf->content), 160) }}</p>
+            <div class="mt-8">
+              <a href="{{ route('site.pdf.show', $pdf) }}" class="inline-flex w-full items-center justify-center rounded-full border border-transparent bg-primary px-4 py-2 font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
+                Ver detalhes
+              </a>
+            </div>
+          </div>
+        </article>
+        @endforeach
+      </div>
+
+
+      @else
+      <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
+        <h3 class="text-2xl font-semibold text-slate-800">Nenhum pdf cadastrado</h3>
+        <p class="mt-3 text-slate-500">Assim que houver pdfs no sistema, eles aparecerão nesta página.</p>
+      </div>
+      @endif
+    </section>
+
+    
   </main>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Event;
 use App\Models\News;
+use App\Models\Pdf;
+use App\Models\Link;
+use Illuminate\Pagination\Paginator;
 use Illuminate\View\View;
 
 class SiteController extends Controller
@@ -30,6 +33,15 @@ class SiteController extends Controller
                 ->limit(21)
                 ->where('featured', 0)
                 ->get(),
+            'pdfs' => Pdf::query()
+                ->latest()
+                ->limit(21)
+                ->get(),
+            'links' => Link::query()
+                ->latest()
+                ->limit(21)
+                ->get(),
+
         ]);
     }
 
@@ -79,6 +91,27 @@ class SiteController extends Controller
             'eventos' => Event::query()
                 ->sortedForListing()
                 ->get(),
+            'pdfs' => Pdf::query()
+                ->latest()
+                ->limit(21)
+                ->get(),
+        ]);
+    }
+
+    public function pdfIndex(): View
+    {
+        return view('site.pdfs.index', [
+            'pdfs' => Pdf::query()
+                ->latest()
+                ->paginate(6)
+                ->withQueryString(),
+        ]);
+    }
+
+    public function pdfShow(Pdf $pdf): View
+    {
+        return view('site.pdfs.show', [
+            'pdf' => $pdf,
         ]);
     }
 }
