@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Event;
+use App\Models\Link;
+use App\Models\LinkCategory;
 use App\Models\News;
 use App\Models\Pdf;
-use App\Models\Link;
 use Illuminate\Pagination\Paginator;
 use Illuminate\View\View;
 
@@ -14,6 +15,14 @@ class SiteController extends Controller
 {
     public function index(): View
     {
+        $categoriasLinks = LinkCategory::query()
+            ->orderBy('id')
+            ->with(['links' => function ($query) {
+                $query->orderBy('title');
+            }])
+            ->get()
+            ->keyBy('title');
+
         return view('site.index', [
             'boards' => Board::query()
                 ->latest()
@@ -41,7 +50,14 @@ class SiteController extends Controller
                 ->latest()
                 ->limit(21)
                 ->get(),
-
+            'departamentos' => $categoriasLinks->get('Departamentos')?->links ?? collect(),
+            'linksUteisPorCategoria' => $categoriasLinks->only([
+                'Sistemas',
+                'Gestão RH',
+                'Ordem de Serviço',
+                'Denúncias',
+                'Links Úteis',
+            ]),
         ]);
     }
 
