@@ -16,10 +16,18 @@ class SiteController extends Controller
     public function index(): View
     {
         $categoriasLinks = LinkCategory::query()
-            ->orderBy('id')
+            ->whereIn('title', [
+                'Departamentos',
+                'Sistemas',
+                'Gestão RH',
+                'Ordem de Serviço',
+                'Denúncias',
+                'Links Úteis',
+            ])
             ->with(['links' => function ($query) {
                 $query->orderBy('title');
             }])
+            ->orderBy('id')
             ->get()
             ->keyBy('title');
 
@@ -51,13 +59,15 @@ class SiteController extends Controller
                 ->limit(21)
                 ->get(),
             'departamentos' => $categoriasLinks->get('Departamentos')?->links ?? collect(),
-            'linksUteisPorCategoria' => $categoriasLinks->only([
-                'Sistemas',
-                'Gestão RH',
-                'Ordem de Serviço',
-                'Denúncias',
-                'Links Úteis',
-            ]),
+            'linksUteisPorCategoria' => $categoriasLinks->filter(
+                fn ($cat) => in_array($cat->title, [
+                    'Sistemas',
+                    'Gestão RH',
+                    'Ordem de Serviço',
+                    'Denúncias',
+                    'Links Úteis',
+                ], true)
+            ),
         ]);
     }
 

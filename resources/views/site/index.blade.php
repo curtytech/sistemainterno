@@ -131,6 +131,85 @@
 
   $departamentosColunas = collect($departamentos)->chunk((int) ceil(count($departamentos) / 3));
   $linksUteisColunas = collect($linksUteis)->chunk((int) ceil(count($linksUteis) / 3));
+
+  $iconePorCategoria = [
+    'Sistemas'          => 'fa-solid fa-server',
+    'Gestão RH'         => 'fa-solid fa-users',
+    'Ordem de Serviço'  => 'fa-solid fa-clipboard-list',
+    'Denúncias'         => 'fa-solid fa-shield-halved',
+    'Links Úteis'       => 'fa-solid fa-link',
+    'Departamentos'     => 'fa-solid fa-sitemap',
+  ];
+
+  $linksUteisPorCategoria = collect($linksUteisPorCategoria)
+    ->map(function ($categoria) use ($iconePorCategoria) {
+        $tituloCategoria = trim($categoria->title ?? '');
+        $itens = collect($categoria->links ?? collect())
+            ->map(function ($link) use ($tituloCategoria) {
+                $titulo = trim($link->title);
+                $host = $link->link !== '#' ? parse_url($link->link, PHP_URL_HOST) : null;
+
+                $logoPorTituloCategoria = [
+                    'Sistemas' => [
+                        'Qive'                   => 'https://www.google.com/s2/favicons?domain=qive.com.br&sz=128',
+                        'Mercos'                 => 'https://www.google.com/s2/favicons?domain=mercos.com&sz=128',
+                        'Hive Cloud - CTe'       => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128',
+                        'Hive Cloud - MDFe'      => 'https://www.google.com/s2/favicons?domain=hivecloud.com.br&sz=128',
+                        'Universidade Sankhya'   => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128',
+                        'Sankhya Om'             => 'https://www.google.com/s2/favicons?domain=sankhya.com.br&sz=128',
+                    ],
+                    'Gestão RH' => [
+                        'Plataforma de Treinamentos'            => '/assets/logo-grupo-sequoia.png',
+                        'Solicitação Admissão de Colaboradores' => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128',
+                        'Solicitação Demissional'               => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128',
+                        'Pontotel'                              => 'https://www.google.com/s2/favicons?domain=pontotel.com.br&sz=128',
+                    ],
+                    'Ordem de Serviço' => [
+                        'Solicitação Manutenção'   => '/assets/logo-grupo-sequoia.png',
+                        'Solicitação Patrimonial'  => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128',
+                    ],
+                    'Denúncias' => [
+                        'Canal de Ética'                              => '/assets/logo-grupo-sequoia.png',
+                        'Canal da mulher'                             => '/assets/logo-grupo-sequoia.png',
+                        'Formulário Anônimo de Denuncia e Sugestões'  => 'https://www.google.com/s2/favicons?domain=forms.office.com&sz=128',
+                    ],
+                ];
+
+                $logo = $logoPorTituloCategoria[$tituloCategoria][$titulo] ?? null;
+
+                if (! $logo && $link->link !== '#') {
+                    $hostFallback = parse_url($link->link, PHP_URL_HOST);
+                    if ($hostFallback) {
+                        $logo = 'https://www.google.com/s2/favicons?sz=128&domain_url=' . urlencode($link->link);
+                    }
+                }
+
+                $palavras = preg_split('/\s+/', $titulo) ?: [];
+                $iniciais = collect($palavras)
+                    ->filter()
+                    ->take(2)
+                    ->map(fn (string $palavra) => mb_strtoupper(mb_substr($palavra, 0, 1)))
+                    ->implode('');
+
+                return [
+                    'nome'     => $titulo,
+                    'link'     => $link->link,
+                    'host'     => $host,
+                    'logo'     => $logo,
+                    'iniciais' => $iniciais !== '' ? $iniciais : 'SI',
+                ];
+            })
+            ->values();
+
+        return [
+            'title' => $tituloCategoria,
+            'icone' => $iconePorCategoria[$tituloCategoria] ?? 'fa-solid fa-link',
+            'items' => $itens,
+        ];
+    })
+    ->filter(fn (array $c) => count($c['items']) > 0)
+    ->take(4)
+    ->values();
   @endphp
 
   @include('site.partials.navbar')
@@ -205,24 +284,42 @@
           <h2 class="text-3xl font-bold mb-2 ">Links <span class="text-primary">Úteis</span></h2>
           <p class="text-slate-600">Acesse rapidamente as principais plataformas usadas no dia a dia.</p>
         </div>
-        <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          @foreach ($linksUteis as $item)
-          <a
-            href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
-            @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-            class="flex min-h-[11rem] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-white hover:shadow-lg">
-            <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 p-2">
-              @if ($item['logo'])
-              <img src="{{ $item['logo'] }}" alt="Logo {{ $item['nome'] }}" class="h-9 w-9 rounded-xl object-contain">
-              @else
-              <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
-              @endif
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          @foreach ($linksUteisPorCategoria as $categoria)
+          <div class="flex h-full flex-col rounded-3xl border border-slate-200 bg-slate-50/60 p-5 shadow-sm transition hover:border-primary/60 hover:bg-white hover:shadow-md">
+            <div class="mb-4 flex items-center gap-3 border-b border-slate-200 pb-4">
+              <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-white shadow-sm ring-1 ring-primary/10">
+                <i class="{{ $categoria['icone'] }} text-base"></i>
+              </div>
+              <h3 class="text-lg font-bold tracking-tight text-slate-900">{{ $categoria['title'] }}</h3>
             </div>
-            <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
-            <p class="mt-1 text-xs text-slate-500">
-              {{ $item['host'] ?? 'Link interno em breve' }}
-            </p>
-          </a>
+            <ul class="flex h-full flex-col gap-3">
+              @foreach ($categoria['items'] as $item)
+              <li>
+                <a
+                  href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
+                  @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+                  class="group flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md">
+                  <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-slate-50 ring-1 ring-slate-200 p-1.5 group-hover:bg-white">
+                    @if ($item['logo'])
+                    <img src="{{ $item['logo'] }}" alt="Logo {{ $item['nome'] }}" class="h-full w-full rounded-lg object-contain">
+                    @else
+                    <span class="text-xs font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
+                    @endif
+                  </div>
+                  <div class="flex min-w-0 flex-col pt-0.5">
+                    <span class="truncate text-sm font-semibold leading-snug text-slate-900 group-hover:text-primary">
+                      {{ $item['nome'] }}
+                    </span>
+                    <span class="mt-0.5 truncate text-xs text-slate-500">
+                      {{ $item['host'] ?? 'Link interno em breve' }}
+                    </span>
+                  </div>
+                </a>
+              </li>
+              @endforeach
+            </ul>
+          </div>
           @endforeach
         </div>
     </section>
