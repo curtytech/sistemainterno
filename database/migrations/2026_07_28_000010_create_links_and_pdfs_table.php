@@ -36,7 +36,7 @@ return new class extends Migration
         });
 
         DB::table('links')->insertOrIgnore([
-            ['link_category_id' => 1,  'title' => 'Qive',                            'link' => 'https://qive.com.br/',                                                                                                        'created_at' => now(), 'updated_at' => now()],
+            ['link_category_id' => 1,  'title' => 'Qive',                            'link' => 'https://qive.com.br/',                                                                                                       'created_at' => now(), 'updated_at' => now()],
             ['link_category_id' => 1,  'title' => 'Mercos',                          'link' => 'https://app.mercos.com/login/',                                                                                              'created_at' => now(), 'updated_at' => now()],
             ['link_category_id' => 1,  'title' => 'Hive Cloud - CTe',                'link' => 'https://cte.hivecloud.com.br/ctes',                                                                                          'created_at' => now(), 'updated_at' => now()],
             ['link_category_id' => 1,  'title' => 'Hive Cloud - MDFe',               'link' => 'https://mdfe.hivecloud.com.br/',                                                                                             'created_at' => now(), 'updated_at' => now()],

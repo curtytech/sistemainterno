@@ -24,20 +24,27 @@
             <div class="relative overflow-hidden rounded-lg">
                 <div class="pdfs-slide-track flex slide-transition">
                     @foreach($pdfs as $pdf)
+                        @php
+                            $arquivos = $pdf->files_list;
+                            $totalArquivos = count($arquivos);
+                            $primeiro = $arquivos->first();
+                        @endphp
                         <div class="pdfs-slide w-full md:w-1/3 flex-shrink-0 px-2 py-4">
                             <div class="block rounded-lg overflow-hidden shadow-md h-full transition hover:shadow-xl hover:-translate-y-0.5 duration-200 bg-white">
                                 <a href="{{ route('site.pdf.show', $pdf) }}" class="block">
-                                    <div class="bg-slate-100 h-48 md:h-56 flex items-center justify-center p-4 border-b border-slate-200">
+                                    <div class="bg-slate-100 h-48 md:h-56 flex flex-col items-center justify-center p-4 border-b border-slate-200">
                                         <div class="flex flex-col items-center gap-2 text-primary transition group-hover:text-primary-600">
                                             <i class="fa-regular fa-file-pdf text-6xl"></i>
-                                            <span class="text-[11px] font-semibold uppercase tracking-[0.2em]">Documento PDF</span>
+                                            <span class="text-[11px] font-semibold uppercase tracking-[0.2em]">
+                                                {{ $totalArquivos <= 1 ? 'Documento PDF' : "{$totalArquivos} documentos PDF" }}
+                                            </span>
                                         </div>
                                     </div>
 
                                     <div class="p-4">
                                         <div class="mb-3 flex items-center justify-between gap-2">
                                             <span class="inline-flex rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary">
-                                                PDF
+                                                PDF{{ $totalArquivos > 1 ? 's' : '' }}
                                             </span>
                                             <span class="text-xs text-slate-500 shrink-0">
                                                 {{ \Illuminate\Support\Carbon::parse($pdf->created_at)->format('d/m/Y') }}
@@ -49,7 +56,11 @@
                                         </h3>
 
                                         <p class="mt-2 text-sm text-slate-600 line-clamp-2">
-                                            Clique para visualizar o documento completo em tela cheia.
+                                            @if ($totalArquivos <= 1)
+                                                Clique para visualizar o documento completo em tela cheia.
+                                            @else
+                                                Pacote com <span class="font-semibold text-primary">{{ $totalArquivos }} arquivos</span>. Clique para visualizar todos.
+                                            @endif
                                         </p>
                                     </div>
                                 </a>
@@ -61,15 +72,16 @@
                                     >
                                         <i class="fa-solid fa-eye mr-2"></i>Visualizar
                                     </a>
-                                    @if ($pdf->file_url)
+                                    @if ($primeiro && ! empty($primeiro['file_url']))
                                         <a
-                                            href="{{ $pdf->file_url }}"
+                                            href="{{ $primeiro['file_url'] }}"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             download
                                             class="inline-flex w-full items-center justify-center rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
                                         >
-                                            <i class="fa-solid fa-download mr-2"></i>Baixar PDF
+                                            <i class="fa-solid fa-download mr-2"></i>
+                                            Baixar{{ $totalArquivos > 1 ? ' o primeiro' : '' }} PDF
                                         </a>
                                     @endif
                                 </div>

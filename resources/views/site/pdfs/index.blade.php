@@ -30,18 +30,26 @@
     @if ($pdfs->isNotEmpty())
       <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         @foreach ($pdfs as $pdfItem)
+          @php
+            $arquivos = $pdfItem->files_list;
+            $totalArquivos = count($arquivos);
+            $primeiro = $arquivos->first();
+            $restantes = $arquivos->slice(1);
+          @endphp
           <article class="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-lg">
-            <div class="flex h-56 w-full items-center justify-center bg-slate-100 p-6">
+            <div class="flex h-56 w-full flex-col items-center justify-center bg-slate-100 p-6">
               <div class="flex flex-col items-center gap-3 text-slate-500 transition group-hover:text-primary">
                 <i class="fa-regular fa-file-pdf text-6xl"></i>
-                <span class="text-xs font-semibold uppercase tracking-widest">Documento PDF</span>
+                <span class="text-xs font-semibold uppercase tracking-widest">
+                  {{ $totalArquivos <= 1 ? 'Documento PDF' : "{$totalArquivos} documentos PDF" }}
+                </span>
               </div>
             </div>
 
             <div class="flex flex-1 flex-col p-6">
               <div class="mb-4 flex items-center justify-between gap-3">
                 <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-                  PDF
+                  PDF{{ $totalArquivos > 1 ? 's' : '' }}
                 </span>
                 <span class="text-sm text-slate-500">
                   {{ \Illuminate\Support\Carbon::parse($pdfItem->created_at)->format('d/m/Y') }}
@@ -52,6 +60,28 @@
                 {{ $pdfItem->title }}
               </h2>
 
+              @if ($totalArquivos > 1)
+                <div class="mt-4 rounded-2xl border border-slate-200 bg-slate-50/60 p-3">
+                  <p class="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    <i class="fa-solid fa-layer-group text-primary"></i>
+                    Arquivos incluídos
+                  </p>
+                  <ul class="flex flex-col gap-1.5">
+                    @foreach ($arquivos->take(3) as $arquivo)
+                      <li class="flex items-center gap-2 text-sm text-slate-700">
+                        <i class="fa-solid fa-file-lines text-xs text-primary/70"></i>
+                        <span class="truncate">{{ $arquivo['filename'] }}</span>
+                      </li>
+                    @endforeach
+                    @if ($totalArquivos > 3)
+                      <li class="text-xs text-slate-500">
+                        + mais {{ $totalArquivos - 3 }} arquivo{{ $totalArquivos - 3 > 1 ? 's' : '' }}
+                      </li>
+                    @endif
+                  </ul>
+                </div>
+              @endif
+
               <div class="mt-4 flex-1" aria-hidden="true"></div>
 
               <div class="mt-6 flex flex-col gap-2">
@@ -61,15 +91,16 @@
                 >
                   <i class="fa-solid fa-eye mr-2"></i>Visualizar
                 </a>
-                @if ($pdfItem->file_url)
+                @if ($primeiro && ! empty($primeiro['file_url']))
                   <a
-                    href="{{ $pdfItem->file_url }}"
+                    href="{{ $primeiro['file_url'] }}"
                     target="_blank"
                     rel="noopener noreferrer"
                     download
                     class="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary"
                   >
-                    <i class="fa-solid fa-download mr-2"></i>Baixar PDF
+                    <i class="fa-solid fa-download mr-2"></i>
+                    Baixar {{ $totalArquivos > 1 ? 'o primeiro' : '' }} PDF
                   </a>
                 @endif
               </div>
