@@ -326,10 +326,10 @@
 
 
     <!-- Departamentos section -->
-    <section id="departamentos" class="bg-slate-50 py-8 px-4">
+    <section id="departamentos" class="bg-slate-50 py-8 px-4 hidden lg:block">
       <div class="container mx-auto max-w-screen-xl px-4">
         <div class="text-center mb-8">
-          <h2 class="text-5xl font-bold mb-4 text-primary">Biblioteca de Documentos</h2>
+          <h2 class="text-5xl font-bold mb-4 text-primary">Departamentos</h2>
           <p class="text-slate-600">Acesse rapidamente os canais de cada documento.</p>
         </div>
         @php
@@ -363,6 +363,35 @@
           </div>
           @endforeach
         </div>
+    </section>
+
+    <!-- Departamentos section -->
+    <section id="departamentos" class="bg-slate-50 px-2 py-8 sm:px-4 lg:hidden block">
+      <div class="container mx-auto max-w-screen-xl px-2 sm:px-4">
+        <div class="mb-6 text-center sm:mb-8">
+          <h2 class="mb-3 text-3xl font-bold text-primary sm:mb-4 sm:text-4xl lg:text-5xl">Departamentos</h2>
+          <p class="text-slate-600">Acesse rapidamente os canais de cada documento.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-7">
+          @foreach ($departamentos as $item)
+          <a
+            href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
+            @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
+            class="flex min-w-0 flex-col items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg sm:p-3">
+            @if ($item['image'])
+            <div class="mb-2 flex h-16 w-full items-center justify-center overflow-hidden rounded-xl bg-slate-50 sm:mb-3 sm:h-20">
+              <img src="{{ $item['image'] }}" alt="{{ $item['nome'] }}" class="h-12 max-w-full object-contain p-2 sm:h-16">
+            </div>
+            @else
+            <div class="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200 sm:mb-3 sm:h-14 sm:w-14">
+              <span class="text-sm font-bold tracking-wide text-primary sm:text-base">{{ $item['iniciais'] }}</span>
+            </div>
+            @endif
+            <h3 class="break-words text-xs font-semibold leading-snug text-slate-900 sm:text-sm">{{ $item['nome'] }}</h3>
+          </a>
+          @endforeach
+        </div>
+      </div>
     </section>
 
     @include('site.partials.noticiasEmDestaque')
