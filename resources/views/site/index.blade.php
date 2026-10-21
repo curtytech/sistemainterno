@@ -329,7 +329,7 @@
     <section id="departamentos" class="bg-slate-50 py-8 px-4 hidden lg:block">
       <div class="container mx-auto max-w-screen-xl px-4">
         <div class="text-center mb-8">
-          <h2 class="text-5xl font-bold mb-4 text-primary">Departamentos</h2>
+          <h2 class="text-5xl font-bold mb-4 text-primary">Biblioteca de documentos</h2>
           <p class="text-slate-600">Acesse rapidamente os canais de cada documento.</p>
         </div>
         @php
