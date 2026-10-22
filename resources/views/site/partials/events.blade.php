@@ -62,7 +62,7 @@ $eventos = \App\Models\Event::future()->limit(21)->get();
                             @endif
 
                             @if ($evento->content)
-                            <p class="mt-2 text-sm text-slate-600 line-clamp-3">
+                            <p class="mt-2 text-sm text-slate-600 line-clamp-3 whitespace-pre-line">
                                 {!! \Illuminate\Support\Str::limit(strip_tags($evento->content), 110) !!}
                             </p>
                             @endif
