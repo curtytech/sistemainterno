@@ -64,7 +64,7 @@ $noticias = \App\Models\Event::future()->limit(21)->get();
 
                             @if ($evento->content)
                             <p class="mt-2 text-sm text-slate-600 line-clamp-3">
-                                {{ \Illuminate\Support\Str::limit(strip_tags($evento->content), 110) }}
+                                {!! \Illuminate\Support\Str::limit(strip_tags($evento->content), 110) !!}
                             </p>
                             @endif
                         </div>
