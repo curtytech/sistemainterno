@@ -400,6 +400,8 @@
 
     @include('site.partials.events')
 
+    @include('site.partials.meetings')
+
     @include('site.partials.pdfs')
 
     <!-- Contatos section -->

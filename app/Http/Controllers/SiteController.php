@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Event;
+use App\Models\Meeting;
 use App\Models\Link;
 use App\Models\LinkCategory;
 use App\Models\News;
@@ -38,6 +39,11 @@ class SiteController extends Controller
                 ->get(),
             'eventos' => Event::query()
                 ->future()
+                ->limit(21)
+                ->get(),
+            'meetings' => Meeting::query()
+                ->with('category:id,name')
+                ->latest()
                 ->limit(21)
                 ->get(),
             'noticiasEmDestaque' => News::query()
@@ -104,6 +110,24 @@ class SiteController extends Controller
 
         return view('site.events.show', [
             'evento' => $event,
+        ]);
+    }
+    public function meetingsIndex(): View
+    {
+        return view('site.meetings.index', [
+            'meetings' => Meeting::query()
+                ->with('category:id,name')
+                ->latest()
+                ->get(),
+        ]);
+    }
+
+    public function meetingsShow(Meeting $meeting): View
+    {
+        $meeting->loadMissing('category:id,name');
+
+        return view('site.meetings.show', [
+            'meeting' => $meeting,
         ]);
     }
 

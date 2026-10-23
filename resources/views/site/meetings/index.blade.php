@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reuniões | Ápice</title>
+  <link rel="icon" type="icon" href="/assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+
+<body class="bg-slate-50 font-sans text-slate-900">
+  @include('site.partials.navbar')
+
+  <main class="mx-auto max-w-7xl px-4 py-12">
+    <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Agenda</p>
+        <h1 class="mt-2 text-4xl font-bold text-slate-900">Todas as reuniões</h1>
+        <p class="mt-3 max-w-2xl text-slate-600">Confira reuniões e ações internas em um só lugar.</p>
+      </div>
+      <a href="{{ route('site.index') }}#reunioes" class="text-sm font-semibold text-primary transition hover:opacity-80">Voltar para a seção da home</a>
+    </div>
+
+    @if ($meetings->isNotEmpty())
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      @foreach ($meetings as $item)
+      <article class="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <img src="{{ $item->image_url ?? '/assets/images/banner1.jpg' }}" alt="{{ $item->title }}" class="h-56 w-full object-cover">
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-4 flex items-center justify-between gap-3">
+            @if ($item->category_name)
+            <span class="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+              {{ $item->category_name }}
+            </span>
+            @endif
+            <span class="text-sm text-slate-500">{{ $item->created_at->format('d/m/Y') }}</span>
+          </div>
+          <h2 class="text-2xl font-semibold text-slate-900">{{ $item->title }}</h2>
+          <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">{{ \Illuminate\Support\Str::limit(strip_tags($item->content), 180) }}</p>
+          <div class="mt-6">
+            <a href="{{ route('site.meetings.show', $item) }}" class="inline-flex rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">
+              Ver reunião
+            </a>
+          </div>
+        </div>
+      </article>
+      @endforeach
+    </div>
+
+   
+    @else
+    <div class="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
+      <h2 class="text-2xl font-semibold text-slate-800">Nenhum item cadastrado</h2>
+      <p class="mt-3 text-slate-500">Assim que houver reuniões no sistema, eles aparecerão nesta página.</p>
+    </div>
+    @endif
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</body>
+
+</html>
