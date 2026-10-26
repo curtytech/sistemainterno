@@ -40,6 +40,16 @@
             <span class="text-sm text-slate-500">{{ $item->created_at->format('d/m/Y') }}</span>
           </div>
           <h2 class="text-2xl font-semibold text-slate-900">{{ $item->title }}</h2>
+          @if ($item->start_date && $item->end_date)
+          <p class="mt-2 text-sm font-medium text-primary">
+            {{ $item->start_date->format('d/m/Y') }} a {{ $item->end_date->format('d/m/Y') }}
+          </p>
+          @endif
+          @if ($item->start_time && $item->end_time)
+          <p class="mt-2 text-sm font-medium text-primary">
+            {{ substr($item->start_time, 0, 5) }} às {{ substr($item->end_time, 0, 5) }}
+          </p>
+          @endif
           <p class="mt-4 flex-1 text-sm leading-7 text-slate-600">{{ \Illuminate\Support\Str::limit(strip_tags($item->content), 180) }}</p>
           <div class="mt-6">
             <a href="{{ route('site.meetings.show', $item) }}" class="inline-flex rounded-full border border-transparent bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:border-primary hover:bg-transparent hover:text-primary">

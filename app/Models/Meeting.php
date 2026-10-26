@@ -14,9 +14,23 @@ class Meeting extends Model
     protected $fillable = [
         'category_id',
         'content',
+        'end_date',
+        'end_time',
         'title',
         'image',
+        'start_date',
+        'start_time',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'start_time' => 'string',
+            'end_time' => 'string',
+        ];
+    }
 
     public function category(): BelongsTo
     {

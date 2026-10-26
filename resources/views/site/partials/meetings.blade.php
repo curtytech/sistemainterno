@@ -47,6 +47,18 @@ $meetings = \App\Models\Meeting::query()->with('category:id,name')->latest()->li
                             <h3 class="text-xl font-semibold text-gray-dark leading-snug line-clamp-2">
                                 {{ $meeting->title }}
                             </h3>
+
+                            @if ($meeting->start_date && $meeting->end_date)
+                            <p class="mt-2 text-sm font-medium text-primary">
+                                {{ $meeting->start_date->format('d/m/Y') }} a {{ $meeting->end_date->format('d/m/Y') }}
+                            </p>
+                            @endif
+
+                            @if ($meeting->start_time && $meeting->end_time)
+                            <p class="mt-2 text-sm font-medium text-primary">
+                                {{ substr($meeting->start_time, 0, 5) }} às {{ substr($meeting->end_time, 0, 5) }}
+                            </p>
+                            @endif
                             
                             @if ($meeting->content)
                             <p class="mt-2 text-sm text-slate-600 line-clamp-3 whitespace-pre-line">

@@ -34,6 +34,16 @@
         </div>
 
         <h1 class="text-3xl font-bold text-slate-900 md:text-5xl">{{ $meeting->title }}</h1>
+        @if ($meeting->start_date && $meeting->end_date)
+        <p class="mt-3 text-base font-semibold text-primary">
+          Data: {{ $meeting->start_date->format('d/m/Y') }} a {{ $meeting->end_date->format('d/m/Y') }}
+        </p>
+        @endif
+        @if ($meeting->start_time && $meeting->end_time)
+        <p class="mt-3 text-base font-semibold text-primary">
+          Horário: {{ substr($meeting->start_time, 0, 5) }} às {{ substr($meeting->end_time, 0, 5) }}
+        </p>
+        @endif
         <div class="mt-6 text-base leading-8 text-slate-700">
           {!! $meeting->content !!}
         </div>
