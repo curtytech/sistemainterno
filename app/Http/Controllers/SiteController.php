@@ -43,7 +43,7 @@ class SiteController extends Controller
                 ->get(),
             'meetings' => Meeting::query()
                 ->with('category:id,name')
-                ->latest()
+                ->future()
                 ->limit(21)
                 ->get(),
             'noticiasEmDestaque' => News::query()
@@ -117,7 +117,7 @@ class SiteController extends Controller
         return view('site.meetings.index', [
             'meetings' => Meeting::query()
                 ->with('category:id,name')
-                ->latest()
+                ->future()
                 ->get(),
         ]);
     }
