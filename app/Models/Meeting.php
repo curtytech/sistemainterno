@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
@@ -53,5 +54,12 @@ class Meeting extends Model
         }
 
         return Storage::disk('public')->url($this->image);
+    }
+
+    public function scopeFuture(Builder $query): Builder
+    {
+        return $query
+            ->whereDate('start_date', '>=', now()->toDateString())
+            ->orderBy('start_date', 'ASC');
     }
 }
