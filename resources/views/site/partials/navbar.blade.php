@@ -66,6 +66,26 @@ return [
 ];
 })->values();
 
+$documentLibraries = \App\Models\DocumentLibrary::query()->orderBy('name')->get();
+if ($documentLibraries->isNotEmpty()) {
+  $departamentos = $documentLibraries->map(function (\App\Models\DocumentLibrary $item) {
+    $initials = collect(preg_split('/\s+/', $item->name) ?: [])
+      ->filter()
+      ->take(2)
+      ->map(fn (string $word) => mb_strtoupper(mb_substr($word, 0, 1)))
+      ->implode('');
+
+    return [
+      'nome' => $item->name,
+      'link' => $item->link,
+      'host' => parse_url($item->link, PHP_URL_HOST),
+      'image' => $item->icon_url,
+      'icon' => null,
+      'iniciais' => $initials !== '' ? $initials : 'DC',
+    ];
+  })->values()->all();
+}
+
 $contatos = [
 [
 'nome' => 'Sequoia',
@@ -286,7 +306,7 @@ $todasNoticias = $noticias->merge($noticias);
           class="relative group"
           @mouseenter="if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } openMenu = 'departamentos'"
           @mouseleave="closeTimer = setTimeout(() => { openMenu = null }, 120)">
-          <a href="#" class="transition hover:text-secondary font-semibold flex items-center">
+          <a href="{{ route('site.document-library.index') }}" class="transition hover:text-secondary font-semibold flex items-center">
             Biblioteca de Documentos
             <i :class="openMenu === 'departamentos' ? 'fa-solid fa-chevron-up ml-1 text-xs' : 'fa-solid fa-chevron-down ml-1 text-xs'"></i>
           </a>
@@ -314,7 +334,14 @@ $todasNoticias = $noticias->merge($noticias);
                   <a
                     href="{{ $item['link'] }}"
                     @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
-                    class="block rounded-lg px-3 py-2 text-sm leading-snug transition hover:bg-primary hover:text-white">
+                    class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm leading-snug transition hover:bg-primary hover:text-white">
+                    @if (! empty($item['image']))
+                    <img src="{{ $item['image'] }}" alt="" class="h-6 w-6 rounded object-contain">
+                    @elseif (! empty($item['icon']))
+                    <i class="{{ $item['icon'] }} w-6 text-center"></i>
+                    @else
+                    <span class="flex h-6 w-6 items-center justify-center rounded bg-slate-100 text-[10px] font-bold text-primary">{{ $item['iniciais'] }}</span>
+                    @endif
                     {{ $item['nome'] }}
                   </a>
                 </div>

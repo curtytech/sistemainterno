@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use App\Models\DocumentLibrary;
 use App\Models\Event;
 use App\Models\Meeting;
 use App\Models\Link;
@@ -63,6 +64,9 @@ class SiteController extends Controller
             'links' => Link::query()
                 ->latest()
                 ->limit(21)
+                ->get(),
+            'documentLibraries' => DocumentLibrary::query()
+                ->orderBy('name')
                 ->get(),
             'departamentos' => $categoriasLinks->get('Departamentos')?->links ?? collect(),
             'linksUteisPorCategoria' => $categoriasLinks->filter(
@@ -162,6 +166,15 @@ class SiteController extends Controller
     {
         return view('site.pdfs.show', [
             'pdf' => $pdf,
+        ]);
+    }
+
+    public function documentLibraryIndex(): View
+    {
+        return view('site.document-library.index', [
+            'documentLibraries' => DocumentLibrary::query()
+                ->orderBy('name')
+                ->get(),
         ]);
     }
 }
