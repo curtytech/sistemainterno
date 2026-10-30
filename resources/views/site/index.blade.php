@@ -334,9 +334,11 @@
         </div>
         @php
         $linhas = [
-        $departamentos->slice(0, 7)->values(),
-        $departamentos->slice(7, 7)->values(),
-        $departamentos->slice(14, 7)->values(),
+        $documentLibraries->slice(0, 7)->values(),
+        $documentLibraries->slice(7, 7)->values(),
+        $documentLibraries->slice(14, 7)->values(),
+        $documentLibraries->slice(21, 7)->values(),
+        $documentLibraries->slice(28, 7)->values(),
         ];
         @endphp
         <div class="flex flex-col gap-3">
@@ -347,16 +349,16 @@
               href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
               @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
               class="flex flex-1 min-w-0 flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg overflow-hidden">
-              @if ($item['image'])
+              @if ($item['icon'])
               <div class="mb-3 flex h-20 w-full items-center justify-center rounded-xl overflow-hidden bg-slate-50">
-                <img src="{{ $item['image'] }}" alt="{{ $item['nome'] }}" class="h-16 object-contain p-2">
+                <img src="{{ $item['icon'] }}" alt="{{ $item['name'] }}" class="h-16 object-contain p-2">
               </div>
               @else
               <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200">
                 <span class="text-base font-bold tracking-wide text-primary">{{ $item['iniciais'] }}</span>
               </div>
               @endif
-              <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['nome'] }}</h3>
+              <h3 class="text-sm font-semibold leading-snug text-slate-900">{{ $item['name'] }}</h3>
 
             </a>
             @endforeach
@@ -373,21 +375,21 @@
           <p class="text-slate-600">Acesse rapidamente os canais de cada documento.</p>
         </div>
         <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-7">
-          @foreach ($departamentos as $item)
+          @foreach ($documentLibraries as $item)
           <a
             href="{{ $item['link'] !== '#' ? $item['link'] : '#' }}"
             @if ($item['link'] !=='#' ) target="_blank" rel="noopener noreferrer" @endif
             class="flex min-w-0 flex-col items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg sm:p-3">
-            @if ($item['image'])
+            @if ($item['icon'])
             <div class="mb-2 flex h-16 w-full items-center justify-center overflow-hidden rounded-xl bg-slate-50 sm:mb-3 sm:h-20">
-              <img src="{{ $item['image'] }}" alt="{{ $item['nome'] }}" class="h-12 max-w-full object-contain p-2 sm:h-16">
+              <img src="{{ $item['icon'] }}" alt="{{ $item['name'] }}" class="h-12 max-w-full object-contain p-2 sm:h-16">
             </div>
             @else
             <div class="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200 sm:mb-3 sm:h-14 sm:w-14">
               <span class="text-sm font-bold tracking-wide text-primary sm:text-base">{{ $item['iniciais'] }}</span>
             </div>
             @endif
-            <h3 class="break-words text-xs font-semibold leading-snug text-slate-900 sm:text-sm">{{ $item['nome'] }}</h3>
+            <h3 class="break-words text-xs font-semibold leading-snug text-slate-900 sm:text-sm">{{ $item['name'] }}</h3>
           </a>
           @endforeach
         </div>
