@@ -351,7 +351,7 @@
               class="flex flex-1 min-w-0 flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg overflow-hidden">
               @if ($item['icon'])
               <div class="mb-3 flex h-20 w-full items-center justify-center rounded-xl overflow-hidden bg-slate-50">
-                <img src="{{ asset($item['icon']) }}" alt="{{ $item['name'] }}" class="h-16 object-contain p-2">
+                <img src="{{ asset('document-library/' . $item['icon']) }}" alt="{{ $item['name'] }}" class="h-16 object-contain p-2">
               </div>
               @else
               <div class="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200">
@@ -371,7 +371,7 @@
     <section id="departamentos" class="bg-slate-50 px-2 py-8 sm:px-4 lg:hidden block">
       <div class="container mx-auto max-w-screen-xl px-2 sm:px-4">
         <div class="mb-6 text-center sm:mb-8">
-          <h2 class="mb-3 text-3xl font-bold text-primary sm:mb-4 sm:text-4xl lg:text-5xl">Departamentos</h2>
+          <h2 class="mb-3 text-3xl font-bold text-primary sm:mb-4 sm:text-4xl lg:text-5xl">Biblioteca de documentos</h2>
           <p class="text-slate-600">Acesse rapidamente os canais de cada documento.</p>
         </div>
         <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 xl:grid-cols-7">
@@ -382,7 +382,7 @@
             class="flex min-w-0 flex-col items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary hover:bg-slate-50 hover:shadow-lg sm:p-3">
             @if ($item['icon'])
             <div class="mb-2 flex h-16 w-full items-center justify-center overflow-hidden rounded-xl bg-slate-50 sm:mb-3 sm:h-20">
-              <img src="{{ asset($item['icon']) }}" alt="{{ $item['name'] }}" class="h-12 max-w-full object-contain p-2 sm:h-16">
+              <img src="{{ asset('document-library/' . $item['icon']) }}" alt="{{ $item['name'] }}" class="h-12 max-w-full object-contain p-2 sm:h-16">
             </div>
             @else
             <div class="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 shadow-sm ring-1 ring-slate-200 sm:mb-3 sm:h-14 sm:w-14">
