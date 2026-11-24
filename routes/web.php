@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/site/pdf', [SiteController::class, 'pdfIndex'])->name('site.pdf.index');
     Route::get('/site/pdf/{pdf}', [SiteController::class, 'pdfShow'])->name('site.pdf.show');
     Route::get('/site/biblioteca-documentos', [SiteController::class, 'documentLibraryIndex'])->name('site.document-library.index');
+    Route::get('/site/videos', [SiteController::class, 'youtubeVideosIndex'])->name('site.youtube-videos.index');
 
     Route::get('/site/perfil/senha', [ProfilePasswordController::class, 'index'])->name('site.profile.password');
     Route::put('/site/perfil/senha', [ProfilePasswordController::class, 'update'])->name('site.profile.password.update');

@@ -10,6 +10,7 @@ use App\Models\Link;
 use App\Models\LinkCategory;
 use App\Models\News;
 use App\Models\Pdf;
+use App\Models\YoutubeVideo;
 use Illuminate\Pagination\Paginator;
 use Illuminate\View\View;
 
@@ -60,6 +61,10 @@ class SiteController extends Controller
             'pdfs' => Pdf::query()
                 ->latest()
                 ->limit(21)
+                ->get(),
+            'youtubeVideos' => YoutubeVideo::query()
+                ->latest()
+                ->limit(6)
                 ->get(),
             'links' => Link::query()
                 ->latest()
@@ -175,6 +180,18 @@ class SiteController extends Controller
             'documentLibraries' => DocumentLibrary::query()
                 ->orderBy('name')
                 ->get(),
+        ]);
+    }
+
+    public function youtubeVideosIndex(): View
+    {
+        $videos = YoutubeVideo::query()
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('site.youtube-videos.index', [
+            'videos' => $videos,
         ]);
     }
 }

@@ -404,6 +404,8 @@
 
     @include('site.partials.meetings')
 
+    @include('site.partials.youtube-videos')
+
     @include('site.partials.pdfs')
 
     <!-- Contatos section -->

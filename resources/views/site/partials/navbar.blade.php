@@ -397,6 +397,7 @@ $todasNoticias = $noticias->merge($noticias);
 
         <li><a href="{{ route('site.index') }}#eventos" class="transition hover:text-secondary font-semibold">Eventos</a></li>
         <li><a href="{{ route('site.index') }}#news" class="transition hover:text-secondary font-semibold">Notícias</a></li>
+        <li><a href="{{ route('site.youtube-videos.index') }}" class="transition hover:text-secondary font-semibold">Vídeos</a></li>
       </ul>
     </nav>
 
@@ -453,6 +454,9 @@ $todasNoticias = $noticias->merge($noticias);
     </li>
     <li>
       <a href="{{ route('site.index') }}#news" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Notícias</a>
+    </li>
+    <li>
+      <a href="{{ route('site.youtube-videos.index') }}" class="block rounded-xl px-4 py-3 font-semibold transition hover:bg-white/10">Vídeos</a>
     </li>
   </ul>
 
